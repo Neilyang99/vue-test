@@ -26,7 +26,8 @@ export default {
     msg:'历史消息',
     msgTpl:'消息模板',
     msgSender:'消息发送器',
-    salesMgr:'業務管理'
+    salesMgr:'業務管理',
+    visitor:'來人洽詢'
   },
   navbar: {
     logOut: '退出登录',
@@ -48,16 +49,16 @@ export default {
   },
 
   button: {
-    add: '添加',
+    add: '新增',
     edit: '修改',
-    delete: '删除',
-    search: '搜索',
+    delete: '刪除',
+    search: '查詢',
     reset: '重置',
     submit: '提交',
     cancel: '取消',
     clear: '清除',
     back: '返回',
-    export: '导出'
+    export: '導出'
   },
   common: {
     mustSelectOne: '请选中操作项!',

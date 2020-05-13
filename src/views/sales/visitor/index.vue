@@ -23,7 +23,7 @@
 
     <el-table :data="list" v-loading="listLoading" element-loading-text="Loading" border fit highlight-current-row
     @current-change="handleCurrentChange">
-      <el-table-column label="專案名稱">
+      <el-table-column label="銷售案號">
         <template slot-scope="scope">
           {{scope.row.name}}
         </template>
@@ -39,7 +39,7 @@
         </template>
       </el-table-column>
 
-      <el-table-column label="最近填表日">
+      <el-table-column label="填表日期">
         <template slot-scope="scope">
           {{scope.row.note}}
         </template>

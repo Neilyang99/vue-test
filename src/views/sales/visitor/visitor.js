@@ -1,10 +1,10 @@
-import { remove, getList, save, disable, enable } from '@/api/system/task'
+import { remove, getList, save } from '@/api/system/task'
 
 export default {
   data() {
     return {
       formVisible: false,
-      formTitle: '添加任务',
+      formTitle: '新增來人洽詢',
       deptList: [],
       isAdd: true,
       form: {
@@ -120,42 +120,10 @@ export default {
         return true
       }
       this.$message({
-        message: '请选中操作项',
+        message: '請挑選其中一筆資料',
         type: 'warning'
       })
       return false
-    },
-    enable(id) {
-      this.$confirm('确定启用该定时任务?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }).then(() => {
-        enable(id).then(response => {
-          this.$message({
-            message: '操作成功',
-            type: 'success'
-          })
-          this.fetchData()
-        })
-      }).catch(() => {
-      })
-    },
-    disable(id) {
-      this.$confirm('确定禁用该定时任务?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }).then(() => {
-        disable(id).then(response => {
-          this.$message({
-            message: '操作成功',
-            type: 'success'
-          })
-          this.fetchData()
-        })
-      }).catch(() => {
-      })
     },
     viewLog(taskId) {
       this.$router.push({ path: '/taskLog', query: { taskId: taskId }})
