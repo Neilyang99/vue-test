@@ -27,7 +27,7 @@ export default {
     msgTpl:'消息模板',
     msgSender:'消息发送器',
     salesMgr:'業務管理',
-    visitor:'來人洽詢'
+    visitorMgr:'來人洽詢'
   },
   navbar: {
     logOut: '退出登录',

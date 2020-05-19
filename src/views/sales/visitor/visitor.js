@@ -1,4 +1,4 @@
-import { remove, getList, save } from '@/api/system/task'
+import { remove, getList, save } from '@/api/sales/visitor'
 
 export default {
   data() {
@@ -9,11 +9,12 @@ export default {
       isAdd: true,
       form: {
         id: '',
-        name: '',
-        jobClass: '',
-        cron: '',
-        note: '',
-        disabled: true,
+        sla10002: '',
+        sla10006: '',
+        sla10007: '',
+        sla10009: '',
+        sla10013: '',
+        sla10015: '',
         data: ''
       },
       rules: {
@@ -30,7 +31,7 @@ export default {
 
       },
       listQuery: {
-        name: undefined
+        sla10006: undefined
       },
       total: 0,
       list: null,
@@ -67,7 +68,7 @@ export default {
       this.fetchData()
     },
     reset() {
-      this.listQuery.name = ''
+      this.listQuery.sla10006 = ''
       this.listQuery.page = 1
       this.fetchData()
     },
@@ -86,7 +87,7 @@ export default {
     },
     add() {
       this.resetForm()
-      this.formTitle = '添加任务'
+      this.formTitle = '新增來人洽詢表'
       this.formVisible = true
       this.isAdd = true
     },
@@ -96,11 +97,12 @@ export default {
         if (valid) {
           save({
             id: self.form.id,
-            name: self.form.name,
-            jobClass: self.form.jobClass,
-            cron: self.form.cron,
-            data: self.form.data,
-            note: self.form.note
+            sla10002: self.form.sla10002,
+            sla10006: self.form.sla10006,
+            sla10007: self.form.sla10007,
+            sla10008: self.form.sla10008,
+            sla10009: self.form.sla10009,
+            sla10010: self.form.sla10010
           }).then(response => {
             console.log(response)
             this.$message({
@@ -132,15 +134,15 @@ export default {
       if (this.checkSel()) {
         this.isAdd = false
         this.form = this.selRow
-        this.formTitle = '修改任务'
+        this.formTitle = '修改洽詢表'
         this.formVisible = true
       }
     },
     remove() {
       if (this.checkSel()) {
         var id = this.selRow.id
-        this.$confirm('确定删除该记录?', '提示', {
-          confirmButtonText: '确定',
+        this.$confirm('確定刪除資料?', '提示', {
+          confirmButtonText: '確定',
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
