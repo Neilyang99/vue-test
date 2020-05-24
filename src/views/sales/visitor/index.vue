@@ -62,11 +62,16 @@
       width="70%">
       <el-form ref="form" :model="form" :rules="rules" label-width="120px">
         <el-row>
-          <el-col :span="10">
-            <el-form-item label="銷售案號" prop="sla10002">
-              <el-input v-model="form.sla10002"></el-input>
-            </el-form-item>
-          </el-col>
+          <el-form-item label="銷售案號"  >
+              <el-select  v-model="form.building" filterable placeholder="请选择">
+                <el-option
+                  v-for="item in buildingList"
+                  :key="item.id"
+                  :label="item.sla00003"
+                  :value="item.id">
+                </el-option>
+              </el-select>
+          </el-form-item>
           <el-col :span="6">
             <el-form-item label="業務員" prop="sla10015">
               <el-input v-model="form.sla10015"></el-input>

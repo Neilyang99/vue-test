@@ -1,4 +1,5 @@
 import { remove, getList, save } from '@/api/sales/visitor'
+import { selectList } from '@/api/sales/sla00'
 
 export default {
   data() {
@@ -15,8 +16,9 @@ export default {
         sla10009: '',
         sla10013: '',
         sla10015: '',
-        data: ''
+        building: ''
       },
+      buildingList:[],
       rules: {
         name: [
           { required: true, message: '请输入任务名', trigger: 'blur' },
@@ -63,6 +65,11 @@ export default {
         this.listLoading = false
       })
     },
+    fetchBuilding(){
+      selectList().then(response => {
+        this.buildingList = response.data
+      })
+    },
     search() {
       this.listQuery.page = 1
       this.fetchData()
@@ -84,9 +91,11 @@ export default {
     },
     resetForm() {
       this.form = {}
+      
     },
     add() {
       this.resetForm()
+      this.fetchBuilding()
       this.formTitle = '新增來人洽詢表'
       this.formVisible = true
       this.isAdd = true
