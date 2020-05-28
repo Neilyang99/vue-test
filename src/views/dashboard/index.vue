@@ -1,7 +1,7 @@
 <template>
   <div class="dashboard-container" id="dashboard">
-    <div class="dashboard-text">欢迎光临:{{name}} </div>
-
+    <div class="dashboard-text">歡迎光臨:{{name}} </div>
+  
     <el-row :gutter="20">
       <el-col :span="6">
         <el-card class="box-card">
@@ -116,6 +116,8 @@
       </el-col>
 
     </el-row>
+  
+
   </div>
 </template>
 

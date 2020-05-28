@@ -38,7 +38,7 @@
       </el-form-item>
 
       <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">{{ $t('login.logIn') }}</el-button>
-
+ 
       <div style="position:relative">
         <div class="tips">
           <span>{{ $t('login.username') }} : admin</span>

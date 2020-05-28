@@ -3,7 +3,7 @@
     <div class="block">
       <el-row :gutter="20">
         <el-col :span="6">
-          <el-input v-model="listQuery.name" size="mini" placeholder="请输入角色名称"></el-input>
+          <el-input v-model="listQuery.name" size="mini" placeholder="請輸入角色名稱"></el-input>
         </el-col>
         <el-col :span="6">
           <el-button type="success" size="mini" icon="el-icon-search" @click.native="search">{{ $t('button.search') }}</el-button>
@@ -16,7 +16,7 @@
           <el-button type="success" size="mini" icon="el-icon-plus" @click.native="add">{{ $t('button.add') }}</el-button>
           <el-button type="primary" size="mini" icon="el-icon-edit" @click.native="edit">{{ $t('button.edit') }}</el-button>
           <el-button type="danger" size="mini" icon="el-icon-delete" @click.native="remove">{{ $t('button.delete') }}</el-button>
-          <el-button type="primary" size="mini" icon="el-icon-setting" @click.native="openPermissions">权限配置</el-button>
+          <el-button type="primary" size="mini" icon="el-icon-setting" @click.native="openPermissions">權限配置</el-button>
         </el-col>
       </el-row>
     </div>
@@ -25,17 +25,17 @@
     <el-table :data="list" v-loading="listLoading" element-loading-text="Loading" border fit highlight-current-row
               @current-change="handleCurrentChange">
 
-      <el-table-column label="名称">
+      <el-table-column label="名稱">
         <template slot-scope="scope">
           {{scope.row.name}}
         </template>
       </el-table-column>
-      <el-table-column label="编码">
+      <el-table-column label="角色代號">
         <template slot-scope="scope">
           {{scope.row.tips}}
         </template>
       </el-table-column>
-      <el-table-column label="所在部门">
+      <el-table-column label="所屬部門">
         <template slot-scope="scope">
           {{scope.row.deptName}}
         </template>
@@ -69,12 +69,12 @@
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
         <el-row>
           <el-col :span="12">
-            <el-form-item label="编码" prop="tips">
+            <el-form-item label="角色代號" prop="tips">
               <el-input v-model="form.tips" minlength=1></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="名称" prop="name">
+            <el-form-item label="名稱" prop="name">
               <el-input v-model="form.name" minlength=1></el-input>
             </el-form-item>
           </el-col>
@@ -82,13 +82,13 @@
           <el-col :span="12">
             <el-form-item label="上级角色">
               <el-input
-                placeholder="请选择上级角色"
+                placeholder="請選擇上级角色"
                 v-model="form.pName"
                 readonly="readonly"
                 @click.native="roleTree.show = !roleTree.show">
               </el-input>
               <el-tree v-if="roleTree.show"
-                       empty-text="暂无数据"
+                       empty-text="暫無資料"
                        :expand-on-click-node="false"
                        :data="list"
                        :props="roleTree.defaultProps"
@@ -105,15 +105,15 @@
           </el-col>
 
           <el-col :span="12">
-            <el-form-item label="所在部门">
+            <el-form-item label="所屬部門">
               <el-input
-                placeholder="请选择所在部门"
+                placeholder="請選擇所屬部門"
                 v-model="form.deptName"
                 readonly="readonly"
                 @click.native="deptTree.show = !deptTree.show">
               </el-input>
               <el-tree v-if="deptTree.show"
-                       empty-text="暂无数据"
+                       empty-text="暫無資料"
                        :expand-on-click-node="false"
                        :data="deptList"
                        :props="deptTree.defaultProps"
@@ -135,7 +135,7 @@
 
 
     <el-dialog
-      title="权限配置"
+      title="權限配置"
       :visible.sync="permissonVisible"
       width="25%">
       <el-form>

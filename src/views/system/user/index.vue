@@ -3,10 +3,10 @@
     <div class="block">
       <el-row  :gutter="20">
         <el-col :span="6">
-          <el-input v-model="listQuery.account" size="mini" placeholder="请输入帐号"></el-input>
+          <el-input v-model="listQuery.account" size="mini" placeholder="請輸入帳號"></el-input>
         </el-col>
         <el-col :span="6">
-          <el-input v-model="listQuery.name" size="mini" placeholder="请输入姓名"></el-input>
+          <el-input v-model="listQuery.name" size="mini" placeholder="請輸入姓名"></el-input>
         </el-col>
         <el-col :span="6">
           <el-button type="success" size="mini" icon="el-icon-search" @click.native="search">{{ $t('button.search') }}</el-button>
@@ -34,7 +34,7 @@
     <el-table :data="list" v-loading="listLoading" element-loading-text="Loading" border fit highlight-current-row
     @current-change="handleCurrentChange">
 
-      <el-table-column label="账号">
+      <el-table-column label="帳號">
         <template slot-scope="scope">
           {{scope.row.account}}
         </template>
@@ -54,27 +54,27 @@
           {{scope.row.roleName}}
         </template>
       </el-table-column>
-      <el-table-column label="部门">
+      <el-table-column label="部門">
         <template slot-scope="scope">
           {{scope.row.dept.simplename}}
         </template>
       </el-table-column>
-      <el-table-column label="邮箱">
+      <el-table-column label="Email">
         <template slot-scope="scope">
           {{scope.row.email}}
         </template>
       </el-table-column>
-      <el-table-column label="电话">
+      <el-table-column label="電話">
         <template slot-scope="scope">
           {{scope.row.phone}}
         </template>
       </el-table-column>
-      <el-table-column label="创建时间">
+      <el-table-column label="建立時間">
         <template slot-scope="scope">
           {{scope.row.createTime}}
         </template>
       </el-table-column>
-      <el-table-column label="状态">
+      <el-table-column label="狀態">
         <template slot-scope="scope">
           <el-switch v-model="scope.row.status==1" @change="changeUserStatus(scope.row)"></el-switch>
         </template>
@@ -103,7 +103,7 @@
       <el-form ref="form" :model="form" :rules="rules" label-width="120px" label-position="right">
         <el-row>
           <el-col :span="12">
-            <el-form-item label="账户" prop="account">
+            <el-form-item label="帳號" prop="account">
               <el-input v-model="form.account" minlength=1></el-input>
             </el-form-item>
           </el-col>
@@ -122,35 +122,35 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="邮箱" prop="email">
+            <el-form-item label="Email" prop="email">
               <el-input v-model="form.email"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12" v-show="isAdd">
-            <el-form-item label="密码" prop="password">
+            <el-form-item label="密碼" prop="password">
               <el-input v-model="form.password"  type="password"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12" v-show="isAdd">
-            <el-form-item label="确认密码" prop="rePassword">
+            <el-form-item label="確認密碼" prop="rePassword">
               <el-input v-model="form.rePassword"  type="password"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="电话" prop="phone">
+            <el-form-item label="電話" prop="phone">
               <el-input v-model="form.phone"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="所属部门" >
+            <el-form-item label="所屬部門" >
               <el-input
-                placeholder="请选择所属部门"
+                placeholder="請選擇所屬部門"
                 v-model="form.deptName"
                 readonly="readonly"
                 @click.native="deptTree.show  = !deptTree.show">
               </el-input>
               <el-tree v-if="deptTree.show"
-                       empty-text="暂无数据"
+                       empty-text="暫無資料"
                        :expand-on-click-node="false"
                        :data="deptTree.data"
                        :props="deptTree.defaultProps"
@@ -161,13 +161,13 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="是否启用" prop="status">
+            <el-form-item label="是否啟用" prop="status">
               <el-switch v-model="form.status"></el-switch>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="出生日期">
-                <el-date-picker type="date" placeholder="选择日期" v-model="form.birthday" style="width: 100%;">
+                <el-date-picker type="date" placeholder="選擇日期" v-model="form.birthday" style="width: 100%;">
 
                 </el-date-picker>
             </el-form-item>

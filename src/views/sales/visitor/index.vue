@@ -25,7 +25,7 @@
     @current-change="handleCurrentChange">
       <el-table-column label="銷售案號">
         <template slot-scope="scope">
-          {{scope.row.sla10002}}
+          {{scope.row.sla10003}}
         </template>
       </el-table-column>
       <el-table-column label="客戶姓名">

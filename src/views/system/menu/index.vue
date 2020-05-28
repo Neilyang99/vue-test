@@ -10,22 +10,22 @@
     highlight-current-row
     border>
 
-      <el-table-column label="名称" >
+      <el-table-column label="名稱" >
         <template slot-scope="scope">
           <el-button type="text" @click="edit(scope.row)">{{scope.row.name}}</el-button>
         </template>
       </el-table-column>
-      <el-table-column label="编码" >
+      <el-table-column label="選單編號" >
         <template slot-scope="scope">
           <span >{{scope.row.code}}</span>
         </template>
       </el-table-column>
-      <el-table-column label="组件" >
+      <el-table-column label="組件" >
         <template slot-scope="scope">
           <span >{{scope.row.component}}</span>
         </template>
       </el-table-column>
-      <el-table-column label="是否是菜单" >
+      <el-table-column label="是否是選單" >
         <template slot-scope="scope">
           <span >{{scope.row.isMenuName}}</span>
         </template>
@@ -35,12 +35,12 @@
             <span >{{scope.row.url}}</span>
           </template>
       </el-table-column>
-      <el-table-column label="是否启用">
+      <el-table-column label="是否啟用">
         <template slot-scope="scope">
           <span >{{scope.row.statusName}}</span>
         </template>
       </el-table-column>
-      <el-table-column label="是否隐藏">
+      <el-table-column label="是否隱藏">
         <template slot-scope="scope">
           <span >{{scope.row.hidden}}</span>
         </template>
@@ -65,18 +65,18 @@
         <el-form ref="form" :model="form" :rules="rules" label-width="120px">
           <el-row>
             <el-col :span="12">
-              <el-form-item label="名称" prop="name">
+              <el-form-item label="名稱" prop="name">
                 <el-input v-model="form.name" minlength=1></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="12">
-              <el-form-item label="请求地址" prop="url">
+              <el-form-item label="請求地址" prop="url">
                 <el-input v-model="form.url"  minlength=1></el-input>
               </el-form-item>
             </el-col>
 
             <el-col :span="12">
-              <el-form-item label="是否是菜单">
+              <el-form-item label="是否是選單">
                 <el-radio-group v-model="form.ismenu">
                   <el-radio :label="1">是</el-radio>
                   <el-radio :label="0">否</el-radio>
@@ -84,7 +84,7 @@
               </el-form-item>
             </el-col>
             <el-col :span="12">
-              <el-form-item label="是否启用">
+              <el-form-item label="是否啟用">
                 <el-radio-group v-model="form.status">
                   <el-radio :label="1">是</el-radio>
                   <el-radio :label="0">否</el-radio>
@@ -92,7 +92,7 @@
               </el-form-item>
             </el-col>
             <el-col :span="12">
-              <el-form-item label="菜单编号" prop="code">
+              <el-form-item label="選單編號" prop="code">
                 <el-input v-model="form.code"></el-input>
               </el-form-item>
             </el-col>
@@ -102,7 +102,7 @@
               </el-form-item>
             </el-col>
             <el-col :span="12">
-              <el-form-item label="是否隐藏">
+              <el-form-item label="是否隱藏">
                 <el-radio-group v-model="form.hidden">
                   <el-radio :label="true">是</el-radio>
                   <el-radio :label="false">否</el-radio>
@@ -110,7 +110,7 @@
               </el-form-item>
             </el-col>
             <el-col :span="12">
-              <el-form-item label="图标" >
+              <el-form-item label="圖示" >
                 <el-input v-model="form.icon"></el-input>
               </el-form-item>
             </el-col>
@@ -120,15 +120,15 @@
               </el-form-item>
             </el-col>
             <el-col :span="12">
-              <el-form-item label="父菜单" >
+              <el-form-item label="上階選單" >
                 <el-input
-                  placeholder="请选择父菜单"
+                  placeholder="請選擇上階選單"
                   v-model="form.pname"
                   readonly="readonly"
                   @click.native="showTree = !showTree">
                 </el-input>
                 <el-tree v-if="showTree"
-                         empty-text="暂无数据"
+                         empty-text="暫無資料"
                          :expand-on-click-node="false"
                          :data="data"
                          :props="defaultProps"

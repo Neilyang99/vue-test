@@ -9,13 +9,13 @@
     :expandAll="expandAll"
     highlight-current-row
     border>
-      <el-table-column label="简称" >
+      <el-table-column label="部門簡稱" >
         <template slot-scope="scope">
           <el-button type="text" @click="edit(scope.row)">{{scope.row.simplename}}</el-button>
 
         </template>
       </el-table-column>
-      <el-table-column label="全称" >
+      <el-table-column label="部門全名" >
         <template slot-scope="scope">
           <span >{{scope.row.fullname}}</span>
         </template>
@@ -25,7 +25,7 @@
           <span >{{scope.row.num}}</span>
         </template>
       </el-table-column>
-      <el-table-column label="操作" >
+      <el-table-column label="功能操作" >
         <template slot-scope="scope">
           <el-button type="text" @click="remove(scope.row)">删除</el-button>
         </template>
@@ -39,12 +39,12 @@
       <el-form ref="form" :model="form" :rules="rules" label-width="120px">
         <el-row>
           <el-col :span="12">
-            <el-form-item label="名称" prop="simplename">
+            <el-form-item label="部門簡稱" prop="simplename">
               <el-input v-model="form.simplename" minlength=1></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="全称" prop="fullname">
+            <el-form-item label="部門全名" prop="fullname">
               <el-input v-model="form.fullname"  minlength=1></el-input>
             </el-form-item>
           </el-col>
@@ -55,15 +55,15 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="父部门" >
+            <el-form-item label="上階部門" >
               <el-input
-                placeholder="请选择父部门"
+                placeholder="請選擇上階部門"
                 v-model="form.pname"
                 readonly="readonly"
                 @click.native="showTree = !showTree">
               </el-input>
               <el-tree v-if="showTree"
-                       empty-text="暂无数据"
+                       empty-text="暫無資料"
                        :expand-on-click-node="false"
                        :data="data"
                        :props="defaultProps"
