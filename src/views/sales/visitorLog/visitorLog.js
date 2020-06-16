@@ -1,54 +1,30 @@
-import { remove, getList, save } from '@/api/sales/visitor'
-import { selectList } from '@/api/sales/sla00'
+import { remove, getVisitorList, save } from '@/api/sales/visitorLog'
 
 export default {
   data() {
     return {
-      formVisible: false,
-      formTitle: '新增來人洽詢',
-      deptList: [],
-      isAdd: true,
-      form: {
-        id: '',
-        sla10003: '',
-        sla10006: '',
-        sla10007: '',
-        sla10009: '',
-        sla10013: '',
-        sla10015: '',
-        building: ''
-      },
-      buildingList:[],
-      rules: {
-        name: [
-          { required: true, message: '请输入任务名', trigger: 'blur' },
-          { min: 2, max: 20, message: '长度在 3 到 20 个字符', trigger: 'blur' }
-        ],
-        jobClass: [
-          { required: true, message: '请输入执行类', trigger: 'blur' }
-        ],
-        cron: [
-          { required: true, message: '请输入定时规则', trigger: 'blur' }
-        ]
-
-      },
+      visitorId: '',
       listQuery: {
-        sla10006: undefined
+        page: 1,
+        limit: 20,
+        visitorId: undefined
       },
       total: 0,
       list: null,
       listLoading: true,
-      selRow: {}
-    }
-  },
-  filters: {
-    statusFilter(status) {
-      const statusMap = {
-        published: 'success',
-        draft: 'gray',
-        deleted: 'danger'
+      selRow: {},
+      formVisible: false,
+      formTitle: '新增洽詢紀錄',
+      isAdd: true,
+      form: {
+        id: '',
+        sla11003:'',
+        sla11004:'',
+        sla11006:''
+      },
+      buildingList:[],
+      rules: {
       }
-      return statusMap[status]
     }
   },
   created() {
@@ -56,32 +32,37 @@ export default {
   },
   methods: {
     init() {
+      this.listQuery.visitorId = this.$route.query.visitorId
       this.fetchData()
     },
     fetchData() {
       this.listLoading = true
-      getList(this.listQuery).then(response => {
+      
+      getVisitorList(this.listQuery.visitorId).then(response => {
         this.list = response.data
         this.listLoading = false
+        this.total = response.data.total
+        
       })
     },
-    fetchBuilding(){
-      selectList().then(response => {
-        this.buildingList = response.data
-      })
-    },
-    search() {
-      this.listQuery.page = 1
+    fetchNext() {
+      this.listQuery.page = this.listQuery.page + 1
       this.fetchData()
     },
-    reset() {
-      this.listQuery.sla10006 = ''
-      this.listQuery.page = 1
+    fetchPrev() {
+      this.listQuery.page = this.listQuery.page - 1
       this.fetchData()
     },
-    handleFilter() {
-      this.listQuery.page = 1
-      this.getList()
+    fetchPage(page) {
+      this.listQuery.page = page
+      this.fetchData()
+    },
+    changeSize(limit) {
+      this.listQuery.limit = limit
+      this.fetchData()
+    },
+    back() {
+      this.$router.go(-1)
     },
     handleClose() {
 
@@ -95,8 +76,8 @@ export default {
     },
     add() {
       this.resetForm()
-      this.fetchBuilding()
-      this.formTitle = '新增來人洽詢表'
+      //this.fetchBuilding() //todo:洽詢類別
+      this.formTitle = '新增來人洽詢紀錄'
       this.formVisible = true
       this.isAdd = true
     },
@@ -106,14 +87,9 @@ export default {
         if (valid) {
           save({
             id: self.form.id,
-            sla10002: self.form.sla10002,
-            sla10006: self.form.sla10006,
-            sla10007: self.form.sla10007,
-            sla10008: self.form.sla10008,
-            sla10009: self.form.sla10009,
-            sla10010: self.form.sla10010
+            
           }).then(response => {
-            console.log(response)
+            //console.log(response)
             this.$message({
               message: '提交成功',
               type: 'success'
@@ -136,14 +112,11 @@ export default {
       })
       return false
     },
-    viewLog(visitorId) {
-      this.$router.push({ path: '/visitorLog', query: { visitorId: visitorId }})
-    },
     edit() {
       if (this.checkSel()) {
         this.isAdd = false
         this.form = this.selRow
-        this.formTitle = '修改洽詢表'
+        this.formTitle = '修改洽詢紀錄'
         this.formVisible = true
       }
     },
@@ -166,6 +139,5 @@ export default {
         })
       }
     }
-
   }
 }

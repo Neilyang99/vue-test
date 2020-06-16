@@ -27,7 +27,8 @@ export default {
     msgTpl:'消息模板',
     msgSender:'消息發送器',
     salesMgr:'業務管理',
-    visitorMgr:'來人洽詢'
+    visitorMgr:'來人洽詢',
+    visitorLog:'洽詢紀錄'
   },
   navbar: {
     logOut: '退出登錄',
@@ -54,11 +55,11 @@ export default {
     delete: '刪除',
     search: '查詢',
     reset: '重置',
-    submit: '提交',
+    submit: '儲存',
     cancel: '取消',
     clear: '清除',
     back: '返回',
-    export: '導出'
+    export: '匯出'
   },
   common: {
     mustSelectOne: '请选中操作项!',
