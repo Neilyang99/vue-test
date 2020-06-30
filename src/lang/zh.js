@@ -42,8 +42,8 @@ export default {
   },
   login: {
     title: '立桓建設',
-    errorAccount:'请输入5到32位的数字和字母',
-    errorPassword:'密码至少位5位',
+    errorAccount:'請輸入5到32位的數字和字母',
+    errorPassword:'密碼至少位5位',
     logIn: '登錄',
     username: '帳號',
     password: '密碼'
@@ -81,10 +81,10 @@ export default {
   },
   dashboard: {
     newUser: '新增用户',
-    message: '未处理消息',
+    message: '未處理訊息',
     income: '收入',
     onlineUser: '在线用户',
-    document:'在线文档',
+    document:'線上文件',
     date: '日期',
     name: '名称',
     addr: '地址',

@@ -63,26 +63,26 @@ export const constantRoutes = [
     children: [
       {
         path: 'profile',
-        name: '个人资料',
+        name: '個人資料',
         component: () => import('@/views/account/profile.vue'),
 
-        meta: { title: '个人资料' }
+        meta: { title: '個人資料' }
 
       },
       {
         path: 'timeline',
-        name: '最近活动',
+        name: '最近活動',
         component: () => import('@/views/account/timeline.vue'),
         hidden: true,
-        meta: { title: '最近活动' }
+        meta: { title: '最近活動' }
 
       },
       {
         path: 'updatePwd',
-        name: '修改密码',
+        name: '修改密碼',
         component: () => import('@/views/account/updatePwd.vue'),
         hidden: true,
-        meta: { title: '修改密码' }
+        meta: { title: '修改密碼' }
       }
     ]
   }
