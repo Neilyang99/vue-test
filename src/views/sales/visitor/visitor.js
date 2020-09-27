@@ -20,15 +20,11 @@ export default {
       },
       buildingList:[],
       rules: {
-        name: [
-          { required: true, message: '请输入任务名', trigger: 'blur' },
-          { min: 2, max: 20, message: '长度在 3 到 20 个字符', trigger: 'blur' }
+        sla10006: [
+          { required: true, message: '請輸入客戶名', trigger: 'blur' }
         ],
-        jobClass: [
-          { required: true, message: '请输入执行类', trigger: 'blur' }
-        ],
-        cron: [
-          { required: true, message: '请输入定时规则', trigger: 'blur' }
+        sla10010: [
+          { required: true, message: '行動電話需要輸入', trigger: 'blur' }
         ]
 
       },
@@ -106,12 +102,15 @@ export default {
         if (valid) {
           save({
             id: self.form.id,
-            sla10002: self.form.sla10002,
+            sla10002: self.form.building,
+            sla10003: self.form.building.sla00003,
             sla10006: self.form.sla10006,
             sla10007: self.form.sla10007,
             sla10008: self.form.sla10008,
             sla10009: self.form.sla10009,
-            sla10010: self.form.sla10010
+            sla10010: self.form.sla10010,
+            sla10013: self.form.sla10013,
+            sla10015: self.form.sla10015
           }).then(response => {
             console.log(response)
             this.$message({
@@ -127,7 +126,7 @@ export default {
       })
     },
     checkSel() {
-      if (this.selRow && this.selRow.id) {
+      if (this.selRow && this.selRow.sla10001) {
         return true
       }
       this.$message({
@@ -141,8 +140,11 @@ export default {
     },
     edit() {
       if (this.checkSel()) {
+        this.fetchBuilding();
         this.isAdd = false
         this.form = this.selRow
+        //this.form.id = this.selRow.sla10001
+        this.form.building = this.selRow.sla10002
         this.formTitle = '修改洽詢表'
         this.formVisible = true
       }

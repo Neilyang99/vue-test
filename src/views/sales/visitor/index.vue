@@ -25,7 +25,7 @@
     @current-change="handleCurrentChange">
       <el-table-column label="銷售案號">
         <template slot-scope="scope">
-          {{scope.row.sla10003}}
+          {{scope.row.sla10002Name}}
         </template>
       </el-table-column>
       <el-table-column label="客戶姓名">
@@ -33,14 +33,14 @@
           {{scope.row.sla10006}}
         </template>
       </el-table-column>
-      <el-table-column label="電話">
+      <el-table-column label="行動電話">
         <template slot-scope="scope">
-          {{scope.row.sla10009}}
+          {{scope.row.sla10010}}
         </template>
       </el-table-column>
       <el-table-column label="填表日期">
         <template slot-scope="scope">
-          {{scope.row.sla10013}}
+          {{scope.row.sla10004}}
         </template>
       </el-table-column>
 
@@ -51,7 +51,7 @@
       </el-table-column>
       <el-table-column label="操作" width="200">
         <template slot-scope="scope">
-        <el-button icon="el-icon-log" size="mini" @click.native="viewLog(scope.row.id)">查看訪談紀錄</el-button>
+        <el-button icon="el-icon-log" size="mini" @click.native="viewLog(scope.row.sla10001)">查看訪談紀錄</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -68,7 +68,7 @@
                   v-for="item in buildingList"
                   :key="item.id"
                   :label="item.sla00003"
-                  :value="item.id">
+                  :value="item.sla00002">
                 </el-option>
               </el-select>
           </el-form-item>

@@ -24,7 +24,7 @@
       </el-table-column>
       <el-table-column label="洽詢類別">
         <template slot-scope="scope">
-          {{scope.row.sla11003}}
+          {{scope.row.sla11003Name}}
         </template>
       </el-table-column>
       <el-table-column label="帶看戶別">

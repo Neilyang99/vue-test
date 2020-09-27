@@ -34,7 +34,7 @@
 
 
           <el-col :span="24">
-            <el-form-item label="重复密碼">
+            <el-form-item label="重複密碼">
               <el-input type="password" v-model="form.rePassword"  ></el-input>
             </el-form-item>
           </el-col>
