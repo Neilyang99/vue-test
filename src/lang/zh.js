@@ -28,7 +28,8 @@ export default {
     msgSender:'消息發送器',
     salesMgr:'業務管理',
     visitorMgr:'來人洽詢',
-    visitorLog:'洽詢紀錄'
+    visitorLog:'洽詢紀錄',
+    sla00:'房屋銷售案'
   },
   navbar: {
     logOut: '退出登錄',
