@@ -1,11 +1,10 @@
-import { remove, getList, save } from '@/api/sales/visitor'
-import { selectList } from '@/api/sales/sla00'
+import { remove, getList, save } from '@/api/sales/sla00'
 
 export default {
   data() {
     return {
       formVisible: false,
-      formTitle: '新增來人洽詢',
+      formTitle: '新增銷售案別',
       deptList: [],
       isAdd: true,
       form: {
@@ -55,16 +54,8 @@ export default {
       this.fetchData()
     },
     fetchData() {
-      this.listLoading = true
-      getList(this.listQuery).then(response => {
-        this.list = response.data
-        this.listLoading = false
-      })
     },
     fetchBuilding() {
-      selectList().then(response => {
-        this.buildingList = response.data
-      })
     },
     search() {
       this.listQuery.page = 1
@@ -142,7 +133,6 @@ export default {
         this.fetchBuilding()
         this.isAdd = false
         this.form = this.selRow
-        //this.form.id = this.selRow.sla10001
         this.form.building = this.selRow.sla10002
         this.formTitle = '修改洽詢表'
         this.formVisible = true

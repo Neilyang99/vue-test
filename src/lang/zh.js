@@ -27,7 +27,9 @@ export default {
     msgTpl:'消息模板',
     msgSender:'消息發送器',
     salesMgr:'業務管理',
-    visitorMgr:'來人洽詢'
+    visitorMgr:'來人洽詢',
+    visitorLog:'洽詢紀錄',
+    sla00:'房屋銷售案'
   },
   navbar: {
     logOut: '退出登錄',
@@ -41,8 +43,8 @@ export default {
   },
   login: {
     title: '立桓建設',
-    errorAccount:'请输入5到32位的数字和字母',
-    errorPassword:'密码至少位5位',
+    errorAccount:'請輸入5到32位的數字和字母',
+    errorPassword:'密碼至少位5位',
     logIn: '登錄',
     username: '帳號',
     password: '密碼'
@@ -54,11 +56,11 @@ export default {
     delete: '刪除',
     search: '查詢',
     reset: '重置',
-    submit: '提交',
+    submit: '儲存',
     cancel: '取消',
     clear: '清除',
     back: '返回',
-    export: '導出'
+    export: '匯出'
   },
   common: {
     mustSelectOne: '请选中操作项!',
@@ -80,10 +82,10 @@ export default {
   },
   dashboard: {
     newUser: '新增用户',
-    message: '未处理消息',
+    message: '未處理訊息',
     income: '收入',
     onlineUser: '在线用户',
-    document:'在线文档',
+    document:'線上文件',
     date: '日期',
     name: '名称',
     addr: '地址',

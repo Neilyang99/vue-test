@@ -25,3 +25,6 @@ npm run build
 # Build for production and view the bundle analyzer report
 npm run build --report
 ```
+
+
+运行：npm run build:prod可以构建出生产环境的前端部署文件

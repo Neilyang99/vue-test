@@ -8,4 +8,10 @@ export function selectList(params) {
   })
 }
 
-
+export function getList(params) {
+  return request({
+    url: '/sla00/list',
+    method: 'get',
+    params
+  })
+}

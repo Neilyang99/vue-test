@@ -26,7 +26,11 @@ export default {
     swagger: 'Docs',
     msg: 'History',
     msgTpl: 'Template',
-    msgSender: 'Sender'
+    msgSender: 'Sender',
+    salesMgr:'Sales',
+    visitorMgr:'Visitor',
+    visitorLog:'Visitor Log',
+    sla00:'Sales Project'
   },
   navbar: {
     logOut: 'Log Out',
