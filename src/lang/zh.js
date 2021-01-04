@@ -29,14 +29,15 @@ export default {
     salesMgr:'業務管理',
     visitorMgr:'來人洽詢',
     visitorLog:'洽詢紀錄',
-    sla00:'房屋銷售案'
+    sla00:'房屋銷售案',
+    sla01:'可售房屋'
   },
   navbar: {
     logOut: '退出登錄',
     profile:'個人資料',
     updatePwd: '修改密碼',
     dashboard: '首頁',
-    github: '项目地址',
+    github: '項目地址',
     screenfull: '全螢幕',
     theme: '佈景樣式',
     size: '布局大小'
@@ -63,13 +64,13 @@ export default {
     export: '匯出'
   },
   common: {
-    mustSelectOne: '请选中操作项!',
-    deleteConfirm: '你确认删除该记录？',
+    mustSelectOne: '請挑選操作項目!',
+    deleteConfirm: '你確認刪除該筆資料嗎？',
     tooltip: '提示',
     warning: '警告',
     optionSuccess: '操作成功',
-    uploadError: '上传文件失败',
-    isRequired: '不能为空',
+    uploadError: '上傳文件失敗',
+    isRequired: '不能空白',
     week: {
       mon: '周一',
       tue: '周二',
@@ -84,27 +85,27 @@ export default {
     newUser: '新增用户',
     message: '未處理訊息',
     income: '收入',
-    onlineUser: '在线用户',
+    onlineUser: '線上使用者',
     document:'線上文件',
     date: '日期',
-    name: '名称',
+    name: '名稱',
     addr: '地址',
-    email: '邮件营销',
-    ad: '联盟广告',
-    vedio: '视频广告',
-    direct: '直接访问',
-    searchEngine: '搜索引擎',
-    userFrom: '用户来源'
+    email: '電子郵件',
+    ad: '廣告',
+    vedio: '視頻廣告',
+    direct: '直接訪問',
+    searchEngine: '搜尋引擎',
+    userFrom: '使用者來源'
   },
   config: {
-    name: '参数名',
-    value: '参数值',
-    descript: '备注',
-    add: '添加参数',
-    edit: '编辑参数',
-    nameInput: '请输入参数名',
-    valueInput: '请输入参数值',
-    lengthValidation: '长度在 2 到 20 个字符'
+    name: '參數名',
+    value: '參數值',
+    descript: '備註',
+    add: '增加參數',
+    edit: '編輯參數',
+    nameInput: '請輸入參數名',
+    valueInput: '請輸入參數值',
+    lengthValidation: '長度在 2 到 20 個字元'
   }
 }
 

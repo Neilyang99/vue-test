@@ -25,7 +25,7 @@
     @current-change="handleCurrentChange">
       <el-table-column label="銷售案號">
         <template slot-scope="scope">
-          {{scope.row.sla10002Name}}
+          {{scope.row.sla10003}}
         </template>
       </el-table-column>
       <el-table-column label="客戶姓名">
@@ -40,7 +40,7 @@
       </el-table-column>
       <el-table-column label="填表日期">
         <template slot-scope="scope">
-          {{scope.row.sla10004}}
+          {{scope.row.sla10013}}
         </template>
       </el-table-column>
 
@@ -63,7 +63,7 @@
       <el-form ref="form" :model="form" :rules="rules" label-width="120px">
         <el-row>
           <el-form-item label="銷售案號"  >
-              <el-select  v-model="form.building" filterable placeholder="请选择">
+              <el-select  v-model="form.building" filterable placeholder="請選擇">
                 <el-option
                   v-for="item in buildingList"
                   :key="item.id"
@@ -79,7 +79,7 @@
           </el-col>
           <el-col :span="6">
             <el-form-item label="填表日期" prop="sla10013">
-              <el-input v-model="form.sla10013"></el-input>
+              <el-date-picker type="date" value-format="yyyyMMdd" placeholder="選擇日期" v-model="form.sla10013" style="width: 100%;"></el-date-picker>
             </el-form-item>
           </el-col>
           <el-col :span="6">
@@ -204,6 +204,18 @@
 
       </el-form>
     </el-dialog>
+    <el-pagination
+                background
+                layout="total, sizes, prev, pager, next, jumper"
+                :page-sizes="[10, 20, 50, 100]"
+                :page-size="listQuery.limit"
+                :total="total"
+                :current-page.sync="listQuery.page"
+                @size-change="changeSize"
+                @current-change="fetchPage"
+                @prev-click="fetchPrev"
+                @next-click="fetchNext">
+    </el-pagination>
   </div>
 </template>
 

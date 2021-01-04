@@ -1,34 +1,42 @@
-import { remove, getList, save } from '@/api/sales/sla00'
+import { remove, getList, save, startToSale } from '@/api/sales/sla00'
 
 export default {
   data() {
     return {
       formVisible: false,
-      formTitle: '新增銷售案別',
-      deptList: [],
+      formTitle: '新增銷售案',
       isAdd: true,
       form: {
         id: '',
-        sla10003: '',
-        sla10006: '',
-        sla10007: '',
-        sla10009: '',
-        sla10013: '',
-        sla10015: '',
-        building: ''
+        sla00002: '',
+        sla00003: '',
+        sla00004: '',
+        sla00005: '',
+        sla00006: '',
+        sla00007: '',
+        sla00008: '',
+        sla00011: 0,
+        sla00012: 0,
+        sla00013: 0,
+        sla00014: 0,
+        sla00015: 0,
+        sla00016: 0,
+        sla00017: 0,
+        sla00030: 0,
+        sla00035: 0
       },
-      buildingList:[],
       rules: {
-        sla10006: [
-          { required: true, message: '請輸入客戶名', trigger: 'blur' }
+        sla00002: [
+          { required: true, message: '請輸入銷售案代號', trigger: 'blur' }
         ],
-        sla10010: [
-          { required: true, message: '行動電話需要輸入', trigger: 'blur' }
+        sla00003: [
+          { required: true, message: '請輸入銷售案名稱', trigger: 'blur' }
         ]
-
       },
       listQuery: {
-        sla10006: undefined
+        page: 1,
+        limit:20,
+        selSla00003: undefined
       },
       total: 0,
       list: null,
@@ -54,6 +62,12 @@ export default {
       this.fetchData()
     },
     fetchData() {
+      this.listLoading = true
+      getList(this.listQuery).then(response => {
+        this.list = response.data.records
+        this.listLoading = false
+        this.total = response.data.total
+      })
     },
     fetchBuilding() {
     },
@@ -62,13 +76,29 @@ export default {
       this.fetchData()
     },
     reset() {
-      this.listQuery.sla10006 = ''
+      this.listQuery.selSla00003 = ''
       this.listQuery.page = 1
       this.fetchData()
     },
     handleFilter() {
       this.listQuery.page = 1
       this.getList()
+    },
+    fetchNext() {
+      this.listQuery.page = this.listQuery.page + 1
+      this.fetchData()
+    },
+    fetchPrev() {
+      this.listQuery.page = this.listQuery.page - 1
+      this.fetchData()
+    },
+    fetchPage(page) {
+      this.listQuery.page = page
+      this.fetchData()
+    },
+    changeSize(limit) {
+      this.listQuery.limit = limit
+      this.fetchData()
     },
     handleClose() {
 
@@ -77,12 +107,30 @@ export default {
       this.selRow = currentRow
     },
     resetForm() {
-      this.form = {}
+      this.form = {
+        id: '',
+        sla00002: '',
+        sla00003: '',
+        sla00004: '',
+        sla00005: '',
+        sla00006: '',
+        sla00007: '',
+        sla00008: '',
+        sla00011: 0,
+        sla00012: 0,
+        sla00013: 0,
+        sla00014: 0,
+        sla00015: 0,
+        sla00016: 0,
+        sla00017: 0,
+        sla00030: 0,
+        sla00035: 0
+      }
     },
     add() {
       this.resetForm()
       this.fetchBuilding()
-      this.formTitle = '新增來人洽詢表'
+      this.formTitle = '新增銷售案'
       this.formVisible = true
       this.isAdd = true
     },
@@ -92,15 +140,24 @@ export default {
         if (valid) {
           save({
             id: self.form.id,
-            sla10002: self.form.building,
-            sla10003: self.form.building.sla00003,
-            sla10006: self.form.sla10006,
-            sla10007: self.form.sla10007,
-            sla10008: self.form.sla10008,
-            sla10009: self.form.sla10009,
-            sla10010: self.form.sla10010,
-            sla10013: self.form.sla10013,
-            sla10015: self.form.sla10015
+            sla00002: self.form.sla00002,
+            sla00003: self.form.sla00003,
+            sla00004: self.form.sla00004,
+            sla00005: self.form.sla00005,
+            sla00006: self.form.sla00006,
+            sla00007: self.form.sla00007,
+            sla00008: self.form.sla00008,
+            sla00011: self.form.sla00011,
+            sla00012: self.form.sla00012,
+            sla00013: self.form.sla00013,
+            sla00014: self.form.sla00014,
+            sla00015: self.form.sla00015,
+            sla00016: self.form.sla00016,
+            sla00017: self.form.sla00017,
+            sla00030: self.form.sla00030,
+            sla00035: self.form.sla00035,
+            sla00041: self.form.sla00041
+            
           }).then(response => {
             console.log(response)
             this.$message({
@@ -116,7 +173,7 @@ export default {
       })
     },
     checkSel() {
-      if (this.selRow && this.selRow.sla10001) {
+      if (this.selRow && this.selRow.id) {
         return true
       }
       this.$message({
@@ -125,16 +182,13 @@ export default {
       })
       return false
     },
-    viewLog(visitorId) {
-      this.$router.push({ path: '/visitorLog', query: { visitorId: visitorId }})
-    },
     edit() {
       if (this.checkSel()) {
         this.fetchBuilding()
         this.isAdd = false
         this.form = this.selRow
-        this.form.building = this.selRow.sla10002
-        this.formTitle = '修改洽詢表'
+        this.form.building = this.selRow.sla00002
+        this.formTitle = '修改銷售案'
         this.formVisible = true
       }
     },
@@ -156,6 +210,25 @@ export default {
         }).catch(() => {
         })
       }
+    },
+    house() {
+      if (this.checkSel()) {
+        this.$router.push({ path: '/sla01', query: { sla00ID: '' }})
+      }
+    },
+    startToSale(id,status) {
+      //if (this.checkSel()) {
+        startToSale(id,status).then(
+          response => {
+            console.log(response)
+            this.$message({
+              message: '提交成功',
+              type: 'success'
+            })
+            this.fetchData()
+          }
+        )
+      //}
     }
 
   }
