@@ -1,10 +1,33 @@
 import request from '@/utils/request'
 
-export function getList(params) {
+export function getList(sla01002) {
   return request({
     url: '/sla01/list',
     method: 'get',
-    params
+    params:{
+      sla01002:sla01002
+    }
+  })
+}
+
+export function getSla01007(){
+  return request({
+    url: '/sla01/getSla01007',
+    method: 'get'
+  })
+}
+
+export function getSla01008(){
+  return request({
+    url: '/sla01/getSla01008',
+    method: 'get'
+  })
+}
+
+export function getSla01015(){
+  return request({
+    url: '/sla01/getSla01015',
+    method: 'get'
   })
 }
 

@@ -1,4 +1,4 @@
-import { remove, getVisitorList, save } from '@/api/sales/visitorLog'
+import { remove, getVisitorList, save, getSla11003 } from '@/api/sales/visitorLog'
 
 export default {
   data() {
@@ -20,9 +20,11 @@ export default {
         id: '',
         sla11003:'',
         sla11004:'',
-        sla11006:''
+        sla11005:'',
+        sla11006:'',
+        sla11008:''
       },
-      buildingList:[],
+      sla11003List:[],
       rules: {
       }
     }
@@ -32,34 +34,23 @@ export default {
   },
   methods: {
     init() {
-      this.listQuery.visitorId = this.$route.query.visitorId
+      this.visitorId = this.$route.query.visitorId
       this.fetchData()
     },
     fetchData() {
       this.listLoading = true
       
-      getVisitorList(this.listQuery.visitorId).then(response => {
+      getVisitorList(this.visitorId).then(response => {
         this.list = response.data
         this.listLoading = false
         this.total = response.data.total
         
       })
     },
-    fetchNext() {
-      this.listQuery.page = this.listQuery.page + 1
-      this.fetchData()
-    },
-    fetchPrev() {
-      this.listQuery.page = this.listQuery.page - 1
-      this.fetchData()
-    },
-    fetchPage(page) {
-      this.listQuery.page = page
-      this.fetchData()
-    },
-    changeSize(limit) {
-      this.listQuery.limit = limit
-      this.fetchData()
+    fetchSla11003() {
+      getSla11003().then(response => {
+        this.sla11003List = response.data
+      })
     },
     back() {
       this.$router.go(-1)
@@ -71,12 +62,19 @@ export default {
       this.selRow = currentRow
     },
     resetForm() {
-      this.form = {}
+      this.form = {
+        id: '',
+        sla11003:'',
+        sla11004:'',
+        sla11005:'',
+        sla11006:'',
+        sla11008:''
+      }
       
     },
     add() {
       this.resetForm()
-      //this.fetchBuilding() //todo:洽詢類別
+      this.fetchSla11003() //洽詢類別
       this.formTitle = '新增來人洽詢紀錄'
       this.formVisible = true
       this.isAdd = true
@@ -87,9 +85,15 @@ export default {
         if (valid) {
           save({
             id: self.form.id,
+            sla11002:this.visitorId,
+            sla11003:self.form.sla11003,
+            sla11004:self.form.sla11004,
+            sla11005:self.form.sla11005,
+            sla11006:self.form.sla11006,
+            sla11008:self.form.sla11008
             
           }).then(response => {
-            //console.log(response)
+            console.log(response)
             this.$message({
               message: '提交成功',
               type: 'success'
@@ -114,6 +118,7 @@ export default {
     },
     edit() {
       if (this.checkSel()) {
+        this.fetchSla11003() //洽詢類別
         this.isAdd = false
         this.form = this.selRow
         this.formTitle = '修改洽詢紀錄'

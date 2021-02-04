@@ -213,7 +213,7 @@ export default {
     },
     house() {
       if (this.checkSel()) {
-        this.$router.push({ path: '/sla01', query: { sla00ID: '' }})
+        this.$router.push({ path: '/sla01', query: { sla00ID: this.selRow.id, projectId: this.selRow.sla00002 }})
       }
     },
     startToSale(id,status) {

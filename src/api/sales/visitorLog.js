@@ -10,6 +10,13 @@ export function getVisitorList(visitorId) {
   })
 }
 
+export function getSla11003(){
+  return request({
+    url: '/visitorLog/getSla11003',
+    method: 'get'
+  })
+}
+
 export function save(params) {
   return request({
     url: '/visitorLog',

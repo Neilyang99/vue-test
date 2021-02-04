@@ -1,9 +1,9 @@
-import { remove, getList, save } from '@/api/sales/sla01'
+import { remove, getList, save, getSla01007, getSla01008, getSla01015 } from '@/api/sales/sla01'
 
 export default {
   data() {
     return {
-      sla00ID: '',
+      projectNo: '',
       listQuery: {
         page: 1,
         limit: 20,
@@ -18,11 +18,23 @@ export default {
       isAdd: true,
       form: {
         id: '',
-        sla11003:'',
-        sla11004:'',
-        sla11006:''
+        sla01003:this.projectNo,
+        sla01004:'',
+        sla01005:'',
+        sla01006:'',
+        sla01007:'',
+        sla01008:'',
+        sla01009:'',
+        sla01010:'',
+        sla01011:'',
+        sla01012:'',
+        sla01013:'',
+        sla01014:'',
+        sla01015:''
       },
-      buildingList:[],
+      sla01007List:[],
+      sla01008List:[],
+      sla01015List:[],
       rules: {
       }
     }
@@ -33,33 +45,33 @@ export default {
   methods: {
     init() {
       this.listQuery.sla00ID = this.$route.query.sla00ID
+      this.projectNo = this.$route.query.projectId
       this.fetchData()
     },
     fetchData() {
       this.listLoading = true
       
-      getList(this.listQuery).then(response => {
-        this.list = response.data.records
+      getList(this.listQuery.sla00ID).then(response => {
+        this.list = response.data
         this.listLoading = false
         this.total = response.data.total
         
       })
     },
-    fetchNext() {
-      this.listQuery.page = this.listQuery.page + 1
-      this.fetchData()
+    fetchSla01007() {//房型
+      getSla01007().then(response => {
+        this.sla01007List = response.data
+      })
     },
-    fetchPrev() {
-      this.listQuery.page = this.listQuery.page - 1
-      this.fetchData()
+    fetchSla01008() {//格局
+      getSla01008().then(response => {
+        this.sla01008List = response.data
+      })
     },
-    fetchPage(page) {
-      this.listQuery.page = page
-      this.fetchData()
-    },
-    changeSize(limit) {
-      this.listQuery.limit = limit
-      this.fetchData()
+    fetchSla01015() {//車位
+      getSla01015().then(response => {
+        this.sla01015List = response.data
+      })
     },
     back() {
       this.$router.go(-1)
@@ -71,11 +83,29 @@ export default {
       this.selRow = currentRow
     },
     resetForm() {
-      this.form = {}
+      this.form = {
+        id: '',
+        sla01003:this.projectNo,
+        sla01004:'',
+        sla01005:'',
+        sla01006:'',
+        sla01007:'',
+        sla01008:'',
+        sla01009:'',
+        sla01010:'',
+        sla01011:'',
+        sla01012:'',
+        sla01013:'',
+        sla01014:'',
+        sla01015:''
+      }
       
     },
     add() {
       this.resetForm()
+      this.fetchSla01007()
+      this.fetchSla01008()
+      this.fetchSla01015()
       this.formTitle = '新增可售房屋資料'
       this.formVisible = true
       this.isAdd = true
@@ -86,6 +116,20 @@ export default {
         if (valid) {
           save({
             id: self.form.id,
+            sla01002:this.listQuery.sla00ID,
+            sla01003:this.projectNo,
+            sla01004:self.form.sla01004,
+            sla01005:self.form.sla01005,
+            sla01006:self.form.sla01006,
+            sla01007:self.form.sla01007,
+            sla01008:self.form.sla01008,
+            sla01009:self.form.sla01009,
+            sla01010:self.form.sla01010,
+            sla01011:self.form.sla01011,
+            sla01012:self.form.sla01012,
+            sla01013:self.form.sla01013,
+            sla01014:self.form.sla01014,
+            sla01015:self.form.sla01015
             
           }).then(response => {
             //console.log(response)
@@ -113,6 +157,9 @@ export default {
     },
     edit() {
       if (this.checkSel()) {
+        this.fetchSla01007()
+        this.fetchSla01008()
+        this.fetchSla01015()
         this.isAdd = false
         this.form = this.selRow
         this.formTitle = '修改可售房屋資料'

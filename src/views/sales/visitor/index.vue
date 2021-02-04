@@ -3,7 +3,7 @@
     <div class="block">
       <el-row  :gutter="20">
         <el-col :span="6">
-          <el-input v-model="listQuery.sla10006" size="mini" placeholder="请输入客戶姓名"></el-input>
+          <el-input v-model="listQuery.sla10006" size="mini" placeholder="請輸入客戶姓名"></el-input>
         </el-col>
         <el-col :span="6">
           <el-button type="success" size="mini" icon="el-icon-search" @click.native="search">{{ $t('button.search') }}</el-button>
@@ -51,7 +51,7 @@
       </el-table-column>
       <el-table-column label="操作" width="200">
         <template slot-scope="scope">
-        <el-button icon="el-icon-log" size="mini" @click.native="viewLog(scope.row.sla10001)">查看訪談紀錄</el-button>
+        <el-button icon="el-icon-log" size="mini" @click.native="viewLog(scope.row.id)">查看訪談紀錄</el-button>
         </template>
       </el-table-column>
     </el-table>

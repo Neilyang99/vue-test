@@ -46,27 +46,42 @@
       width="70%">
       <el-form ref="form" :model="form" :rules="rules" label-width="120px">
         <el-row>
-          <el-col>
-            <el-form-item label="洽詢日期" prop="sla11004" >{{form.sla11004}}
-              
+          <el-col :span="6">
+            <el-form-item label="洽詢類別"  >
+                <el-select  v-model="form.sla11003" filterable placeholder="請選擇">
+                  <el-option
+                    v-for="item in sla11003List"
+                    :key="item.key"
+                    :label="item.value"
+                    :value="item.key">
+                  </el-option>
+                </el-select>
             </el-form-item>
           </el-col>
-          <el-form-item label="洽詢類別"  >
-              <el-select  v-model="form.building" filterable placeholder="请选择">
-                <el-option
-                  v-for="item in buildingList"
-                  :key="item.id"
-                  :label="item.sla11003"
-                  :value="item.id">
-                </el-option>
-              </el-select>
-          </el-form-item>
-          <el-col :span="20">
-            <el-form-item label="洽詢紀錄" prop="sla11006" >
+          <el-col :span="6">
+            <el-form-item label="洽詢日期" prop="sla11004" >
+              <el-date-picker type="date" value-format="yyyyMMdd" placeholder="選擇日期" v-model="form.sla11004" style="width: 100%;"></el-date-picker>
+            </el-form-item>
+          </el-col>
+          <el-col :span="6">
+            <el-form-item label="帶看戶別" prop="sla11005">
+              <el-input v-model="form.sla11005"></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>  
+          <el-col :span="24">
+            <el-form-item label="洽詢事項紀錄" prop="sla11006" >
               <el-input v-model="form.sla11006" type="textarea"></el-input>
             </el-form-item>
           </el-col>
-
+        </el-row>
+        <el-row>  
+          <el-col :span="24">
+            <el-form-item label="接洽人意見" prop="sla11008" >
+              <el-input v-model="form.sla11008" type="textarea"></el-input>
+            </el-form-item>
+          </el-col>
         </el-row>
         <el-form-item>
           <el-button type="primary" @click="save">{{ $t('button.submit') }}</el-button>
@@ -75,19 +90,6 @@
 
       </el-form>
     </el-dialog>
-
-    <el-pagination
-      background
-      layout="total, sizes, prev, pager, next, jumper"
-      :page-sizes="[10, 20, 50, 100,500]"
-      :page-size="listQuery.limit"
-      :total="total"
-      :current-page.sync="listQuery.page"
-      @size-change="changeSize"
-      @current-change="fetchPage"
-      @prev-click="fetchPrev"
-      @next-click="fetchNext">
-    </el-pagination>
   </div>
 </template>
 
