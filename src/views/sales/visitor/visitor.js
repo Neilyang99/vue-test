@@ -1,4 +1,6 @@
-import { remove, getList, save } from '@/api/sales/visitor'
+import { remove, getList, save, 
+  getSla10016,getSla10017,getSla10018,getSla10019,getSla10020,getSla10021,getSla10022,getSla10023,getSla10024,
+  getSla10025,getSla10026,getSla10027,getSla10029,getSla10030 } from '@/api/sales/visitor'
 import { selectList } from '@/api/sales/sla00'
 
 export default {
@@ -39,6 +41,20 @@ export default {
         buildingName: ''
       },
       buildingList:[],
+      sla10016List:[],
+      sla10017List:[],
+      sla10018List:[],
+      sla10019List:[],
+      sla10020List:[],
+      sla10021List:[],
+      sla10022List:[],
+      sla10023List:[],
+      sla10024List:[],
+      sla10025List:[],
+      sla10026List:[],
+      sla10027List:[],
+      sla10029List:[],
+      sla10030List:[],
       rules: {
         sla10006: [
           { required: true, message: '請輸入客戶名', trigger: 'blur' }
@@ -75,6 +91,7 @@ export default {
   methods: {
     init() {
       this.fetchData()
+      this.fetchOptionList()
     },
     fetchData() {
       this.listLoading = true
@@ -88,6 +105,22 @@ export default {
       selectList().then(response => {
         this.buildingList = response.data
       })
+    },
+    fetchOptionList(){
+      getSla10016().then(response => {this.sla10016List = response.data})
+      //getSla10017().then(response => {this.sla10017List = response.data})
+      getSla10018().then(response => {this.sla10018List = response.data})
+      getSla10019().then(response => {this.sla10019List = response.data})
+      getSla10020().then(response => {this.sla10020List = response.data})
+      getSla10021().then(response => {this.sla10021List = response.data})
+      getSla10022().then(response => {this.sla10022List = response.data})
+      getSla10023().then(response => {this.sla10023List = response.data})
+      getSla10024().then(response => {this.sla10024List = response.data})
+      getSla10025().then(response => {this.sla10025List = response.data})
+      getSla10026().then(response => {this.sla10026List = response.data})
+      getSla10027().then(response => {this.sla10027List = response.data})
+      getSla10029().then(response => {this.sla10029List = response.data})
+      getSla10030().then(response => {this.sla10030List = response.data})
     },
     search() {
       this.listQuery.page = 1
@@ -160,6 +193,7 @@ export default {
     add() {
       this.resetForm()
       this.fetchBuilding()
+      
       this.formTitle = '新增來人洽詢表'
       this.formVisible = true
       this.isAdd = true
@@ -190,7 +224,7 @@ export default {
             sla10020: self.form.sla10020,
             sla10021: self.form.sla10021,
             sla10022: self.form.sla10022,
-            sla10023: self.form.sla10022,
+            sla10023: self.form.sla10023,
             sla10024: self.form.sla10024,
             sla10025: self.form.sla10025,
             sla10026: self.form.sla10026,

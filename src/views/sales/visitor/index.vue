@@ -90,8 +90,8 @@
           <el-col :span="6">
             <el-form-item label="性别" prop="sla10007">
               <el-radio-group v-model="form.sla10007">
-                <el-radio :label="1">男</el-radio>
-                <el-radio :label="2">女</el-radio>
+                <el-radio label="M">男</el-radio>
+                <el-radio label="F">女</el-radio>
               </el-radio-group>
             </el-form-item>
           </el-col>
@@ -117,12 +117,26 @@
           </el-col>
           <el-col :span="8">
             <el-form-item label="區域" prop="sla10016">
-              <el-input v-model="form.sla10016" ></el-input>
+              <el-select  v-model="form.sla10016" placeholder="請選擇">
+                  <el-option
+                    v-for="item in sla10016List"
+                    :key="item.key"
+                    :label="item.value"
+                    :value="item.key">
+                  </el-option>
+              </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="8">
             <el-form-item label="需求產品" prop="sla10019">
-              <el-input v-model="form.sla10019" ></el-input>
+              <el-select  v-model="form.sla10019" placeholder="請選擇">
+                  <el-option
+                    v-for="item in sla10019List"
+                    :key="item.key"
+                    :label="item.value"
+                    :value="item.key">
+                  </el-option>
+              </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="5">
@@ -132,47 +146,110 @@
           </el-col>
           <el-col :span="8">
             <el-form-item label="職業" prop="sla10018">
-              <el-input v-model="form.sla10018" ></el-input>
+              <el-select  v-model="form.sla10018" placeholder="請選擇">
+                  <el-option
+                    v-for="item in sla10018List"
+                    :key="item.key"
+                    :label="item.value"
+                    :value="item.key">
+                  </el-option>
+              </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="8">
             <el-form-item label="需求價位" prop="sla10027">
-              <el-input v-model="form.sla10027" ></el-input>
+              <el-select  v-model="form.sla10027" placeholder="請選擇">
+                  <el-option
+                    v-for="item in sla10027List"
+                    :key="item.key"
+                    :label="item.value"
+                    :value="item.key">
+                  </el-option>
+              </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="8">
             <el-form-item label="購買用途" prop="sla10020">
-              <el-input v-model="form.sla10020" ></el-input>
+              <el-select  v-model="form.sla10020" placeholder="請選擇">
+                  <el-option
+                    v-for="item in sla10020List"
+                    :key="item.key"
+                    :label="item.value"
+                    :value="item.key">
+                  </el-option>
+              </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="8">
             <el-form-item label="現住狀況" prop="sla10021">
-              <el-input v-model="form.sla10021" ></el-input>
+              <el-select  v-model="form.sla10021" placeholder="請選擇">
+                  <el-option
+                    v-for="item in sla10021List"
+                    :key="item.key"
+                    :label="item.value"
+                    :value="item.key">
+                  </el-option>
+              </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="8">
             <el-form-item label="車位需求" prop="sla10022">
-              <el-input v-model="form.sla10022" ></el-input>
+              <el-select  v-model="form.sla10022" placeholder="請選擇">
+                  <el-option
+                    v-for="item in sla10022List"
+                    :key="item.key"
+                    :label="item.value"
+                    :value="item.key">
+                  </el-option>
+              </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="8">
             <el-form-item label="媒體分析" prop="sla10023">
-              <el-input v-model="form.sla10023" ></el-input>
+              <el-select  v-model="form.sla10023" placeholder="請選擇">
+                  <el-option
+                    v-for="item in sla10023List"
+                    :key="item.key"
+                    :label="item.value"
+                    :value="item.key">
+                  </el-option>
+              </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="8">
             <el-form-item label="詢問重點" prop="sla10024">
-              <el-input v-model="form.sla10024" ></el-input>
+              <el-select  v-model="form.sla10024" placeholder="請選擇">
+                  <el-option
+                    v-for="item in sla10024List"
+                    :key="item.key"
+                    :label="item.value"
+                    :value="item.key">
+                  </el-option>
+              </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="8">
             <el-form-item label="需求房數" prop="sla10025">
-              <el-input v-model="form.sla10025" ></el-input>
+              <el-select  v-model="form.sla10025" placeholder="請選擇">
+                  <el-option
+                    v-for="item in sla10025List"
+                    :key="item.key"
+                    :label="item.value"
+                    :value="item.key">
+                  </el-option>
+              </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="8">
             <el-form-item label="已購原因" prop="sla10029">
-              <el-input v-model="form.sla10029" ></el-input>
+              <el-select  v-model="form.sla10029" placeholder="請選擇">
+                  <el-option
+                    v-for="item in sla10029List"
+                    :key="item.key"
+                    :label="item.value"
+                    :value="item.key">
+                  </el-option>
+              </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="8">
@@ -182,12 +259,26 @@
           </el-col>
           <el-col :span="8">
             <el-form-item label="需求坪數" prop="sla10026">
-              <el-input v-model="form.sla10026" ></el-input>
+              <el-select  v-model="form.sla10026" placeholder="請選擇">
+                  <el-option
+                    v-for="item in sla10026List"
+                    :key="item.key"
+                    :label="item.value"
+                    :value="item.key">
+                  </el-option>
+              </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="8">
             <el-form-item label="未購原因" prop="sla10030">
-              <el-input v-model="form.sla10030" ></el-input>
+              <el-select  v-model="form.sla10030" placeholder="請選擇">
+                  <el-option
+                    v-for="item in sla10030List"
+                    :key="item.key"
+                    :label="item.value"
+                    :value="item.key">
+                  </el-option>
+              </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="12">
