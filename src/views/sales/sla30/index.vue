@@ -53,7 +53,7 @@
       :title="formTitle"
       :visible.sync="formVisible"
       width="76%">
-      <el-form ref="form" :model="form" :rules="rules" label-width="160px">
+      <el-form ref="form" :model="form" :rules="rules" label-width="160px"  style="border: 1px solid black;">
         <el-row>
           <el-col :span="8">
             <el-form-item label="填表日期" prop="sla30002">
@@ -185,7 +185,28 @@
             </el-form-item>
           </el-col>
         </el-row>
+        
+        <el-row > 
+          <el-col :span="3"  style="border: 1px solid black;"><label>產品規劃</label></el-col>
+          <el-col :span="3"  style="border: 1px solid black;"><label>區別</label></el-col>
+          <el-col :span="3"  style="border: 1px solid black;"><label>產品規劃</label></el-col>
+          <el-col :span="5"  style="border: 1px solid black;"><label>坪數範圍</label></el-col>
+          <el-col :span="3"  style="border: 1px solid black;"><label>戶數</label></el-col>
+          <el-col :span="3"  style="border: 1px solid black;"><label>比例</label></el-col>
+          <el-col :span="4"  style="border: 1px solid black;"><label>位置圖</label></el-col>
+        </el-row>
 
+        <el-row style="border: 1px solid black;" type="flex" justify="center" align="middle"> 
+          <el-col :span="3" align="middle"><label>產品規劃</label></el-col>
+          <el-col :span="3"  style="border: 1px solid black;"><label>店鋪</label></el-col>
+          <el-col :span="3"  style="border: 1px solid black; height:43px" ><el-checkbox label="1F" v-model="form.sla13"></el-checkbox></el-col>
+          <el-col :span="5"  style="border: 1px solid black;">
+            <el-input v-model="form.sla11" style="width:100px" maxlength="5"></el-input>~<el-input v-model="form.sla12" style="width:100px" maxlength="5"></el-input>坪
+          </el-col>
+          <el-col :span="3"  style="border: 1px solid black;"><el-input v-model="form.sla11" style="width:100px" ></el-input>戶</el-col>
+          <el-col :span="3"  style="border: 1px solid black;"><el-input v-model="form.sla11" style="width:100px;"  ></el-input>%</el-col>
+          <el-col :span="4"  style="border: 1px solid black;"><label >&nbsp;</label></el-col>
+        </el-row> 
 
 
         <el-form-item>
