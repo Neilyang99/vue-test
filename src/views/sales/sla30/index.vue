@@ -22,9 +22,9 @@
 
     <el-table :data="list" v-loading="listLoading" element-loading-text="Loading" border fit highlight-current-row
       @current-change="handleCurrentChange">
-      <el-table-column label="行政區">
+      <el-table-column label="填寫日期">
         <template slot-scope="scope">
-          {{scope.row.sla30004}}
+          {{scope.row.sla30002}}
         </template>
       </el-table-column>
       <el-table-column label="土地區分">
@@ -61,15 +61,23 @@
             </el-form-item>
           </el-col>
           <el-col :span="8">
-            <el-form-item label="填寫人" prop="sla30003">
+            <!--<el-form-item label="填寫人" prop="sla30003">
               <div>{{form.sla30003}}</div>
             </el-form-item>
+            -->
           </el-col>
         </el-row>
         <el-row> 
           <el-col :span="8">
-            <el-form-item label="行政區" prop="sla30004">
-              <el-input v-model="form.sla30004"></el-input>
+            <el-form-item label="行政區" prop="sla30005">
+              <el-select  v-model="form.sla30005" placeholder="請選擇">
+                  <el-option
+                    v-for="item in sla30005List"
+                    :key="item.key"
+                    :label="item.value"
+                    :value="item.key">
+                  </el-option>
+              </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="8" >
@@ -440,7 +448,7 @@
           </el-col>
           <el-col :span="3">
             <label>概估銷售率</label>
-            <el-input v-model="form.sla300199" style="width:60px" maxlength="3"></el-input>%
+            <el-input v-model="form.sla300117" style="width:60px" maxlength="3"></el-input>%
           </el-col>
         </el-row>
         <el-row style="border: 1px solid black;">
@@ -456,44 +464,44 @@
         <el-row style="border: 1px solid black;" type="flex" justify="center"  align="middle">
           <el-col :span="2" ><label>台中市</label></el-col>
           <el-col :span="5">
-            <el-checkbox label="中區" v-model="form.sla32001"></el-checkbox><br>
-            <el-checkbox label="東區" v-model="form.sla32001"></el-checkbox><br>
-            <el-checkbox label="南區" v-model="form.sla32001"></el-checkbox><br>
-            <el-checkbox label="西區" v-model="form.sla32001"></el-checkbox><br>
-            <el-checkbox label="北區" v-model="form.sla32001"></el-checkbox><br>
-            <el-checkbox label="北屯區" v-model="form.sla32001"></el-checkbox><br>
-            <el-checkbox label="西屯區" v-model="form.sla32001"></el-checkbox><br>
-            <el-checkbox label="南屯區" v-model="form.sla32001"></el-checkbox>
+            <el-checkbox label="中區" v-model="form.sla320010"></el-checkbox><br>
+            <el-checkbox label="東區" v-model="form.sla320011"></el-checkbox><br>
+            <el-checkbox label="南區" v-model="form.sla320012"></el-checkbox><br>
+            <el-checkbox label="西區" v-model="form.sla320013"></el-checkbox><br>
+            <el-checkbox label="北區" v-model="form.sla320014"></el-checkbox><br>
+            <el-checkbox label="北屯區" v-model="form.sla320015"></el-checkbox><br>
+            <el-checkbox label="西屯區" v-model="form.sla320016"></el-checkbox><br>
+            <el-checkbox label="南屯區" v-model="form.sla320017"></el-checkbox>
           </el-col>
           <el-col :span="5">
-            <el-checkbox label="太平區" v-model="form.sla32001"></el-checkbox><br>
-            <el-checkbox label="大里區" v-model="form.sla32001"></el-checkbox><br>
-            <el-checkbox label="霧峰區" v-model="form.sla32001"></el-checkbox><br>
-            <el-checkbox label="烏日區" v-model="form.sla32001"></el-checkbox><br>
-            <el-checkbox label="豐原區" v-model="form.sla32001"></el-checkbox><br>
-            <el-checkbox label="后里區" v-model="form.sla32001"></el-checkbox><br>
-            <el-checkbox label="石岡區" v-model="form.sla32001"></el-checkbox><br>
-            <el-checkbox label="東勢區" v-model="form.sla32001"></el-checkbox>
+            <el-checkbox label="太平區" v-model="form.sla320018"></el-checkbox><br>
+            <el-checkbox label="大里區" v-model="form.sla320019"></el-checkbox><br>
+            <el-checkbox label="霧峰區" v-model="form.sla320021"></el-checkbox><br>
+            <el-checkbox label="烏日區" v-model="form.sla320022"></el-checkbox><br>
+            <el-checkbox label="豐原區" v-model="form.sla320023"></el-checkbox><br>
+            <el-checkbox label="后里區" v-model="form.sla320024"></el-checkbox><br>
+            <el-checkbox label="石岡區" v-model="form.sla320025"></el-checkbox><br>
+            <el-checkbox label="東勢區" v-model="form.sla320026"></el-checkbox>
           </el-col>
           <el-col :span="5">
-            <el-checkbox label="和平區" v-model="form.sla32001"></el-checkbox><br>
-            <el-checkbox label="新社區" v-model="form.sla32001"></el-checkbox><br>
-            <el-checkbox label="潭子區" v-model="form.sla32001"></el-checkbox><br>
-            <el-checkbox label="大雅區" v-model="form.sla32001"></el-checkbox><br>
-            <el-checkbox label="神岡區" v-model="form.sla32001"></el-checkbox><br>
-            <el-checkbox label="大肚區" v-model="form.sla32001"></el-checkbox><br>
-            <el-checkbox label="沙鹿區" v-model="form.sla32001"></el-checkbox><br>
-            <el-checkbox label="龍井區" v-model="form.sla32001"></el-checkbox>
+            <el-checkbox label="和平區" v-model="form.sla320027"></el-checkbox><br>
+            <el-checkbox label="新社區" v-model="form.sla320028"></el-checkbox><br>
+            <el-checkbox label="潭子區" v-model="form.sla320029"></el-checkbox><br>
+            <el-checkbox label="大雅區" v-model="form.sla320030"></el-checkbox><br>
+            <el-checkbox label="神岡區" v-model="form.sla320031"></el-checkbox><br>
+            <el-checkbox label="大肚區" v-model="form.sla320032"></el-checkbox><br>
+            <el-checkbox label="沙鹿區" v-model="form.sla320033"></el-checkbox><br>
+            <el-checkbox label="龍井區" v-model="form.sla320034"></el-checkbox>
           </el-col>
           <el-col :span="5" >
-            <el-checkbox label="梧棲區" v-model="form.sla32001"></el-checkbox><br>
-            <el-checkbox label="清水區" v-model="form.sla32001"></el-checkbox><br>
-            <el-checkbox label="大甲區" v-model="form.sla32001"></el-checkbox><br>
-            <el-checkbox label="外埔區" v-model="form.sla32001"></el-checkbox><br>
-            <el-checkbox label="大安區" v-model="form.sla32001"></el-checkbox>
+            <el-checkbox label="梧棲區" v-model="form.sla320035"></el-checkbox><br>
+            <el-checkbox label="清水區" v-model="form.sla320036"></el-checkbox><br>
+            <el-checkbox label="大甲區" v-model="form.sla320037"></el-checkbox><br>
+            <el-checkbox label="外埔區" v-model="form.sla320038"></el-checkbox><br>
+            <el-checkbox label="大安區" v-model="form.sla320039"></el-checkbox>
           </el-col>
         </el-row>
-
+<!--
         <el-row style="border: 1px solid black;" type="flex" justify="center" align="middle">
           <el-col :span="3" align="middle"><label>外縣市</label></el-col>
           <el-col :span="21">
@@ -504,7 +512,7 @@
             </el-checkbox>
           </el-col>
         </el-row>
-
+-->
         <br>
         <el-form-item align="middle">
           <el-button type="primary" @click="save">{{ $t('button.submit') }}</el-button>

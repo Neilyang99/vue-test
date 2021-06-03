@@ -1,4 +1,4 @@
-import { remove, getList, save } from '@/api/sales/sla30'
+import { remove, getList, save, getSla30005, getSla30084 } from '@/api/sales/sla30'
 
 export default {
   data() {
@@ -120,10 +120,13 @@ export default {
         sla300111: 0,
         sla300112: 0,
         sla300113: 0,
-        sla300114: ''
+        sla300114: '',
+        sla300117: ''
       },
+      sla30005List:[],
+      sla30084List:[],
       rules: {
-        sla30004: [
+        sla30005: [
           { required: true, message: '請輸入行政區', trigger: 'blur' }
         ],
         sla30006: [
@@ -175,6 +178,7 @@ export default {
   methods: {
     init() {
       this.fetchData()
+      this.fetchOptionList()
     },
     fetchData() {
       this.listLoading = true
@@ -184,7 +188,9 @@ export default {
         this.total = response.data.total
       })
     },
-    fetchBuilding() {
+    fetchOptionList(){
+      getSla30005().then(response => {this.sla30005List = response.data})
+      getSla30084().then(response => {this.sla30084List = response.data})
     },
     search() {
       this.listQuery.page = 1
@@ -336,12 +342,13 @@ export default {
         sla300111: 0,
         sla300112: 0,
         sla300113: 0,
-        sla300114: ''
+        sla300114: '',
+        sla300117: ''
       }
     },
     add() {
       this.resetForm()
-      this.fetchBuilding()
+      this.fetchOptionList()
       this.formTitle = '市調資料'
       this.formVisible = true
       this.isAdd = true
@@ -519,7 +526,8 @@ export default {
             sla300111: self.form.sla300111,
             sla300112: self.form.sla300112,
             sla300113: self.form.sla300113,
-            sla300114: self.form.sla300114
+            sla300114: self.form.sla300114,
+            sla300117: self.form.sla300117
           }).then(response => {
             console.log(response)
             this.$message({
@@ -546,7 +554,7 @@ export default {
     },
     edit() {
       if (this.checkSel()) {
-        this.fetchBuilding()
+        this.fetchOptionList()
         this.isAdd = false
         this.form = this.selRow
         if(this.selRow.sla30033 == '1'){

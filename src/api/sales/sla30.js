@@ -25,3 +25,17 @@ export function remove(id) {
     }
   })
 }
+
+export function getSla30005(){
+  return request({
+    url: '/sla30/getSla30005',
+    method: 'get'
+  })
+}
+
+export function getSla30084(){
+  return request({
+    url: '/sla30/getSla30084',
+    method: 'get'
+  })
+}
