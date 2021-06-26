@@ -30,13 +30,20 @@ export default {
         sla01012:'',
         sla01013:'',
         sla01014:'',
-        sla01015:''
+        sla01015:'',
+        sla01027:''
+      },
+      rules: {
+        sla01005: [
+          {required: true, message: '請輸入棟別資料。',trigger: 'blur'}
+        ],
+        sla01006: [
+          {required: true, message: '請輸入戶別資料。',trigger: 'blur'}
+        ]
       },
       sla01007List:[],
       sla01008List:[],
       sla01015List:[],
-      rules: {
-      }
     }
   },
   created() {
@@ -129,8 +136,9 @@ export default {
             sla01012:self.form.sla01012,
             sla01013:self.form.sla01013,
             sla01014:self.form.sla01014,
-            sla01015:self.form.sla01015
-            
+            sla01015:self.form.sla01015,
+            sla01027:'A',
+            sla01033:''
           }).then(response => {
             //console.log(response)
             this.$message({
@@ -155,8 +163,18 @@ export default {
       })
       return false
     },
+    checkData(){
+      if(this.selRow.sla01027 == 'A'){//A=未銷售
+        return true
+      }
+      this.$message({
+        message: '已有銷售資料，不可變更。',
+        type: 'warning'
+      })
+      return false
+    },
     edit() {
-      if (this.checkSel()) {
+      if (this.checkSel() && this.checkData()) {
         this.fetchSla01007()
         this.fetchSla01008()
         this.fetchSla01015()
@@ -167,7 +185,7 @@ export default {
       }
     },
     remove() {
-      if (this.checkSel()) {
+      if (this.checkSel() && this.checkData()) {
         var id = this.selRow.id
         this.$confirm('確定刪除資料?', '提示', {
           confirmButtonText: '確定',

@@ -52,6 +52,16 @@
           {{scope.row.sla01009}}
         </template>
       </el-table-column>
+      <el-table-column label="銷售狀態">
+        <template slot-scope="scope">
+          {{scope.row.sla01027Name}}
+        </template>
+      </el-table-column>
+      <el-table-column label="狀態" v-if="false">
+        <template slot-scope="scope">
+          {{scope.row.sla01027}}
+        </template>
+      </el-table-column>
     </el-table>
 
     <el-dialog

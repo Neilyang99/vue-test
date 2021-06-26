@@ -31,7 +31,9 @@ export default {
     visitorLog:'洽詢紀錄',
     sla00:'房屋銷售案',
     sla01:'可售房屋',
-    sla30:'市調資料'
+    sla30:'市調資料',
+    slb10:'專案日報表',
+    slb11:'專案成交明細'
   },
   navbar: {
     logOut: '退出登錄',
