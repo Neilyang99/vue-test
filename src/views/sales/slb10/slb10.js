@@ -214,10 +214,34 @@ export default {
         setTimeout(()=> this.formVisible = true, 500)
       }
     },
-    deal() {
+    deal() {//成交
       if (this.checkSel()) {
         
         this.$router.push({ path: '/slb11', query: { slb10ID: this.selRow.id, projectId: this.selRow.slb10004, pjName: this.selRow.slb10005, pDate: this.selRow.slb10002 }})
+      }
+    },
+    again() {//回籠
+      if (this.checkSel()) {
+        
+        this.$router.push({ path: '/slb12', query: { slb10ID: this.selRow.id, projectId: this.selRow.slb10004, pjName: this.selRow.slb10005, pDate: this.selRow.slb10002 }})
+      }
+    },
+    cancelH() {//退戶
+      if (this.checkSel()) {
+        
+        this.$router.push({ path: '/slb13', query: { slb10ID: this.selRow.id, projectId: this.selRow.slb10004, pjName: this.selRow.slb10005, pDate: this.selRow.slb10002 }})
+      }
+    },
+    deposit() {//訂金補足
+      if (this.checkSel()) {
+        
+        this.$router.push({ path: '/slb15', query: { slb10ID: this.selRow.id, projectId: this.selRow.slb10004, pjName: this.selRow.slb10005, pDate: this.selRow.slb10002 }})
+      }
+    },
+    contract() {//簽約
+      if (this.checkSel()) {
+        
+        this.$router.push({ path: '/slb16', query: { slb10ID: this.selRow.id, projectId: this.selRow.slb10004, pjName: this.selRow.slb10005, pDate: this.selRow.slb10002 }})
       }
     },
     addDeal(){

@@ -18,6 +18,9 @@
           <el-button type="danger" size="mini" icon="el-icon-delete" @click.native="remove">{{ $t('button.delete') }}</el-button>
           <el-button type="info" size="mini" icon="el-icon-info" @click.native="deal">成交明細</el-button>
           <el-button type="info" size="mini" icon="el-icon-info" @click.native="again">回籠明細</el-button>
+          <el-button type="info" size="mini" icon="el-icon-info" @click.native="cancelH">退戶明細</el-button>
+          <el-button type="info" size="mini" icon="el-icon-info" @click.native="deposit">補足明細</el-button>
+          <el-button type="info" size="mini" icon="el-icon-info" @click.native="contract">簽約明細</el-button>
         </el-col>
       </el-row>
     </div>
