@@ -17,8 +17,8 @@
           <el-button type="primary" size="mini" icon="el-icon-edit" @click.native="edit">{{ $t('button.edit') }}</el-button>
           <el-button type="danger" size="mini" icon="el-icon-delete" @click.native="remove">{{ $t('button.delete') }}</el-button>
           <el-button type="info" size="mini" icon="el-icon-info" @click.native="house">可售房屋</el-button>
-          <!--<el-button type="info" size="mini" icon="el-icon-caret-bottom" @click.native="info">車位</el-button>
-          <el-button type="info" size="mini" icon="el-icon-view" @click.native="info">銷售員</el-button>
+          <el-button type="info" size="mini" icon="el-icon-info" @click.native="carPosition">車位</el-button>
+          <!-- <el-button type="info" size="mini" icon="el-icon-view" @click.native="info">銷售員</el-button>
           -->
         </el-col>
       </el-row>
