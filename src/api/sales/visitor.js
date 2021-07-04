@@ -26,6 +26,12 @@ export function remove(id) {
   })
 }
 
+export function getSla10004(){
+  return request({
+    url: '/visitor/getSla10004',
+    method: 'get'
+  })
+}
 export function getSla10016(){
   return request({
     url: '/visitor/getSla10016',

@@ -1,5 +1,5 @@
 import { remove, getList, save, 
-  getSla10016,getSla10017,getSla10018,getSla10019,getSla10020,getSla10021,getSla10022,getSla10023,getSla10024,
+  getSla10004,getSla10016,getSla10017,getSla10018,getSla10019,getSla10020,getSla10021,getSla10022,getSla10023,getSla10024,
   getSla10025,getSla10026,getSla10027,getSla10029,getSla10030 } from '@/api/sales/visitor'
 import { selectList } from '@/api/sales/sla00'
 
@@ -13,6 +13,7 @@ export default {
         id: '',
         sla10002: '',
         sla10003: '',
+        sla10004: '',
         sla10006: '',
         sla10007: '',
         sla10008: '',
@@ -23,6 +24,7 @@ export default {
         sla10013: '',
         sla10015: '',
         sla10016: '',
+        sla10017: '',
         sla10018: '',
         sla10019: '',
         sla10020: '',
@@ -41,6 +43,7 @@ export default {
         buildingName: ''
       },
       buildingList:[],
+      sla10004List:[],
       sla10016List:[],
       sla10017List:[],
       sla10018List:[],
@@ -56,6 +59,12 @@ export default {
       sla10029List:[],
       sla10030List:[],
       rules: {
+        sla10004: [
+          { required: true, message: '請輸入來人或來電', trigger: 'blur' }
+        ],
+        sla10013: [
+          { required: true, message: '請輸入填表日期', trigger: 'blur' }
+        ],
         sla10006: [
           { required: true, message: '請輸入客戶名', trigger: 'blur' }
         ],
@@ -107,8 +116,9 @@ export default {
       })
     },
     fetchOptionList(){
+      getSla10004().then(response => {this.sla10004List = response.data})
       getSla10016().then(response => {this.sla10016List = response.data})
-      //getSla10017().then(response => {this.sla10017List = response.data})
+      getSla10017().then(response => {this.sla10017List = response.data})
       getSla10018().then(response => {this.sla10018List = response.data})
       getSla10019().then(response => {this.sla10019List = response.data})
       getSla10020().then(response => {this.sla10020List = response.data})
@@ -162,6 +172,7 @@ export default {
         id: '',
         sla10002: '',
         sla10003: '',
+        sla10004: '',
         sla10006: '',
         sla10007: '',
         sla10008: '',
@@ -172,6 +183,7 @@ export default {
         sla10013: '',
         sla10015: '',
         sla10016: '',
+        sla10017: '',
         sla10018: '',
         sla10019: '',
         sla10020: '',
@@ -197,7 +209,6 @@ export default {
       this.formTitle = '新增來人洽詢表'
       this.formVisible = true
       this.isAdd = true
-      
     },
     save() {
       var self = this
@@ -209,6 +220,7 @@ export default {
             id: self.form.id,
             sla10002: self.form.building,
             sla10003: self.form.buildingName,
+            sla10004: self.form.sla10004,
             sla10006: self.form.sla10006,
             sla10007: self.form.sla10007,
             sla10008: self.form.sla10008,
@@ -219,6 +231,7 @@ export default {
             sla10013: self.form.sla10013,
             sla10015: self.form.sla10015,
             sla10016: self.form.sla10016,
+            sla10017: self.form.sla10017,
             sla10018: self.form.sla10018,
             sla10019: self.form.sla10019,
             sla10020: self.form.sla10020,

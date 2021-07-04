@@ -26,6 +26,12 @@ export default {
       },
       sla11003List:[],
       rules: {
+        sla11003: [
+          { required: true, message: '請輸入洽詢類別', trigger: 'blur' }
+        ],
+        sla11004: [
+          { required: true, message: '請輸入洽詢日期', trigger: 'blur' }
+        ]
       }
     }
   },

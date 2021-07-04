@@ -43,10 +43,14 @@
           {{scope.row.sla10013}}
         </template>
       </el-table-column>
-
       <el-table-column label="負責業務員">
         <template slot-scope="scope">
           {{scope.row.sla10015}}
+        </template>
+      </el-table-column>
+      <el-table-column label="來人/來電" v-if="false">
+        <template slot-scope="scope">
+          {{scope.row.sla10004Name}}
         </template>
       </el-table-column>
       <el-table-column label="操作" width="200">
@@ -60,34 +64,33 @@
       :title="formTitle"
       :visible.sync="formVisible"
       width="70%">
-      <el-form ref="form" :model="form" :rules="rules" label-width="120px">
+      <el-form ref="form" :model="form" :rules="rules" label-width="100px">
         <el-row>
-          <el-form-item label="銷售案號"  >
-              <el-select  v-model="form.building" filterable placeholder="請選擇">
-                <el-option
-                  v-for="item in buildingList"
-                  :key="item.id"
-                  :label="item.sla00003"
-                  :value="item.sla00002">
-                </el-option>
+          <el-col :span="8">
+            <el-form-item label="銷售案號"  >
+                <el-select  v-model="form.building" filterable placeholder="請選擇">
+                  <el-option
+                    v-for="item in buildingList"
+                    :key="item.id"
+                    :label="item.sla00003"
+                    :value="item.sla00002">
+                  </el-option>
+                </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item label="來人/來電" prop="sla10004">
+              <el-select  v-model="form.sla10004" placeholder="請選擇">
+                  <el-option
+                    v-for="item in sla10004List"
+                    :key="item.key"
+                    :label="item.value"
+                    :value="item.key">
+                  </el-option>
               </el-select>
-          </el-form-item>
-          <el-col :span="6">
-            <el-form-item label="業務員" prop="sla10015">
-              <el-input v-model="form.sla10015"></el-input>
             </el-form-item>
           </el-col>
-          <el-col :span="6">
-            <el-form-item label="填表日期" prop="sla10013">
-              <el-date-picker type="date" value-format="yyyyMMdd" placeholder="選擇日期" v-model="form.sla10013" style="width: 100%;"></el-date-picker>
-            </el-form-item>
-          </el-col>
-          <el-col :span="6">
-            <el-form-item label="客戶姓名" prop="sla10006">
-              <el-input v-model="form.sla10006"></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="6">
+          <el-col :span="8">
             <el-form-item label="性别" prop="sla10007">
               <el-radio-group v-model="form.sla10007">
                 <el-radio label="M">男</el-radio>
@@ -95,21 +98,42 @@
               </el-radio-group>
             </el-form-item>
           </el-col>
+        </el-row>
+        <el-row>  
+          <el-col :span="8">
+            <el-form-item label="業務員" prop="sla10015">
+              <el-input v-model="form.sla10015"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item label="填表日期" prop="sla10013">
+              <el-date-picker type="date" value-format="yyyyMMdd" placeholder="選擇日期" v-model="form.sla10013" style="width: 100%;"></el-date-picker>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item label="客戶姓名" prop="sla10006">
+              <el-input v-model="form.sla10006"></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>  
           <el-col :span="8">
             <el-form-item label="Email" prop="sla10012">
               <el-input v-model="form.sla10012" ></el-input>
             </el-form-item>
           </el-col>
-          <el-col :span="6">
+          <el-col :span="8">
             <el-form-item label="電話" prop="sla10009">
               <el-input v-model="form.sla10009" ></el-input>
             </el-form-item>
           </el-col>
-          <el-col :span="6">
+          <el-col :span="8">
             <el-form-item label="行動電話" prop="sla10010">
               <el-input v-model="form.sla10010" ></el-input>
             </el-form-item>
           </el-col>
+        </el-row>
+        <el-row>  
           <el-col :span="8">
             <el-form-item label="連絡地址" prop="sla10011">
               <el-input v-model="form.sla10011" ></el-input>
@@ -139,9 +163,18 @@
               </el-select>
             </el-form-item>
           </el-col>
-          <el-col :span="5">
-            <el-form-item label="年齡" prop="sla10008">
-              <el-input v-model="form.sla10008" ></el-input>
+        </el-row>
+        <el-row>  
+          <el-col :span="8">
+            <el-form-item label="年齡區間" prop="sla10017">
+              <el-select  v-model="form.sla10017" placeholder="請選擇">
+                  <el-option
+                    v-for="item in sla10017List"
+                    :key="item.key"
+                    :label="item.value"
+                    :value="item.key">
+                  </el-option>
+              </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="8">
@@ -168,6 +201,8 @@
               </el-select>
             </el-form-item>
           </el-col>
+        </el-row>
+        <el-row>  
           <el-col :span="8">
             <el-form-item label="購買用途" prop="sla10020">
               <el-select  v-model="form.sla10020" placeholder="請選擇">
@@ -204,6 +239,8 @@
               </el-select>
             </el-form-item>
           </el-col>
+        </el-row>
+        <el-row>  
           <el-col :span="8">
             <el-form-item label="媒體分析" prop="sla10023">
               <el-select  v-model="form.sla10023" placeholder="請選擇">
@@ -240,6 +277,8 @@
               </el-select>
             </el-form-item>
           </el-col>
+        </el-row>
+        <el-row>  
           <el-col :span="8">
             <el-form-item label="已購原因" prop="sla10029">
               <el-select  v-model="form.sla10029" placeholder="請選擇">
@@ -269,6 +308,8 @@
               </el-select>
             </el-form-item>
           </el-col>
+        </el-row>
+        <el-row>  
           <el-col :span="8">
             <el-form-item label="未購原因" prop="sla10030">
               <el-select  v-model="form.sla10030" placeholder="請選擇">
@@ -281,13 +322,13 @@
               </el-select>
             </el-form-item>
           </el-col>
-          <el-col :span="12">
+          <el-col :span="16">
             <el-form-item label="備註" >
               <el-input v-model="form.sla10033" type="textarea"></el-input>
             </el-form-item>
           </el-col>
-
         </el-row>
+
         <el-form-item>
           <el-button type="primary" @click="save">{{ $t('button.submit') }}</el-button>
           <el-button @click.native="formVisible = false">{{ $t('button.cancel') }}</el-button>
