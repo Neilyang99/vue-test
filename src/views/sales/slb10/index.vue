@@ -15,7 +15,7 @@
         <el-col :span="24">
           <el-button type="success" size="mini" icon="el-icon-plus" @click.native="add">{{ $t('button.add') }}</el-button>
           <el-button type="primary" size="mini" icon="el-icon-edit" @click.native="edit">{{ $t('button.edit') }}</el-button>
-          <el-button type="danger" size="mini" icon="el-icon-delete" @click.native="remove">{{ $t('button.delete') }}</el-button>
+          <!-- <el-button type="danger" size="mini" icon="el-icon-delete" @click.native="remove">{{ $t('button.delete') }}</el-button> -->
           <el-button type="info" size="mini" icon="el-icon-info" @click.native="deal">成交明細</el-button>
           <el-button type="info" size="mini" icon="el-icon-info" @click.native="again">回籠明細</el-button>
           <el-button type="info" size="mini" icon="el-icon-info" @click.native="cancelH">退戶明細</el-button>
@@ -126,10 +126,28 @@
             </el-form-item>
           </el-col>
         </el-row>
-<!--
+
         <el-row > 
           <el-col :span="24"  style="border: 1px solid black;" justify="center" align="middle">
             <label>成交明細</label><br>
+          </el-col>
+        </el-row>
+        <el-row style="border: 1px solid black;"> 
+          <el-col :span="6" >
+            <label>&nbsp;&nbsp;今日成交</label>
+            <el-input v-model="form.slb10011" style="width:100px" maxlength="5"></el-input>戶
+          </el-col>
+          <el-col :span="6" >
+            <label>&nbsp;&nbsp;金額</label>
+            <el-input v-model="form.slb10009" style="width:100px" maxlength="5"></el-input>萬
+          </el-col>
+          <el-col :span="6" >
+            <label>&nbsp;&nbsp;累計成交</label>
+            <el-input v-model="form.slb10011" style="width:100px" maxlength="5"></el-input>戶
+          </el-col>
+          <el-col :span="6" >
+            <label>&nbsp;&nbsp;金額</label>
+            <el-input v-model="form.slb10009" style="width:100px" maxlength="5"></el-input>萬
           </el-col>
         </el-row>
         <div v-for="(v,i) in form.dealList" :key="i">
@@ -159,9 +177,241 @@
           </el-col>
         </el-row>
         </div>
-        <el-button class="add-btn btn" type="text" icon="el-icon-plus" @click="addDeal">增加成交明細輸入項</el-button>
--->        
+        <!--<el-button class="add-btn btn" type="text" icon="el-icon-plus" @click="addDeal">增加成交明細輸入項</el-button>-->
+        <el-row style="border: 1px solid black;" type="flex" justify="center" align="middle"> 
+          <el-col :span="24" >
+            <label >&nbsp;&nbsp;備註</label>
+            <el-input v-model="form.slb11007" type="textarea" :rows="1" style="width:1000px" ></el-input>
+          </el-col>
+        </el-row> 
+        <br>
+        <el-row > 
+          <el-col :span="24"  style="border: 1px solid black;" justify="center" align="middle">
+            <label>回籠明細</label><br>
+          </el-col>
+        </el-row>
         
+        <div v-for="(v,i) in form.dealList" :key="i">
+        <el-row style="border: 1px solid black;" type="flex" justify="center" align="middle">
+          <el-col :span="3">
+            <label>&nbsp;&nbsp;編號{{i+1}}</label>
+            <el-button type="text" class="delete-btn" icon="el-icon-delete" size="mini" @click="deleteDeal(v)"></el-button>
+          </el-col>
+          <el-col :span="24">
+            <label>棟別</label>
+            <el-select  v-model="v.slb11004" placeholder="請選擇" style="width:80%">
+              <el-option
+                v-for="item in slb11004List"
+                :key="item.key"
+                :label="item.value"
+                :value="item.key">
+              </el-option>
+            </el-select>
+          </el-col>
+        </el-row>
+        </div>
+        <!--<el-button class="add-btn btn" type="text" icon="el-icon-plus" @click="addDeal">增加成交明細輸入項</el-button>-->
+        <el-row style="border: 1px solid black;" type="flex" justify="center" align="middle"> 
+          <el-col :span="24" >
+            <label >&nbsp;&nbsp;備註</label>
+            <el-input v-model="form.slb11007" type="textarea" :rows="1" style="width:1000px" ></el-input>
+          </el-col>
+        </el-row> 
+
+        <br>
+        <el-row > 
+          <el-col :span="24"  style="border: 1px solid black;" justify="center" align="middle">
+            <label>退換戶明細</label><br>
+          </el-col>
+        </el-row>
+        <el-row style="border: 1px solid black;"> 
+          <el-col :span="6" >
+            <label>&nbsp;&nbsp;今日退換戶</label>
+            <el-input v-model="form.slb10009" style="width:100px" maxlength="5"></el-input>戶
+          </el-col>
+          <el-col :span="6" >
+            <label>&nbsp;&nbsp;金額</label>
+            <el-input v-model="form.slb10009" style="width:100px" maxlength="5"></el-input>萬
+          </el-col>
+          <el-col :span="6" >
+            <label>&nbsp;&nbsp;累計退戶</label>
+            <el-input v-model="form.slb10009" style="width:100px" maxlength="5"></el-input>戶
+          </el-col>
+          <el-col :span="6" >
+            <label>&nbsp;&nbsp;金額</label>
+            <el-input v-model="form.slb10009" style="width:100px" maxlength="5"></el-input>萬
+          </el-col>
+        </el-row>
+        <div v-for="(v,i) in form.dealList" :key="i">
+        <el-row style="border: 1px solid black;" type="flex" justify="center" align="middle">
+          <el-col :span="3">
+            <label>&nbsp;&nbsp;編號{{i+1}}</label>
+            <el-button type="text" class="delete-btn" icon="el-icon-delete" size="mini" @click="deleteDeal(v)"></el-button>
+          </el-col>
+          <el-col :span="7">
+            <label>棟別</label>
+            <el-select  v-model="v.slb11004" placeholder="請選擇" style="width:80%">
+              <el-option
+                v-for="item in slb11004List"
+                :key="item.key"
+                :label="item.value"
+                :value="item.key">
+              </el-option>
+            </el-select>
+          </el-col>
+          <el-col :span="7">
+            <label>總金額</label>
+            <el-input v-model="v.slb11006" style="width:100px" maxlength="5"></el-input>萬
+          </el-col>
+          <el-col :span="7">
+            <label>訂金</label>
+            <el-input v-model="v.slb11007" style="width:100px" maxlength="5"></el-input>萬
+          </el-col>
+        </el-row>
+        </div>
+        <!--<el-button class="add-btn btn" type="text" icon="el-icon-plus" @click="addDeal">增加成交明細輸入項</el-button>-->
+        <el-row style="border: 1px solid black;" type="flex" justify="center" align="middle"> 
+          <el-col :span="24" >
+            <label >&nbsp;&nbsp;備註</label>
+            <el-input v-model="form.slb11007" type="textarea" :rows="1" style="width:1000px" ></el-input>
+          </el-col>
+        </el-row>
+        <el-row style="border: 1px solid black; height:45px; " type="flex" justify="center" align="middle"> 
+          <el-col :span="12" >
+            <label>&nbsp;&nbsp;累積成交-累積退回戶數</label>
+            <label>&nbsp;&nbsp;{{0}}戶</label>
+            <label>&nbsp;&nbsp;{{0}}萬</label>
+          </el-col>
+          <el-col :span="6" >
+            <label>&nbsp;&nbsp;實際成交戶數</label>
+            <label>&nbsp;&nbsp;{{0}}戶</label>
+          </el-col>
+          <el-col :span="6" >
+            <label>&nbsp;&nbsp;金額</label>
+            <label>&nbsp;&nbsp;{{0}}萬</label>
+          </el-col>
+        </el-row> 
+        <br>
+
+        <el-row > 
+          <el-col :span="24"  style="border: 1px solid black;" justify="center" align="middle">
+            <label>今日訂金補足</label><br>
+          </el-col>
+        </el-row>
+        <el-row style="border: 1px solid black;"> 
+          <el-col :span="6" >
+            <label>&nbsp;&nbsp;今日訂金補足</label>
+            <el-input v-model="form.slb10011" style="width:100px" maxlength="5"></el-input>戶
+          </el-col>
+          <el-col :span="6" >
+            <label>&nbsp;&nbsp;金額</label>
+            <el-input v-model="form.slb10009" style="width:100px" maxlength="5"></el-input>萬
+          </el-col>
+          <el-col :span="6" >
+            <label>&nbsp;&nbsp;實際補足戶數</label>
+            <el-input v-model="form.slb10011" style="width:100px" maxlength="5"></el-input>戶
+          </el-col>
+          <el-col :span="6" >
+            <label>&nbsp;&nbsp;金額</label>
+            <el-input v-model="form.slb10009" style="width:100px" maxlength="5"></el-input>萬
+          </el-col>
+        </el-row>
+        <div v-for="(v,i) in form.dealList" :key="i">
+        <el-row style="border: 1px solid black;" type="flex" justify="center" align="middle">
+          <el-col :span="3">
+            <label>&nbsp;&nbsp;編號{{i+1}}</label>
+            <el-button type="text" class="delete-btn" icon="el-icon-delete" size="mini" @click="deleteDeal(v)"></el-button>
+          </el-col>
+          <el-col :span="7">
+            <label>棟別</label>
+            <el-select  v-model="v.slb11004" placeholder="請選擇" style="width:80%">
+              <el-option
+                v-for="item in slb11004List"
+                :key="item.key"
+                :label="item.value"
+                :value="item.key">
+              </el-option>
+            </el-select>
+          </el-col>
+          <el-col :span="7">
+            <label>總金額</label>
+            <el-input v-model="v.slb11006" style="width:100px" maxlength="5"></el-input>萬
+          </el-col>
+          <el-col :span="7">
+            <label>訂金</label>
+            <el-input v-model="v.slb11007" style="width:100px" maxlength="5"></el-input>萬
+          </el-col>
+        </el-row>
+        </div>
+        <!--<el-button class="add-btn btn" type="text" icon="el-icon-plus" @click="addDeal">增加成交明細輸入項</el-button>-->
+        <el-row style="border: 1px solid black;" type="flex" justify="center" align="middle"> 
+          <el-col :span="24" >
+            <label >&nbsp;&nbsp;備註</label>
+            <el-input v-model="form.slb11007" type="textarea" :rows="1" style="width:1000px" ></el-input>
+          </el-col>
+        </el-row> 
+        <br>
+
+        <el-row > 
+          <el-col :span="24"  style="border: 1px solid black;" justify="center" align="middle">
+            <label>今日簽約戶數</label><br>
+          </el-col>
+        </el-row>
+        <el-row style="border: 1px solid black;"> 
+          <el-col :span="6" >
+            <label>&nbsp;&nbsp;今日簽約戶數</label>
+            <el-input v-model="form.slb10011" style="width:100px" maxlength="5"></el-input>戶
+          </el-col>
+          <el-col :span="6" >
+            <label>&nbsp;&nbsp;金額</label>
+            <el-input v-model="form.slb10009" style="width:100px" maxlength="5"></el-input>萬
+          </el-col>
+          <el-col :span="6" >
+            <label>&nbsp;&nbsp;累積簽約戶數</label>
+            <el-input v-model="form.slb10011" style="width:100px" maxlength="5"></el-input>戶
+          </el-col>
+          <el-col :span="6" >
+            <label>&nbsp;&nbsp;金額</label>
+            <el-input v-model="form.slb10009" style="width:100px" maxlength="5"></el-input>萬
+          </el-col>
+        </el-row>
+        <div v-for="(v,i) in form.dealList" :key="i">
+        <el-row style="border: 1px solid black;" type="flex" justify="center" align="middle">
+          <el-col :span="3">
+            <label>&nbsp;&nbsp;編號{{i+1}}</label>
+            <el-button type="text" class="delete-btn" icon="el-icon-delete" size="mini" @click="deleteDeal(v)"></el-button>
+          </el-col>
+          <el-col :span="7">
+            <label>棟別</label>
+            <el-select  v-model="v.slb11004" placeholder="請選擇" style="width:80%">
+              <el-option
+                v-for="item in slb11004List"
+                :key="item.key"
+                :label="item.value"
+                :value="item.key">
+              </el-option>
+            </el-select>
+          </el-col>
+          <el-col :span="7">
+            <label>總金額</label>
+            <el-input v-model="v.slb11006" style="width:100px" maxlength="5"></el-input>萬
+          </el-col>
+          <el-col :span="7">
+            <label>訂金</label>
+            <el-input v-model="v.slb11007" style="width:100px" maxlength="5"></el-input>萬
+          </el-col>
+        </el-row>
+        </div>
+        <!--<el-button class="add-btn btn" type="text" icon="el-icon-plus" @click="addDeal">增加成交明細輸入項</el-button>-->
+        <el-row style="border: 1px solid black;" type="flex" justify="center" align="middle"> 
+          <el-col :span="24" >
+            <label >&nbsp;&nbsp;備註</label>
+            <el-input v-model="form.slb11007" type="textarea" :rows="1" style="width:1000px" ></el-input>
+          </el-col>
+        </el-row> 
+        <br>
+
+
 
 
         <el-form-item>

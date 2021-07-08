@@ -7,7 +7,7 @@ export default {
   data() {
     return {
       formVisible: false,
-      formTitle: '新增來人洽詢',
+      formTitle: '新增來人/來電洽詢',
       isAdd: true,
       form: {
         id: '',
@@ -206,7 +206,7 @@ export default {
       this.resetForm()
       this.fetchBuilding()
       
-      this.formTitle = '新增來人洽詢表'
+      this.formTitle = '新增來人/來電洽詢表'
       this.formVisible = true
       this.isAdd = true
     },
