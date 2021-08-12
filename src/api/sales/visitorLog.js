@@ -34,3 +34,14 @@ export function remove(id) {
     }
   })
 }
+
+
+export function getNotSaleHouse(projectNo ){
+  return request({
+    url: '/sla01/getNotSaleHouse',
+    method: 'get',
+    params: {
+      projectNo: projectNo
+    }
+  })
+}

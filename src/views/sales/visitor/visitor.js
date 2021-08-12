@@ -270,8 +270,8 @@ export default {
       })
       return false
     },
-    viewLog(visitorId) {
-      this.$router.push({ path: '/visitorLog', query: { visitorId: visitorId }})
+    viewLog(visitorId,projectId) {
+      this.$router.push({ path: '/visitorLog', query: { visitorId: visitorId, projectId:projectId }})
     },
     edit() {
       if (this.checkSel()) {

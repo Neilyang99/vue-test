@@ -1,9 +1,10 @@
-import { remove, getVisitorList, save, getSla11003 } from '@/api/sales/visitorLog'
+import { remove, getVisitorList, save, getSla11003, getNotSaleHouse } from '@/api/sales/visitorLog'
 
 export default {
   data() {
     return {
       visitorId: '',
+      projectId:'',
       listQuery: {
         page: 1,
         limit: 20,
@@ -22,9 +23,11 @@ export default {
         sla11004:'',
         sla11005:'',
         sla11006:'',
-        sla11008:''
+        sla11008:'',
+        sla11023:0
       },
       sla11003List:[],
+      houseList:[],
       rules: {
         sla11003: [
           { required: true, message: '請輸入洽詢類別', trigger: 'blur' }
@@ -41,6 +44,7 @@ export default {
   methods: {
     init() {
       this.visitorId = this.$route.query.visitorId
+      this.projectId = this.$route.query.projectId
       this.fetchData()
     },
     fetchData() {
@@ -51,6 +55,11 @@ export default {
         this.listLoading = false
         this.total = response.data.total
         
+      })
+    },
+    fetchHouse() {
+      getNotSaleHouse(this.projectId).then(response => {
+        this.houseList = response.data
       })
     },
     fetchSla11003() {
@@ -74,13 +83,15 @@ export default {
         sla11004:'',
         sla11005:'',
         sla11006:'',
-        sla11008:''
+        sla11008:'',
+        sla11023:0
       }
       
     },
     add() {
       this.resetForm()
       this.fetchSla11003() //洽詢類別
+      this.fetchHouse()//house
       this.formTitle = '新增來人洽詢紀錄'
       this.formVisible = true
       this.isAdd = true
@@ -96,7 +107,8 @@ export default {
             sla11004:self.form.sla11004,
             sla11005:self.form.sla11005,
             sla11006:self.form.sla11006,
-            sla11008:self.form.sla11008
+            sla11008:self.form.sla11008,
+            sla11023:self.form.sla11023
             
           }).then(response => {
             console.log(response)
@@ -125,6 +137,7 @@ export default {
     edit() {
       if (this.checkSel()) {
         this.fetchSla11003() //洽詢類別
+        this.fetchHouse()//house
         this.isAdd = false
         this.form = this.selRow
         this.formTitle = '修改洽詢紀錄'

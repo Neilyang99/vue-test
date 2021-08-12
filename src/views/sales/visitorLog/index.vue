@@ -65,7 +65,14 @@
           </el-col>
           <el-col :span="6">
             <el-form-item label="帶看戶別" prop="sla11005">
-              <el-input v-model="form.sla11005"></el-input>
+              <el-select  v-model="form.sla11023" filterable placeholder="請選擇">
+                <el-option
+                   v-for="item in houseList"
+                   :key="item.key"
+                   :label="item.value"
+                   :value="item.key">
+                </el-option>
+              </el-select>
             </el-form-item>
           </el-col>
         </el-row>

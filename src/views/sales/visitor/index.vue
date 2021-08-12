@@ -55,7 +55,7 @@
       </el-table-column>
       <el-table-column label="操作" width="200">
         <template slot-scope="scope">
-        <el-button icon="el-icon-log" size="mini" @click.native="viewLog(scope.row.id)">查看訪談紀錄</el-button>
+        <el-button icon="el-icon-log" size="mini" @click.native="viewLog(scope.row.id,scope.row.sla10002)">查看訪談紀錄</el-button>
         </template>
       </el-table-column>
     </el-table>
