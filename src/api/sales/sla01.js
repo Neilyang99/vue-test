@@ -10,12 +10,6 @@ export function getList(sla01002) {
   })
 }
 
-export function getNotSaleHouse(){
-  return request({
-    url: '/sla01/getNotSaleHouse',
-    method: 'get'
-  })
-}
 
 export function getSla01007(){
   return request({

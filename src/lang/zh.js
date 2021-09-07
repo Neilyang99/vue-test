@@ -30,6 +30,7 @@ export default {
     visitorMgr:'來人來電洽詢',
     visitorLog:'洽詢紀錄',
     visitorReport:'來人來電統計表',
+    visitorCharts:'客戶資料圖表',
     mediaReport:'項目分析表',
     sla00:'房屋銷售案',
     sla01:'可售房屋',
