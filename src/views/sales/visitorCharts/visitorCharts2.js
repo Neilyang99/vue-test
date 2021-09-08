@@ -19,28 +19,84 @@ import 'zrender/lib/svg/svg'
 import elementResizeDetectorMaker from "element-resize-detector"
 
 export default {
-
-  name: 'visitorCharts',
-  components: {
-    chart: ECharts
-  },
   data() {
-    const data = []
-    for (let i = 0; i <= 360; i++) {
-      const t = i / 180 * Math.PI
-      const r = Math.sin(2 * t) * Math.cos(2 * t)
-      data.push([r, i])
-    }
     return {
-      notice: [],
-      lineData: {
+      chartList: [{
+        value: '1',
+        label: '來客量曲線圖'
+      }, {
+        value: '2',
+        label: '動機總數圓餅圖'
+      },{
+        value: '3',
+        label: '來源總數量長條圖'
+      },{
+        value: '4',
+        label: '位置總數量長條圖'
+      }],
+      listQuery: {
+        chartType: undefined
+      },
+      chartData:{},
+      optionData:[
+        { value: 135, name: '自用' },
+        { value: 75, name: '首次' },
+        { value: 34, name: '換屋' },
+        { value: 15, name: '贈與' },
+        { value: 30, name: '投資'},
+        { value: 10, name: '幫別人看'},
+        { value: 1, name: '其他'}
+      ] 
+    }
+      
+  },
+  created() {
+    this.init()
+  },
+  mounted(){
+    //绑定echart图表跟随窗口大小自动缩放
+    let that = this
+    let erd = elementResizeDetectorMaker()
+    erd.listenTo(document.getElementById("visitorCharts"),(element)=>{
+      that.$nextTick(()=>{
+        that.$refs.chart.resize()
+      })
+    })
+  },
+  methods: {
+    init(){
+      this.fetchData()
+      
+    },
+    fetchData() {
+
+    },
+    search() {
+      if(this.listQuery.chartType == '1'){
+        this.lineChart()
+      }else if(this.listQuery.chartType == '2'){
+        this.pieChart()
+      }else if(this.listQuery.chartType == '3'){
+        this.barChart()
+      }else if(this.listQuery.chartType == '4'){    
+      }
+      
+    },
+    reset() {
+      
+    },
+    lineChart(){
+      this.chartData = {
         title: {
-          text: ''
+          text: '來客量曲線圖',
+          x: 'center'
         },
         tooltip: {
           trigger: 'axis'
         },
         legend: {
+          orient: 'vertical',
+          left: 'right',
           data: [this.$t('dashboard.email'), this.$t('dashboard.ad'), this.$t('dashboard.vedio'), this.$t('dashboard.direct'), this.$t('dashboard.searchEngine')]
         },
         grid: {
@@ -94,8 +150,10 @@ export default {
             data: [820, 932, 901, 934, 1290, 1330, 1320]
           }
         ]
-      },
-      barData: {
+      }
+    },
+    barChart(){
+      this.chartData= {
         xAxis: {
           type: 'category',
           data: [this.$t('common.week.mon'), this.$t('common.week.tue'), this.$t('common.week.wed'), this.$t('common.week.thu'), this.$t('common.week.fri'), this.$t('common.week.sat'), this.$t('common.week.sun')]
@@ -103,25 +161,37 @@ export default {
         yAxis: {
           type: 'value'
         },
+        toolbox: {
+          feature: {
+            saveAsImage: {}
+          }
+        },
         series: [{
           data: [120, 200, 150, 80, 70, 110, 130],
           type: 'bar'
         }]
-      },
-      pieData: {
+      }
+    },
+    pieChart(){
+      this.chartData= {
         title: {
-          text: this.$t('dashboard.userFrom'),
-          subtext: '纯属虚构',
+          text: '動機總數量圓餅圖',
+          //subtext: '---------------',
           x: 'center'
         },
         tooltip: {
           trigger: 'item',
           formatter: '{a} <br/>{b} : {c} ({d}%)'
         },
+        toolbox: {
+          feature: {
+            saveAsImage: {}
+          }
+        },
         legend: {
           orient: 'vertical',
           left: 'left',
-          data: [this.$t('dashboard.email'), this.$t('dashboard.ad'), this.$t('dashboard.vedio'), this.$t('dashboard.direct'), this.$t('dashboard.searchEngine')]
+          data: ['自用','首次','換屋','贈與','投資','幫別人看','其他']
         },
         series: [
           {
@@ -129,13 +199,7 @@ export default {
             type: 'pie',
             radius: '55%',
             center: ['50%', '60%'],
-            data: [
-              { value: 335, name: this.$t('dashboard.direct') },
-              { value: 310, name: this.$t('dashboard.email') },
-              { value: 234, name: this.$t('dashboard.ad') },
-              { value: 135, name: this.$t('dashboard.vedio') },
-              { value: 1548, name: this.$t('dashboard.searchEngine') }
-            ],
+            data: this.optionData,
             itemStyle: {
               emphasis: {
                 shadowBlur: 10,
@@ -145,57 +209,7 @@ export default {
             }
           }
         ]
-      },
-      tableData: [{
-        date: '2016-05-02',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-04',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1517 弄'
-      }, {
-        date: '2016-05-01',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1519 弄'
-      }, {
-        date: '2016-05-03',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1516 弄'
-      }]
-    }
-  },
-  computed: {
-    
-  },
-  created() {
-    this.fetchData()
-  },
-  mounted(){
-    //绑定echart图表跟随窗口大小自动缩放
-    let that = this
-    let erd = elementResizeDetectorMaker()
-    erd.listenTo(document.getElementById("visitorCharts"),(element)=>{
-      that.$nextTick(()=>{
-        that.$refs.pieChart.resize()
-      })
-    })
-  },
-  methods: {
-    fetchData() {
-      this.listLoading = true
-      const self = this
-      getList(self.listQuery).then(response => {
-        for (var i = 0; i < response.data.length; i++) {
-          var notice = response.data[i]
-          self.$notify({
-            title: notice.title,
-            message: notice.content,
-            duration: 3000
-          })
-        }
-        self.listLoading = false
-      })
+      }
     }
   }
 }
