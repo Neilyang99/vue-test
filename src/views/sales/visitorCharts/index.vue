@@ -2,8 +2,15 @@
   <div class="app-container" id = "visitorCharts">
     <div class="block">
       <el-row  :gutter="20">
-        <el-col :span="6">
-          <el-input size="mini" placeholder="請輸入銷售案名稱"></el-input>
+        <el-col :span="4">
+          <el-select v-model="listQuery.buildingNo" size="mini" placeholder="銷售案名稱">
+            <el-option
+              v-for="item in buildingList"
+              :key="item.sla00002"
+              :label="item.sla00003"
+              :value="item.sla00002">
+            </el-option>
+          </el-select>
         </el-col>
         <el-col :span="4">
           <el-select v-model="listQuery.chartType" size="mini" placeholder="圖表類別">
@@ -19,6 +26,7 @@
           <el-button type="success" size="mini" icon="el-icon-search" @click.native="search">{{ $t('button.search') }}</el-button>
           <el-button type="primary" size="mini" icon="el-icon-refresh" @click.native="reset">{{ $t('button.reset') }}</el-button>
         </el-col>
+        <el-col :span="10"></el-col>
       </el-row>
     </div>
 
@@ -32,7 +40,7 @@
   </div>
 </template>
 
-<script src="./visitorCharts2.js"></script>
+<script src="./visitorCharts.js"></script>
 
 
 <style rel="stylesheet/scss" lang="scss" scoped>

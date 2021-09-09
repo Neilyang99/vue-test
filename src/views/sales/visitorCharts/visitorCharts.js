@@ -1,4 +1,4 @@
-import { getList } from '@/api/system/notice'
+import { buildingList, getCntMotivation, getCntVisitor, getCntArea, getCntVisitType } from '@/api/sales/visitorCharts'
 import ECharts from 'vue-echarts/components/ECharts'
 import 'echarts/lib/chart/bar'
 import 'echarts/lib/chart/line'
@@ -19,29 +19,159 @@ import 'zrender/lib/svg/svg'
 import elementResizeDetectorMaker from "element-resize-detector"
 
 export default {
-
-  name: 'visitorCharts',
-  components: {
-    chart: ECharts
-  },
   data() {
-    const data = []
-    for (let i = 0; i <= 360; i++) {
-      const t = i / 180 * Math.PI
-      const r = Math.sin(2 * t) * Math.cos(2 * t)
-      data.push([r, i])
-    }
     return {
-      notice: [],
-      lineData: {
+      chartList: [{
+        value: '1',
+        label: '來客量曲線圖'
+      }, {
+        value: '2',
+        label: '動機總數圓餅圖'
+      },{
+        value: '3',
+        label: '來源總數量長條圖'
+      },{
+        value: '4',
+        label: '位置總數量長條圖'
+      }],
+      listQuery: {
+        chartType: undefined,
+        buildingNo: undefined
+      },
+      buildingList:{},
+      buildingName:'',
+      chartData:{},
+      optionData:[],
+      legendData:[],
+      visitorData:[],
+      visitorLegend:[],
+      areaData:[],
+      areaLegend:[],
+      typeData:[],
+      typeLegend:[]
+    }
+  },
+  created() {
+    this.init()
+  },
+  mounted(){
+    //绑定echart图表跟随窗口大小自动缩放
+    let that = this
+    let erd = elementResizeDetectorMaker()
+    erd.listenTo(document.getElementById("visitorCharts"),(element)=>{
+      that.$nextTick(()=>{
+        that.$refs.chart.resize()
+      })
+    })
+  },
+  methods: {
+    init(){
+      this.fetchData()
+      this.fetchBuilding()
+      
+    },
+    fetchData() {
+
+    },
+    fetchBuilding() {
+      buildingList().then(response => {
+        this.buildingList = response.data
+      })
+    },
+    getCntMotivation(buildingNo){
+      var ddata = []
+      getCntMotivation(buildingNo).then(response => {
+        this.optionData = response.data
+        this.optionData.forEach(function(item, i){
+          ddata.push(item.name)
+        })
+        this.legendData = ddata
+      })
+    },
+    getVisitorQty(buildingNo){
+      var ddata = []
+      var vdata = []
+      var fromDB = []
+      getCntVisitor(buildingNo).then(response => {
+        fromDB = response.data
+        
+        fromDB.forEach(function(item, i){
+          ddata.push(item.key)
+          vdata.push(item.value)
+        })
+        this.visitorLegend = ddata
+        this.visitorData = vdata
+      })
+      
+    },
+    getCntVisitType(buildingNo){
+      var ddata = []
+      var vdata = []
+      var fromDB = []
+      getCntVisitType(buildingNo).then(response => {
+        fromDB = response.data
+        fromDB.forEach(function(item, i){
+          ddata.push(item.name)
+          vdata.push(item.value)
+        })
+        this.typeLegend = ddata
+        this.typeData = vdata
+      })
+    },
+    getCntArea(buildingNo){
+      var ddata = []
+      var vdata = []
+      var fromDB = []
+      getCntArea(buildingNo).then(response => {
+        fromDB = response.data
+        fromDB.forEach(function(item, i){
+          ddata.push(item.name)
+          vdata.push(item.value)
+        })
+        this.areaLegend = ddata
+        this.areaData = vdata
+      })
+    },
+    getBuildingName(vid){//get Project name by project id
+      let obj = {};
+      obj = this.buildingList.find((item)=>{
+        return item.sla00002 === vid
+      })
+      return obj.sla00003
+    },
+    search() {
+      this.buildingName = this.getBuildingName(this.listQuery.buildingNo);
+      this.chartData = {}
+
+      if(this.listQuery.chartType == '1'){
+        this.getVisitorQty(this.listQuery.buildingNo);
+        setTimeout(()=> this.lineChart(), 500)
+        
+      }else if(this.listQuery.chartType == '2'){
+        this.getCntMotivation(this.listQuery.buildingNo);
+        setTimeout(()=> this.pieChart(), 500)
+
+      }else if(this.listQuery.chartType == '3'){
+        this.getCntVisitType(this.listQuery.buildingNo);
+        setTimeout(()=> this.barChart(), 500)
+
+      }else if(this.listQuery.chartType == '4'){  
+        this.getCntArea(this.listQuery.buildingNo);
+        setTimeout(()=> this.barAreaChart(), 500)
+      }
+    },
+    reset() {
+
+    },
+    lineChart(){
+      this.chartData = {
         title: {
-          text: ''
+          text: '來客量曲線圖',
+          subtext: this.buildingName,
+          x: 'center'
         },
         tooltip: {
           trigger: 'axis'
-        },
-        legend: {
-          data: [this.$t('dashboard.email'), this.$t('dashboard.ad'), this.$t('dashboard.vedio'), this.$t('dashboard.direct'), this.$t('dashboard.searchEngine')]
         },
         grid: {
           left: '3%',
@@ -57,71 +187,93 @@ export default {
         xAxis: {
           type: 'category',
           boundaryGap: false,
-          data: [this.$t('common.week.mon'), this.$t('common.week.tue'), this.$t('common.week.wed'), this.$t('common.week.thu'), this.$t('common.week.fri'), this.$t('common.week.sat'), this.$t('common.week.sun')]
+          data: this.visitorLegend
         },
         yAxis: {
           type: 'value'
         },
         series: [
           {
-            name: this.$t('dashboard.email'),
             type: 'line',
-            stack: '总量',
-            data: [120, 132, 101, 134, 90, 230, 210]
-          },
-          {
-            name: this.$t('dashboard.ad'),
-            type: 'line',
-            stack: '总量',
-            data: [220, 182, 191, 234, 290, 330, 310]
-          },
-          {
-            name: this.$t('dashboard.vedio'),
-            type: 'line',
-            stack: '总量',
-            data: [150, 232, 201, 154, 190, 330, 410]
-          },
-          {
-            name: this.$t('dashboard.direct'),
-            type: 'line',
-            stack: '总量',
-            data: [320, 332, 301, 334, 390, 330, 320]
-          },
-          {
-            name: this.$t('dashboard.searchEngine'),
-            type: 'line',
-            stack: '总量',
-            data: [820, 932, 901, 934, 1290, 1330, 1320]
+            smooth: true,
+            data: this.visitorData
           }
-        ]
-      },
-      barData: {
+        ],
+        color:["#009688"]
+      }
+    },
+    barAreaChart(){
+      this.chartData= {
+        title: {
+          text: '位置總數量長條圖',
+          subtext: this.buildingName,
+          x: 'center'
+        },
         xAxis: {
           type: 'category',
-          data: [this.$t('common.week.mon'), this.$t('common.week.tue'), this.$t('common.week.wed'), this.$t('common.week.thu'), this.$t('common.week.fri'), this.$t('common.week.sat'), this.$t('common.week.sun')]
+          data: this.areaLegend
         },
         yAxis: {
           type: 'value'
         },
+        toolbox: {
+          feature: {
+            saveAsImage: {}
+          }
+        },
         series: [{
-          data: [120, 200, 150, 80, 70, 110, 130],
+          data: this.areaData,
           type: 'bar'
-        }]
-      },
-      pieData: {
+        }],
+        color:["#7EC0EE"]
+      }
+    },
+    barChart(){
+      this.chartData= {
         title: {
-          text: this.$t('dashboard.userFrom'),
-          subtext: '纯属虚构',
+          text: '來源總數量長條圖',
+          subtext: this.buildingName,
+          x: 'center'
+        },
+        xAxis: {
+          type: 'category',
+          data: this.typeLegend
+        },
+        yAxis: {
+          type: 'value'
+        },
+        toolbox: {
+          feature: {
+            saveAsImage: {}
+          }
+        },
+        series: [{
+          data: this.typeData,
+          type: 'bar'
+        }],
+        color:["#7EC0EE"]
+      }
+    },
+    pieChart(){
+      this.chartData= {
+        title: {
+          text: '動機總數量圓餅圖',
+          subtext: this.buildingName,
           x: 'center'
         },
         tooltip: {
           trigger: 'item',
           formatter: '{a} <br/>{b} : {c} ({d}%)'
         },
+        toolbox: {
+          feature: {
+            saveAsImage: {}
+          }
+        },
         legend: {
           orient: 'vertical',
           left: 'left',
-          data: [this.$t('dashboard.email'), this.$t('dashboard.ad'), this.$t('dashboard.vedio'), this.$t('dashboard.direct'), this.$t('dashboard.searchEngine')]
+          data: this.legendData
         },
         series: [
           {
@@ -129,13 +281,7 @@ export default {
             type: 'pie',
             radius: '55%',
             center: ['50%', '60%'],
-            data: [
-              { value: 335, name: this.$t('dashboard.direct') },
-              { value: 310, name: this.$t('dashboard.email') },
-              { value: 234, name: this.$t('dashboard.ad') },
-              { value: 135, name: this.$t('dashboard.vedio') },
-              { value: 1548, name: this.$t('dashboard.searchEngine') }
-            ],
+            data: this.optionData,
             itemStyle: {
               emphasis: {
                 shadowBlur: 10,
@@ -145,57 +291,7 @@ export default {
             }
           }
         ]
-      },
-      tableData: [{
-        date: '2016-05-02',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-04',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1517 弄'
-      }, {
-        date: '2016-05-01',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1519 弄'
-      }, {
-        date: '2016-05-03',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1516 弄'
-      }]
-    }
-  },
-  computed: {
-    
-  },
-  created() {
-    this.fetchData()
-  },
-  mounted(){
-    //绑定echart图表跟随窗口大小自动缩放
-    let that = this
-    let erd = elementResizeDetectorMaker()
-    erd.listenTo(document.getElementById("visitorCharts"),(element)=>{
-      that.$nextTick(()=>{
-        that.$refs.pieChart.resize()
-      })
-    })
-  },
-  methods: {
-    fetchData() {
-      this.listLoading = true
-      const self = this
-      getList(self.listQuery).then(response => {
-        for (var i = 0; i < response.data.length; i++) {
-          var notice = response.data[i]
-          self.$notify({
-            title: notice.title,
-            message: notice.content,
-            duration: 3000
-          })
-        }
-        self.listLoading = false
-      })
+      }
     }
   }
 }
