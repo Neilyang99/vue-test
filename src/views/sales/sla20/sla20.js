@@ -172,6 +172,12 @@ export default {
         }
       })
     },
+    accountPayable() {
+      if (this.checkSel()) {
+        this.$router.push({ path: '/sla23', query: { orderId: this.selRow.id}})
+      }
+      
+    },
     remove() {
       if (this.checkSel()) {
         var id = this.selRow.id

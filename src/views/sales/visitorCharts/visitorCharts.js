@@ -34,8 +34,19 @@ export default {
         value: '4',
         label: '位置總數量長條圖'
       }],
+      chartDataType:[{
+        value: 'month',
+        label: '月'
+      },{
+        value: 'quarter',
+        label: '季'
+      },{
+        value: 'year',
+        label: '年'
+      }],
       listQuery: {
         chartType: undefined,
+        chartDataType: undefined,
         buildingNo: undefined
       },
       buildingList:{},
@@ -88,11 +99,11 @@ export default {
         this.legendData = ddata
       })
     },
-    getVisitorQty(buildingNo){
+    getVisitorQty(buildingNo,dataType){
       var ddata = []
       var vdata = []
       var fromDB = []
-      getCntVisitor(buildingNo).then(response => {
+      getCntVisitor(buildingNo, dataType).then(response => {
         fromDB = response.data
         
         fromDB.forEach(function(item, i){
@@ -140,11 +151,11 @@ export default {
       return obj.sla00003
     },
     search() {
-      this.buildingName = this.getBuildingName(this.listQuery.buildingNo);
+      this.buildingName = this.getBuildingName(this.listQuery.buildingNo)
       this.chartData = {}
 
       if(this.listQuery.chartType == '1'){
-        this.getVisitorQty(this.listQuery.buildingNo);
+        this.getVisitorQty(this.listQuery.buildingNo, this.listQuery.chartDataType)
         setTimeout(()=> this.lineChart(), 500)
         
       }else if(this.listQuery.chartType == '2'){
@@ -152,15 +163,18 @@ export default {
         setTimeout(()=> this.pieChart(), 500)
 
       }else if(this.listQuery.chartType == '3'){
-        this.getCntVisitType(this.listQuery.buildingNo);
+        this.getCntVisitType(this.listQuery.buildingNo)
         setTimeout(()=> this.barChart(), 500)
 
       }else if(this.listQuery.chartType == '4'){  
-        this.getCntArea(this.listQuery.buildingNo);
+        this.getCntArea(this.listQuery.buildingNo)
         setTimeout(()=> this.barAreaChart(), 500)
       }
     },
     reset() {
+      this.listQuery.chartType = ''
+      this.listQuery.buildingNo=''
+      this.listQuery.chartDataType=''
 
     },
     lineChart(){

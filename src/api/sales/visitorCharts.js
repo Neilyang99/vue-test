@@ -18,12 +18,13 @@ export function getCntMotivation(projectNo){
   })
 }
 
-export function getCntVisitor(projectNo){
+export function getCntVisitor(projectNo, type){
   return request({
     url: '/visitorCharts/getCountBySla10013',
     method: 'get',
     params: {
-      projectCode: projectNo
+      projectCode: projectNo,
+      type: type
     }
   })
 }

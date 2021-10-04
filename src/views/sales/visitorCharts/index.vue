@@ -22,11 +22,21 @@
             </el-option>
           </el-select>
         </el-col>
+        <el-col :span="4" v-if="listQuery.chartType == '1'">
+          <el-select v-model="listQuery.chartDataType" size="mini" placeholder="資料統計分類">
+            <el-option
+              v-for="item in chartDataType"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
+          </el-select>
+        </el-col>
         <el-col :span="6">
           <el-button type="success" size="mini" icon="el-icon-search" @click.native="search">{{ $t('button.search') }}</el-button>
           <el-button type="primary" size="mini" icon="el-icon-refresh" @click.native="reset">{{ $t('button.reset') }}</el-button>
         </el-col>
-        <el-col :span="10"></el-col>
+        <el-col :span="6"></el-col>
       </el-row>
     </div>
 
