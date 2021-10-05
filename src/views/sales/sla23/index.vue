@@ -15,6 +15,15 @@
         </el-col>
       </el-row>
     </div>
+    <br>
+    <div class="block">
+      <el-row >
+        <el-col :span="3" align="middle"><label>客戶姓名: {{order.sla20008}}</label></el-col>
+        <el-col :span="3" align="middle"><label>棟別: {{order.sla20041}}</label></el-col>
+        <el-col :span="3" align="middle"><label>戶號: {{order.sla20042}}</label></el-col>
+        <el-col :span="3" align="middle"><label>成交總價: {{order.sla20068}}</label></el-col>
+      </el-row>
+    </div>
     <el-table :data="list" v-loading="listLoading" element-loading-text="Loading" border fit highlight-current-row @current-change="handleCurrentChange">
 
       <el-table-column label="收款日期">
@@ -47,8 +56,8 @@
       <el-form ref="form" :model="form" :rules="rules" label-width="120px">
         <el-row>
           <el-col :span="6">
-            <el-form-item label="收款類別"  >
-                <el-select  v-model="form.sla23031" filterable placeholder="請選擇">
+            <el-form-item label="收款類別"   prop="sla23031" >
+                <el-select  v-model="form.sla23031" placeholder="請選擇">
                   <el-option
                     v-for="item in sla23031List"
                     :key="item.key"
@@ -59,13 +68,20 @@
             </el-form-item>
           </el-col>
           <el-col :span="6">
+            <el-form-item label="期款名稱" prop="sla23033"  v-if="form.sla23031 == 40">
+                <el-input v-model="form.sla23033"></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>  
+          <el-col :span="6">
             <el-form-item label="收款日期" prop="sla23005" >
               <el-date-picker type="date" value-format="yyyyMMdd" placeholder="選擇日期" v-model="form.sla23005" style="width: 100%;"></el-date-picker>
             </el-form-item>
           </el-col>
           <el-col :span="6">
             <el-form-item label="收款方式" prop="sla23006">
-              <el-select  v-model="form.sla23006" filterable placeholder="請選擇">
+              <el-select  v-model="form.sla23006" placeholder="請選擇">
                 <el-option
                    v-for="item in sla23006List"
                    :key="item.key"
@@ -75,9 +91,7 @@
               </el-select>
             </el-form-item>
           </el-col>
-        </el-row>
-        <el-row>  
-          <el-col :span="24">
+          <el-col :span="12">
             <el-form-item label="收款金額" prop="sla23008" >
               <el-input v-model="form.sla23008"></el-input>
             </el-form-item>

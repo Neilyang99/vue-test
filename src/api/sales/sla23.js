@@ -24,6 +24,16 @@ export function getSla23031(){
   })
 }
 
+export function getOrderById(id){
+  return request({
+    url: '/sla20/getOrderById',
+    method: 'get',
+    params: {
+      id:id
+    }
+  })
+}
+
 export function save(params) {
   return request({
     url: '/sla23',

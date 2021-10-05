@@ -1,4 +1,4 @@
-import { remove, getList, save, getSla23006, getSla23031 } from '@/api/sales/sla23'
+import { remove, getList, save, getSla23006, getSla23031, getOrderById } from '@/api/sales/sla23'
 
 export default {
   data() {
@@ -11,6 +11,7 @@ export default {
       },
       total: 0,
       list: null,
+      order: null,
       listLoading: true,
       selRow: {},
       formVisible: false,
@@ -50,6 +51,7 @@ export default {
     init() {
       this.orderId = this.$route.query.orderId
       this.fetchData()
+      this.fetchOrder()
     },
     fetchData() {
       this.listLoading = true
@@ -69,6 +71,11 @@ export default {
     fetchSla23031() {
       getSla23031().then(response => {
         this.sla23031List = response.data
+      })
+    },
+    fetchOrder() {
+      getOrderById(this.orderId).then(response => {
+        this.order = response.data
       })
     },
     back() {
@@ -107,6 +114,10 @@ export default {
       var self = this
       this.$refs['form'].validate((valid) => {
         if (valid) {
+
+          if(self.form.sla23031 != '40'){
+            self.form.sla23033 = '';
+          }
           save({
             id: self.form.id,
             sla23002:this.orderId,
