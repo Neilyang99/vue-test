@@ -172,11 +172,15 @@ export default {
         }
       })
     },
-    accountPayable() {
+    accountPayable() {//收款
       if (this.checkSel()) {
         this.$router.push({ path: '/sla23', query: { orderId: this.selRow.id}})
       }
-      
+    },
+    checkHouse() {//驗收
+      if (this.checkSel()) {
+        this.$router.push({ path: '/sla24', query: { orderId: this.selRow.id}})
+      }
     },
     remove() {
       if (this.checkSel()) {

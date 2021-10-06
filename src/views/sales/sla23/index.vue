@@ -69,7 +69,7 @@
           </el-col>
           <el-col :span="6">
             <el-form-item label="期款名稱" prop="sla23033"  v-if="form.sla23031 == 40">
-                <el-input v-model="form.sla23033"></el-input>
+                <el-input v-model="form.sla23033" maxlength="50"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
@@ -107,14 +107,14 @@
         <el-row>  
           <el-col :span="24">
             <el-form-item label="收款銀行帳號" prop="sla23046" >
-              <el-input v-model="form.sla23046"></el-input>
+              <el-input v-model="form.sla23046" maxlength="50"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>  
           <el-col :span="12">
             <el-form-item label="支票號碼" prop="sla23047" >
-              <el-input v-model="form.sla23047"></el-input>
+              <el-input v-model="form.sla23047" maxlength="100"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
