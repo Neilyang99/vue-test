@@ -50,7 +50,7 @@
           {{scope.row.sla24008}}
         </template>
       </el-table-column>
-       <el-table-column label="操作">
+      <el-table-column label="操作">
         <template slot-scope="scope">
           <el-button type="success" icon="el-icon-log" size="mini" @click.native="setConfirm(scope.row.id)" v-if="scope.row.sla24008 === '' ">完工確認</el-button>
           <el-button type="info" icon="el-icon-log" size="mini" @click.native="cancelFDate(scope.row.id)" v-if="scope.row.sla24008 != '' ">取消確認</el-button>

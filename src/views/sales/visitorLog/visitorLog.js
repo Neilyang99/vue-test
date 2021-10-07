@@ -1,4 +1,4 @@
-import { remove, getVisitorList, save, getSla11003, getNotSaleHouse } from '@/api/sales/visitorLog'
+import { remove, getVisitorList, save, getSla11003, getNotSaleHouse, getCustomerById, creatOrder, findOrderExist } from '@/api/sales/visitorLog'
 
 export default {
   data() {
@@ -13,6 +13,9 @@ export default {
       total: 0,
       list: null,
       listLoading: true,
+      customer: null,
+      orderExist: null,
+      hasOrder: 'N',
       selRow: {},
       formVisible: false,
       formTitle: '新增洽詢紀錄',
@@ -46,6 +49,9 @@ export default {
       this.visitorId = this.$route.query.visitorId
       this.projectId = this.$route.query.projectId
       this.fetchData()
+      this.fetchCustomer()
+      this.fetchOrderExist()
+
     },
     fetchData() {
       this.listLoading = true
@@ -56,6 +62,20 @@ export default {
         this.total = response.data.total
         
       })
+    },
+    fetchCustomer() {
+      getCustomerById(this.visitorId).then(response => {
+        this.customer = response.data
+      })
+    },
+    fetchOrderExist() {
+      findOrderExist(this.visitorId).then(response => {
+        this.orderExist = response.data
+        if(this.orderExist[0]) {
+          this.hasOrder = 'Y'
+        }
+      })
+
     },
     fetchHouse() {
       getNotSaleHouse(this.projectId).then(response => {
@@ -160,6 +180,25 @@ export default {
             this.fetchData()
           })
         }).catch(() => {
+        })
+      }
+    },
+    creatOrder() {
+
+      //var dt = new Date().toJSON().slice(0,10).replace(/-/g,'');
+      if (this.checkSel()) {
+        creatOrder({
+          id: this.selRow.id,
+          sla11002: this.visitorId,
+          sla11023: this.selRow.sla11023
+          
+        }).then(response => {
+          console.log(response)
+          this.$message({
+            message: '提交成功',
+            type: 'success'
+          })
+          this.fetchOrderExist()
         })
       }
     }

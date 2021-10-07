@@ -17,6 +17,26 @@ export function getSla11003(){
   })
 }
 
+export function findOrderExist(visitorId){
+  return request({
+    url: '/visitorLog/findOrderExist',
+    method: 'get',
+    params: {
+      visitorId:visitorId
+    }
+  })
+}
+
+export function getCustomerById(id){
+  return request({
+    url: '/visitor/getCustomerById',
+    method: 'get',
+    params: {
+      id: id
+    }
+  })
+}
+
 export function save(params) {
   return request({
     url: '/visitorLog',
@@ -35,7 +55,6 @@ export function remove(id) {
   })
 }
 
-
 export function getNotSaleHouse(projectNo ){
   return request({
     url: '/sla01/getNotSaleHouse',
@@ -43,5 +62,13 @@ export function getNotSaleHouse(projectNo ){
     params: {
       projectNo: projectNo
     }
+  })
+}
+
+export function creatOrder(params) {
+  return request({
+    url: '/visitorLog/creatOrder',
+    method: 'post',
+    params
   })
 }

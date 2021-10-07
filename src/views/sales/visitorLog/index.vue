@@ -12,7 +12,16 @@
           <el-button type="success" size="mini" icon="el-icon-plus" @click.native="add">{{ $t('button.add') }}</el-button>
           <el-button type="primary" size="mini" icon="el-icon-edit" @click.native="edit">{{ $t('button.edit') }}</el-button>
           <el-button type="danger" size="mini" icon="el-icon-delete" @click.native="remove">{{ $t('button.delete') }}</el-button>
+          <el-button type="info" size="mini" icon="el-icon-info" @click.native="creatOrder" :disabled="hasOrder === 'Y' ">轉訂單</el-button>
         </el-col>
+      </el-row>
+    </div>
+    <br>
+    <div class="block">
+      <el-row >
+        <el-col :span="6" ><label>銷售案: {{customer.sla10003}}</label></el-col>
+        <el-col :span="6" align="middle"><label>客戶姓名: {{customer.sla10006}}</label></el-col>
+        <el-col :span="6" align="middle"><label>是否已轉訂單: {{hasOrder}}</label></el-col>
       </el-row>
     </div>
     <el-table :data="list" v-loading="listLoading" element-loading-text="Loading" border fit highlight-current-row @current-change="handleCurrentChange">
@@ -37,7 +46,6 @@
           {{scope.row.sla11006}}
         </template>
       </el-table-column>
-
     </el-table>
 
     <el-dialog
