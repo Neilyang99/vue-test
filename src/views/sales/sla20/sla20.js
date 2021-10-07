@@ -1,4 +1,4 @@
-import { remove, getList, save, selectList } from '@/api/sales/sla20'
+import { remove, getList, save, selectList, setOrderStatus } from '@/api/sales/sla20'
 
 export default {
   data() {
@@ -181,6 +181,26 @@ export default {
       if (this.checkSel()) {
         this.$router.push({ path: '/sla24', query: { orderId: this.selRow.id}})
       }
+    },
+    setClosed(id) {//結案
+      setOrderStatus(id,'E0').then(response => {
+        console.log(response)
+        this.$message({
+          message: '提交成功',
+          type: 'success'
+        })
+        this.fetchData()
+      })  
+    },
+    setOpen(id) {//取消結案 : 狀態改為 交屋
+      setOrderStatus(id,'B5').then(response => {
+        console.log(response)
+        this.$message({
+          message: '提交成功',
+          type: 'success'
+        })
+        this.fetchData()
+      })  
     },
     remove() {
       if (this.checkSel()) {

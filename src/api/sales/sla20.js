@@ -33,3 +33,14 @@ export function selectList(params) {
     params
   })
 }
+
+export function setOrderStatus(id,status) {
+  return request({
+    url: '/sla20/updateStatus',
+    method: 'post',
+    params: {
+      id: id,
+      status: status
+    }
+  })
+}

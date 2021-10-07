@@ -45,14 +45,26 @@
           {{scope.row.sla20004}}
         </template>
       </el-table-column>
-      <el-table-column label="負責業務員">
+      <el-table-column label="戶號">
         <template slot-scope="scope">
-          {{scope.row.sla10015}}
+          {{scope.row.sla20042}}
+        </template>
+      </el-table-column>
+      <el-table-column label="總價">
+        <template slot-scope="scope">
+          {{scope.row.sla20068}}
         </template>
       </el-table-column>
       <el-table-column label="訂單狀態" >
         <template slot-scope="scope">
-          {{scope.row.sla20005}}
+          {{scope.row.sla20005Name}}
+        </template>
+      </el-table-column>
+
+      <el-table-column label="操作">
+        <template slot-scope="scope">
+          <el-button type="success" icon="el-icon-log" size="mini" @click.native="setClosed(scope.row.id)" v-if="scope.row.sla20005 != 'E0' " :disabled="scope.row.sla20005 != 'B5' ">結案確認</el-button>
+          <el-button type="info" icon="el-icon-log" size="mini" @click.native="setOpen(scope.row.id)" v-if="scope.row.sla20005 === 'E0' ">取消結案</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -65,7 +77,7 @@
         <el-row>
           <el-col :span="8">
             <el-form-item label="銷售案號"  >
-                <el-select  v-model="form.building" filterable placeholder="請選擇">
+                <el-select  v-model="form.sla20002" filterable placeholder="請選擇">
                   <el-option
                     v-for="item in buildingList"
                     :key="item.id"
@@ -165,11 +177,13 @@
               <el-input v-model="form.sla20068" ></el-input>
             </el-form-item>
           </el-col>
+          <!--
           <el-col :span="8">
             <el-form-item label="訂金" >
               <el-input v-model="form.sla20069" ></el-input>
             </el-form-item>
           </el-col>
+          -->
           </el-row>
           <el-row>
           <el-col :span="24">

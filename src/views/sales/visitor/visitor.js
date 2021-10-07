@@ -76,7 +76,10 @@ export default {
       listQuery: {
         page: 1,
         limit:10,
-        sla10006: undefined
+        sla10003: undefined,
+        sla10006: undefined,
+        sla10009: undefined,
+        sla10010: undefined
       },
       total: 0,
       list: null,
@@ -104,6 +107,7 @@ export default {
     },
     fetchData() {
       this.listLoading = true
+      
       getList(this.listQuery).then(response => {
         this.list = response.data.records
         this.listLoading = false
@@ -153,7 +157,10 @@ export default {
       this.fetchData()
     },
     reset() {
+      this.listQuery.sla10003 = ''
       this.listQuery.sla10006 = ''
+      this.listQuery.sla10009 = ''
+      this.listQuery.sla10010 = ''
       this.listQuery.page = 1
       this.fetchData()
     },
