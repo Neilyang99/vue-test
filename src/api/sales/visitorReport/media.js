@@ -21,3 +21,45 @@ export function getReportAnalysis(projectCode, type) {
     }
   })
 }
+
+export function getCauseAnalysis(projectId, type) {
+  return request({
+    url: '/visitorReport/getCauseAnalysis',
+    method: 'get',
+    params: {
+      projectId: projectId,
+      type: type
+    }
+  })
+}
+
+export function getNotDeal(projectCode, type) {
+  return request({
+    url: '/visitorReport/getNotDealAgain',
+    method: 'get',
+    params: {
+      projectCode: projectCode,
+      type: type
+    }
+  })
+}
+
+export function getHouseType(projectId) {
+  return request({
+    url: '/visitorReport/getHouseType',
+    method: 'get',
+    params: {
+      projectId: projectId
+    }
+  })
+}
+
+export function getSaleStatus(projectId) {
+  return request({
+    url: '/visitorReport/getSaleStatus',
+    method: 'get',
+    params: {
+      projectId: projectId
+    }
+  })
+}

@@ -40,3 +40,41 @@
 .user-content>.profile>img{
   width:100%;
 }
+
+.TS {
+  border-collapse: collapse;
+  padding:2px;
+  width: 100%;
+}
+.csT {
+  background:#F0F0FF;
+  border:solid 1px #000000;
+  padding:2px 3px;
+}
+.csTc {
+  background:#F0F0FF;
+  border:solid 1px #000000;
+  padding:2px 3px;
+  text-align:center;
+}
+.csTr {
+  background:#F0F0FF;
+  border:solid 1px #000000;
+  padding:2px 3px;
+  text-align:right;
+}
+.csD {
+  border:solid 1px #000000;
+  padding:2px 3px;
+}
+.csDc {
+  border:solid 1px #000000;
+  padding:2px 3px;
+  text-align:center;
+
+}
+.csDr {
+  border:solid 1px #000000;
+  padding:2px 3px;
+  text-align:right;
+}

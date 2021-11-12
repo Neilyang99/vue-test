@@ -102,6 +102,24 @@ export default {
     },
     careerAnalysis(projectCode) {
       this.$router.push({ path: '/mediaReport', query: { projectCode: projectCode, reportType:'CAREER' }})
+    },
+    orderAnalysis(projectId) {
+      this.$router.push({ path: '/orderCause', query: { projectId: projectId, reportType:'BUY' }})
+    },
+    notOrderAnalysis(projectId) {
+      this.$router.push({ path: '/orderCause', query: { projectId: projectId, reportType:'NOBUY' }})
+    },
+    notDealAgain(projectCode) {
+      this.$router.push({ path: '/notDealAgain', query: { projectCode: projectCode, reportType:'NOTDEAL' }})
+    },
+    houseTypeAnalysis(projectId) {
+      this.$router.push({ path: '/houseType', query: { projectId: projectId }})
+    },
+    saleStatus(projectId) {
+      this.$router.push({ path: '/saleStatus', query: { projectId: projectId }})
+    },
+    weeklyReport(projectId) {
+      this.$router.push({ path: '/weeklyReport', query: { projectId: projectId }})
     }
   }
 }

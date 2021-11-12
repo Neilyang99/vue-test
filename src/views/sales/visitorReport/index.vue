@@ -29,13 +29,20 @@
           {{scope.row.sla00008}}
         </template>
       </el-table-column>
-      <el-table-column label="操作" min-width="200">
+      <el-table-column label="操作" min-width="400">
         <template slot-scope="scope">
         <el-button icon="el-icon-log" size="mini" @click.native="areaAnalysis(scope.row.sla00002)">區域分析</el-button>
         <el-button icon="el-icon-log" size="mini" @click.native="mdeiaAnalysis(scope.row.sla00002)">媒體分析</el-button>
         <el-button icon="el-icon-log" size="mini" @click.native="motivationAnalysis(scope.row.sla00002)">購買動機分析</el-button>
         <el-button icon="el-icon-log" size="mini" @click.native="ageAnalysis(scope.row.sla00002)">年齡分析</el-button>
         <el-button icon="el-icon-log" size="mini" @click.native="careerAnalysis(scope.row.sla00002)">職業分析</el-button>
+        <br>
+        <el-button icon="el-icon-log" size="mini" @click.native="notDealAgain(scope.row.sla00002)">回籠未成交原因</el-button>
+        <el-button icon="el-icon-log" size="mini" @click.native="orderAnalysis(scope.row.id)">已購原因分析</el-button>
+        <el-button icon="el-icon-log" size="mini" @click.native="saleStatus(scope.row.id)">銷況表</el-button>
+        <el-button icon="el-icon-log" size="mini" @click.native="houseTypeAnalysis(scope.row.id)">格局去化分析</el-button>
+        <el-button icon="el-icon-log" size="mini"  @click.native="notOrderAnalysis(scope.row.id)">未購原因分析</el-button>
+        <el-button icon="el-icon-log" size="mini"  @click.native="weeklyReport(scope.row.id)">週報表</el-button>
         </template>
       </el-table-column>
     </el-table>
