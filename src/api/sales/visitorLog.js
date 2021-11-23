@@ -72,3 +72,14 @@ export function creatOrder(params) {
     params
   })
 }
+
+
+export function getAllSaleHouse(projectNo ){
+  return request({
+    url: '/sla01/getAllSaleHouse',
+    method: 'get',
+    params: {
+      projectNo: projectNo
+    }
+  })
+}

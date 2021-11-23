@@ -63,3 +63,14 @@ export function getSaleStatus(projectId) {
     }
   })
 }
+
+export function getWeeklyReport(projectId,projectCode) {
+  return request({
+    url: '/visitorReport/getWeeklyReport',
+    method: 'get',
+    params: {
+      projectId: projectId,
+      projectCode: projectCode
+    }
+  })
+}

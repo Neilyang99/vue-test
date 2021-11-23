@@ -1,4 +1,4 @@
-import { remove, getVisitorList, save, getSla11003, getNotSaleHouse, getCustomerById, creatOrder, findOrderExist } from '@/api/sales/visitorLog'
+import { remove, getVisitorList, save, getSla11003, getNotSaleHouse, getCustomerById, creatOrder, findOrderExist, getAllSaleHouse } from '@/api/sales/visitorLog'
 
 export default {
   data() {
@@ -31,6 +31,7 @@ export default {
       },
       sla11003List:[],
       houseList:[],
+      allHouseList:[],
       rules: {
         sla11003: [
           { required: true, message: '請輸入洽詢類別', trigger: 'blur' }
@@ -82,6 +83,12 @@ export default {
         this.houseList = response.data
       })
     },
+    /*
+    fetchAllHouse() {
+      getAllSaleHouse(this.projectId).then(response => {
+        this.allHouseList = response.data
+      })
+    },*/
     fetchSla11003() {
       getSla11003().then(response => {
         this.sla11003List = response.data
@@ -183,10 +190,19 @@ export default {
         })
       }
     },
+    checkHouseId(){
+      if(this.selRow.sla11023 != ''){
+        return true
+      }
+      this.$message({
+        message: '請挑選帶看房屋',
+        type: 'warning'
+      })
+      return false
+    },
     creatOrder() {
-
       //var dt = new Date().toJSON().slice(0,10).replace(/-/g,'');
-      if (this.checkSel()) {
+      if (this.checkSel() && this.checkHouseId()) {
         creatOrder({
           id: this.selRow.id,
           sla11002: this.visitorId,

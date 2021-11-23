@@ -1,4 +1,4 @@
-import { getSaleStatus } from '@/api/sales/visitorReport/media'
+import { getWeeklyReport } from '@/api/sales/visitorReport/media'
 
 export default {
   data() {
@@ -34,12 +34,12 @@ export default {
       this.reportTitle = "週 報 表";
     },
     fetchData() {
-      /*this.listLoading = true
+      this.listLoading = true
       
-      getSaleStatus(this.projectId).then(response => {
+      getWeeklyReport(this.projectId).then(response => {
         this.form = response.data
         this.listLoading = false
-      })*/
+      })
       
     },
     

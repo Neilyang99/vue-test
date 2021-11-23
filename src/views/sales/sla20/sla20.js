@@ -116,7 +116,7 @@ export default {
             id: self.form.id,
             sla20002: self.form.sla20002,
             sla20004: self.form.sla20004,
-            sla20005: self.form.sla20005,
+            //sla20005: self.form.sla20005,
             sla20006: self.form.sla20006,
             sla20008: self.form.sla20008,
             sla20009: self.form.sla20009,

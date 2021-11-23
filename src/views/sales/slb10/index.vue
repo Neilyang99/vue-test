@@ -100,22 +100,22 @@
         <el-row>
           <el-col :span="6">
             <el-form-item label="工地來人數" prop="slb10009">
-              <el-input v-model="form.slb10009" maxlength="5"></el-input>
+              <el-input v-model="form.slb100091" maxlength="5"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="6">
             <el-form-item label="回籠" prop="slb10011">
-              <el-input v-model="form.slb10011" maxlength="5"></el-input>
+              <el-input v-model="form.slb100115" maxlength="5"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="6">
             <el-form-item label="工地來電數" prop="slb10010">
-              <el-input v-model="form.slb10010" maxlength="5"></el-input>
+              <el-input v-model="form.slb100106" maxlength="5"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="6">
             <el-form-item label="出勤" prop="slb10012">
-              <el-select  v-model="form.slb10012" placeholder="請選擇" >
+              <el-select  v-model="form.slb100128" placeholder="請選擇" >
                 <el-option
                   v-for="item in slb10012List"
                   :key="item.key"
@@ -135,19 +135,19 @@
         <el-row style="border: 1px solid black;"> 
           <el-col :span="6" >
             <label>&nbsp;&nbsp;今日成交</label>
-            <el-input v-model="form.slb10011" style="width:100px" maxlength="5"></el-input>戶
+            <el-input v-model="form.slb10013" style="width:100px" maxlength="5"></el-input>戶
           </el-col>
           <el-col :span="6" >
             <label>&nbsp;&nbsp;金額</label>
-            <el-input v-model="form.slb10009" style="width:100px" maxlength="5"></el-input>萬
+            <el-input v-model="form.slb10014" style="width:100px" maxlength="5"></el-input>萬
           </el-col>
           <el-col :span="6" >
             <label>&nbsp;&nbsp;累計成交</label>
-            <el-input v-model="form.slb10011" style="width:100px" maxlength="5"></el-input>戶
+            <el-input v-model="form.slb100112" style="width:100px" maxlength="5"></el-input>戶
           </el-col>
           <el-col :span="6" >
             <label>&nbsp;&nbsp;金額</label>
-            <el-input v-model="form.slb10009" style="width:100px" maxlength="5"></el-input>萬
+            <el-input v-model="form.slb100092" style="width:100px" maxlength="5"></el-input>萬
           </el-col>
         </el-row>
         <div v-for="(v,i) in form.dealList" :key="i">
@@ -169,11 +169,11 @@
           </el-col>
           <el-col :span="7">
             <label>總金額</label>
-            <el-input v-model="v.slb11006" style="width:100px" maxlength="5"></el-input>萬
+            <el-input v-model="v.slb110406" style="width:100px" maxlength="5"></el-input>萬
           </el-col>
           <el-col :span="7">
             <label>訂金</label>
-            <el-input v-model="v.slb11007" style="width:100px" maxlength="5"></el-input>萬
+            <el-input v-model="v.slb110407" style="width:100px" maxlength="5"></el-input>萬
           </el-col>
         </el-row>
         </div>
@@ -227,19 +227,19 @@
         <el-row style="border: 1px solid black;"> 
           <el-col :span="6" >
             <label>&nbsp;&nbsp;今日退換戶</label>
-            <el-input v-model="form.slb10009" style="width:100px" maxlength="5"></el-input>戶
+            <el-input v-model="form.slb100093" style="width:100px" maxlength="5"></el-input>戶
           </el-col>
           <el-col :span="6" >
             <label>&nbsp;&nbsp;金額</label>
-            <el-input v-model="form.slb10009" style="width:100px" maxlength="5"></el-input>萬
+            <el-input v-model="form.slb100094" style="width:100px" maxlength="5"></el-input>萬
           </el-col>
           <el-col :span="6" >
             <label>&nbsp;&nbsp;累計退戶</label>
-            <el-input v-model="form.slb10009" style="width:100px" maxlength="5"></el-input>戶
+            <el-input v-model="form.slb10005" style="width:100px" maxlength="5"></el-input>戶
           </el-col>
           <el-col :span="6" >
             <label>&nbsp;&nbsp;金額</label>
-            <el-input v-model="form.slb10009" style="width:100px" maxlength="5"></el-input>萬
+            <el-input v-model="form.slb100096" style="width:100px" maxlength="5"></el-input>萬
           </el-col>
         </el-row>
         <div v-for="(v,i) in form.dealList" :key="i">
@@ -261,11 +261,11 @@
           </el-col>
           <el-col :span="7">
             <label>總金額</label>
-            <el-input v-model="v.slb11006" style="width:100px" maxlength="5"></el-input>萬
+            <el-input v-model="v.slb110506" style="width:100px" maxlength="5"></el-input>萬
           </el-col>
           <el-col :span="7">
             <label>訂金</label>
-            <el-input v-model="v.slb11007" style="width:100px" maxlength="5"></el-input>萬
+            <el-input v-model="v.slb110507" style="width:100px" maxlength="5"></el-input>萬
           </el-col>
         </el-row>
         </div>
@@ -301,19 +301,19 @@
         <el-row style="border: 1px solid black;"> 
           <el-col :span="6" >
             <label>&nbsp;&nbsp;今日訂金補足</label>
-            <el-input v-model="form.slb10011" style="width:100px" maxlength="5"></el-input>戶
+            <el-input v-model="form.slb1001177" style="width:100px" maxlength="5"></el-input>戶
           </el-col>
           <el-col :span="6" >
             <label>&nbsp;&nbsp;金額</label>
-            <el-input v-model="form.slb10009" style="width:100px" maxlength="5"></el-input>萬
+            <el-input v-model="form.slb1000955" style="width:100px" maxlength="5"></el-input>萬
           </el-col>
           <el-col :span="6" >
             <label>&nbsp;&nbsp;實際補足戶數</label>
-            <el-input v-model="form.slb10011" style="width:100px" maxlength="5"></el-input>戶
+            <el-input v-model="form.slb1001188" style="width:100px" maxlength="5"></el-input>戶
           </el-col>
           <el-col :span="6" >
             <label>&nbsp;&nbsp;金額</label>
-            <el-input v-model="form.slb10009" style="width:100px" maxlength="5"></el-input>萬
+            <el-input v-model="form.slb10009554" style="width:100px" maxlength="5"></el-input>萬
           </el-col>
         </el-row>
         <div v-for="(v,i) in form.dealList" :key="i">
@@ -335,11 +335,11 @@
           </el-col>
           <el-col :span="7">
             <label>總金額</label>
-            <el-input v-model="v.slb11006" style="width:100px" maxlength="5"></el-input>萬
+            <el-input v-model="v.slb110606" style="width:100px" maxlength="5"></el-input>萬
           </el-col>
           <el-col :span="7">
             <label>訂金</label>
-            <el-input v-model="v.slb11007" style="width:100px" maxlength="5"></el-input>萬
+            <el-input v-model="v.slb110607" style="width:100px" maxlength="5"></el-input>萬
           </el-col>
         </el-row>
         </div>
@@ -360,19 +360,19 @@
         <el-row style="border: 1px solid black;"> 
           <el-col :span="6" >
             <label>&nbsp;&nbsp;今日簽約戶數</label>
-            <el-input v-model="form.slb10011" style="width:100px" maxlength="5"></el-input>戶
+            <el-input v-model="form.slb1003311" style="width:100px" maxlength="5"></el-input>戶
           </el-col>
           <el-col :span="6" >
             <label>&nbsp;&nbsp;金額</label>
-            <el-input v-model="form.slb10009" style="width:100px" maxlength="5"></el-input>萬
+            <el-input v-model="form.slb103309" style="width:100px" maxlength="5"></el-input>萬
           </el-col>
           <el-col :span="6" >
             <label>&nbsp;&nbsp;累積簽約戶數</label>
-            <el-input v-model="form.slb10011" style="width:100px" maxlength="5"></el-input>戶
+            <el-input v-model="form.slb1003311" style="width:100px" maxlength="5"></el-input>戶
           </el-col>
           <el-col :span="6" >
             <label>&nbsp;&nbsp;金額</label>
-            <el-input v-model="form.slb10009" style="width:100px" maxlength="5"></el-input>萬
+            <el-input v-model="form.slb103309" style="width:100px" maxlength="5"></el-input>萬
           </el-col>
         </el-row>
         <div v-for="(v,i) in form.dealList" :key="i">
@@ -394,11 +394,11 @@
           </el-col>
           <el-col :span="7">
             <label>總金額</label>
-            <el-input v-model="v.slb11006" style="width:100px" maxlength="5"></el-input>萬
+            <el-input v-model="v.slb1100446" style="width:100px" maxlength="5"></el-input>萬
           </el-col>
           <el-col :span="7">
             <label>訂金</label>
-            <el-input v-model="v.slb11007" style="width:100px" maxlength="5"></el-input>萬
+            <el-input v-model="v.slb1105507" style="width:100px" maxlength="5"></el-input>萬
           </el-col>
         </el-row>
         </div>

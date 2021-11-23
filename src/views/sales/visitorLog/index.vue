@@ -36,11 +36,11 @@
           {{scope.row.sla11003Name}}
         </template>
       </el-table-column>
-      <el-table-column label="帶看戶別">
+      <!--<el-table-column label="帶看戶別">
         <template slot-scope="scope">
           {{scope.row.sla11005}}
         </template>
-      </el-table-column>
+      </el-table-column>-->
       <el-table-column label="事項紀錄">
         <template slot-scope="scope">
           {{scope.row.sla11006}}

@@ -22,6 +22,8 @@ export default {
         sla00015: 0,
         sla00016: 0,
         sla00017: 0,
+        sla00028: 0,
+        sla00029: 0,
         sla00030: 0,
         sla00035: 0
       },
@@ -123,6 +125,8 @@ export default {
         sla00015: 0,
         sla00016: 0,
         sla00017: 0,
+        sla00028: 0,
+        sla00029: 0,
         sla00030: 0,
         sla00035: 0
       }
@@ -154,6 +158,8 @@ export default {
             sla00015: self.form.sla00015,
             sla00016: self.form.sla00016,
             sla00017: self.form.sla00017,
+            sla00028: self.form.sla00028,
+            sla00029: self.form.sla00029,
             sla00030: self.form.sla00030,
             sla00035: self.form.sla00035,
             sla00041: self.form.sla00041

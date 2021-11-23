@@ -163,6 +163,18 @@
             </el-form-item>
           </el-col>
         </el-row>
+        <el-row>    
+          <el-col :span="6">
+            <el-form-item label="表價總銷" prop="sla00029">
+              <el-input v-model="form.sla00029"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="6">
+            <el-form-item label="底價總銷" prop="sla00028">
+              <el-input v-model="form.sla00028"></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
         <el-form-item>
           <el-button type="primary" @click="save">{{ $t('button.submit') }}</el-button>
           <el-button @click.native="formVisible = false">{{ $t('button.cancel') }}</el-button>

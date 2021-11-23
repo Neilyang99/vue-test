@@ -154,6 +154,7 @@ export default {
       this.formVisible = true
       this.isAdd = true
       this.form.slb10002 = new Date().toISOString().substr(0,10)
+      this.form.slb10014 =this.form.slb10014/10000
     },
     save() {
       var self = this
@@ -172,7 +173,9 @@ export default {
             slb10009: self.form.slb10009,
             slb10010: self.form.slb10010,
             slb10011: self.form.slb10011,
-            slb10012: self.form.slb10012
+            slb10012: self.form.slb10012,
+            slb10013: self.form.slb10013,
+            slb10014: self.form.slb10014*10000
             
             
           }).then(response => {
