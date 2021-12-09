@@ -27,7 +27,9 @@ export default {
         sla23045:'',
         sla23046:'',
         sla23047:'',
-        sla23048:''
+        sla23048:'',
+        sla23050:'',
+        sla23051:''
       },
       sla23006List:[],
       sla23031List:[],
@@ -98,7 +100,9 @@ export default {
         sla23045:'',
         sla23046:'',
         sla23047:'',
-        sla23048:''
+        sla23048:'',
+        sla23050:'',
+        sla23051:''
       }
       
     },
@@ -130,6 +134,8 @@ export default {
             sla23046:self.form.sla23046,
             sla23047:self.form.sla23047,
             sla23048:self.form.sla23048,
+            sla23050:self.form.sla23050,
+            sla23051:self.form.sla23051,
             sla23049: ''
             
           }).then(response => {

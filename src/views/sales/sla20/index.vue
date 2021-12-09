@@ -77,12 +77,12 @@
         <el-row>
           <el-col :span="8">
             <el-form-item label="銷售案號"  >
-                <el-select  v-model="form.sla20002" filterable placeholder="請選擇">
+                <el-select  v-model="form.sla20002" filterable placeholder="請選擇" :disabled="true">
                   <el-option
                     v-for="item in buildingList"
                     :key="item.id"
                     :label="item.sla00003"
-                    :value="item.sla00002">
+                    :value="item.id">
                   </el-option>
                 </el-select>
             </el-form-item>
@@ -96,7 +96,7 @@
           </el-col>
           <el-col :span="8">
             <el-form-item label="客戶姓名" prop="sla20008">
-              <el-input v-model="form.sla20008"></el-input>
+              <el-input v-model="form.sla20008" maxlength="50"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
@@ -127,64 +127,74 @@
         </el-row>
         <el-row>  
           <el-col :span="8">
-            <el-form-item label="區別" prop="sla20040">
-              <el-input v-model="form.sla20040" ></el-input>
+            <el-form-item label="區別" >
+              {{form.sla20040}}
             </el-form-item>
           </el-col>
           <el-col :span="8">
-            <el-form-item label="棟別" prop="sla20041">
-              <el-input v-model="form.sla20041" ></el-input>
+            <el-form-item label="棟別" >
+              {{form.sla20041}}
             </el-form-item>
           </el-col>
           <el-col :span="8">
-            <el-form-item label="戶號" prop="sla20042">
-              <el-input v-model="form.sla20042" ></el-input>
+            <el-form-item label="戶號" >
+              {{form.sla20042}}
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>  
           <el-col :span="8">
             <el-form-item label="地坪數" prop="sla20046">
-              <el-input v-model="form.sla20046" ></el-input>
+              {{form.sla20046}}
             </el-form-item>
           </el-col>
           <el-col :span="8">
             <el-form-item label="建坪數" prop="sla20047">
-              <el-input v-model="form.sla20047" ></el-input>
+              {{form.sla20047}}
             </el-form-item>
           </el-col>
           <el-col :span="8">
             <el-form-item label="公設建坪數" prop="sla20048">
-              <el-input v-model="form.sla20048" ></el-input>
+              {{form.sla20048}}
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>  
           <el-col :span="8">
             <el-form-item label="地號" prop="sla20049">
-              <el-input v-model="form.sla20049" ></el-input>
+              {{form.sla20049}}
             </el-form-item>
           </el-col>
           <el-col :span="16">
             <el-form-item label="地址" prop="sla20050">
-              <el-input v-model="form.sla20050" ></el-input>
+              {{form.sla20050}}
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>  
           <el-col :span="8">
             <el-form-item label="成交總價" >
-              <el-input v-model="form.sla20068" ></el-input>
+              <el-input v-model="form.sla20068" @change="calAmt()"></el-input>
             </el-form-item>
           </el-col>
-          <!--
           <el-col :span="8">
-            <el-form-item label="訂金" >
-              <el-input v-model="form.sla20069" ></el-input>
+            <el-form-item label="仲人費" >
+              <el-input v-model="form.sla20094"  @change="calAmt()"></el-input>
             </el-form-item>
           </el-col>
-          -->
-          </el-row>
+          <el-col :span="8">
+            <el-form-item label="贈送/雜項費" >
+              <el-input v-model="form.sla20095"  @change="calAmt()"></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="8">
+            <el-form-item label="實際總價" >
+              {{form.sla20096}}
+            </el-form-item>
+          </el-col>
+        </el-row>
           <el-row>
           <el-col :span="24">
             <el-form-item label="備註" >

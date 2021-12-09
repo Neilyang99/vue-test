@@ -125,10 +125,11 @@
         </el-row>
         <el-row>
           <el-col :span="6">
-            <el-form-item label="銷售表價" prop="sla02014" >
+            <el-form-item label="銷售價格" prop="sla02014" >
               <el-input v-model="form.sla02014" maxlength="5"></el-input>
             </el-form-item>
           </el-col>
+          <!--
           <el-col :span="6">
             <el-form-item label="業務員底價" prop="sla02015" >
               <el-input v-model="form.sla02015" maxlength="5"></el-input>
@@ -144,6 +145,7 @@
               <el-input v-model="form.sla02017" maxlength="5"></el-input>
             </el-form-item>
           </el-col>
+          -->
         </el-row>
         <el-form-item>
           <el-button type="primary" @click="save">{{ $t('button.submit') }}</el-button>

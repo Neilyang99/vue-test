@@ -52,8 +52,9 @@ export default {
         this.buildingList = response.data
       })
     },
-    fetchOptionList(){
-      
+    calAmt(){
+      var amt = this.form.sla20068 - this.form.sla20094 - this.form.sla20095
+      this.form.sla20096 = amt
     },
     search() {
       this.listQuery.page = 1
@@ -95,7 +96,10 @@ export default {
         id: '',
         sla20068: '',
         sla20069: '',
-        sla20087: ''
+        sla20087: '',
+        sla20094: '',
+        sla20095: '',
+        sla20096: ''
       }
     },
     add() {
@@ -128,8 +132,11 @@ export default {
             sla20041: self.form.sla20041,
             sla20042: self.form.sla20042,
             sla20068: self.form.sla20068,
-            sla20069: self.form.sla20069,
-            sla20087: self.form.sla20087
+            //sla20069: self.form.sla20069,
+            sla20087: self.form.sla20087,
+            sla20094: self.form.sla20094,
+            sla20095: self.form.sla20095,
+            sla20096: self.form.sla20096
             
           }).then(response => {
             console.log(response)

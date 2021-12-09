@@ -18,6 +18,16 @@ export function getCntMotivation(projectNo){
   })
 }
 
+export function getCntAge(projectNo){
+  return request({
+    url: '/visitorCharts/getCountBySla10017',
+    method: 'get',
+    params: {
+      projectCode: projectNo
+    }
+  })
+}
+
 export function getCntVisitor(projectNo, type){
   return request({
     url: '/visitorCharts/getCountBySla10013',

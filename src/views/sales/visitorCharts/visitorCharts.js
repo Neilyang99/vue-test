@@ -1,4 +1,4 @@
-import { buildingList, getCntMotivation, getCntVisitor, getCntArea, getCntVisitType } from '@/api/sales/visitorCharts'
+import { buildingList, getCntMotivation, getCntVisitor, getCntArea, getCntVisitType, getCntAge } from '@/api/sales/visitorCharts'
 import ECharts from 'vue-echarts/components/ECharts'
 import 'echarts/lib/chart/bar'
 import 'echarts/lib/chart/line'
@@ -32,9 +32,15 @@ export default {
         label: '來源總數量長條圖'
       },{
         value: '4',
-        label: '位置總數量長條圖'
+        label: '來客區域長條圖'
+      },{
+        value: '5',
+        label: '年齡圓餅圖'
       }],
       chartDataType:[{
+        value: 'week',
+        label: '週'
+      },{
         value: 'month',
         label: '月'
       },{
@@ -54,6 +60,7 @@ export default {
       chartData:{},
       optionData:[],
       legendData:[],
+      ageData:[],
       visitorData:[],
       visitorLegend:[],
       areaData:[],
@@ -97,6 +104,16 @@ export default {
           ddata.push(item.name)
         })
         this.legendData = ddata
+      })
+    },
+    getCntAge(buildingNo){
+      var ddata = []
+      getCntAge(buildingNo).then(response => {
+        this.optionData = response.data
+        this.optionData.forEach(function(item, i){
+          ddata.push(item.name)
+        })
+        this.ageData = ddata
       })
     },
     getVisitorQty(buildingNo,dataType){
@@ -169,6 +186,9 @@ export default {
       }else if(this.listQuery.chartType == '4'){  
         this.getCntArea(this.listQuery.buildingNo)
         setTimeout(()=> this.barAreaChart(), 500)
+      }else if(this.listQuery.chartType == '5'){  
+        this.getCntAge(this.listQuery.buildingNo)
+        setTimeout(()=> this.agePieChart(), 500)
       }
     },
     reset() {
@@ -219,7 +239,7 @@ export default {
     barAreaChart(){
       this.chartData= {
         title: {
-          text: '位置總數量長條圖',
+          text: '來客區域長條圖',
           subtext: this.buildingName,
           x: 'center'
         },
@@ -288,6 +308,45 @@ export default {
           orient: 'vertical',
           left: 'left',
           data: this.legendData
+        },
+        series: [
+          {
+            name: 'from',
+            type: 'pie',
+            radius: '55%',
+            center: ['50%', '60%'],
+            data: this.optionData,
+            itemStyle: {
+              emphasis: {
+                shadowBlur: 10,
+                shadowOffsetX: 0,
+                shadowColor: 'rgba(0, 0, 0, 0.5)'
+              }
+            }
+          }
+        ]
+      }
+    },
+    agePieChart(){
+      this.chartData= {
+        title: {
+          text: '年齡總數量圓餅圖',
+          subtext: this.buildingName,
+          x: 'center'
+        },
+        tooltip: {
+          trigger: 'item',
+          formatter: '{a} <br/>{b} : {c} ({d}%)'
+        },
+        toolbox: {
+          feature: {
+            saveAsImage: {}
+          }
+        },
+        legend: {
+          orient: 'vertical',
+          left: 'left',
+          data: this.ageData
         },
         series: [
           {

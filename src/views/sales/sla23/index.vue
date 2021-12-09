@@ -123,6 +123,18 @@
             </el-form-item>
           </el-col>
         </el-row>
+        <el-row>  
+          <el-col :span="12">
+            <el-form-item label="信用卡交易批次" prop="sla23050" >
+              <el-input v-model="form.sla23050" maxlength="100"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="信用卡後五碼" prop="sla23051" >
+              <el-input v-model="form.sla23051" maxlength="5"></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
         <el-form-item>
           <el-button type="primary" @click="save">{{ $t('button.submit') }}</el-button>
           <el-button @click.native="formVisible = false">{{ $t('button.cancel') }}</el-button>
