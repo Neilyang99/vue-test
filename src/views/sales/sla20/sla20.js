@@ -136,7 +136,13 @@ export default {
             sla20087: self.form.sla20087,
             sla20094: self.form.sla20094,
             sla20095: self.form.sla20095,
-            sla20096: self.form.sla20096
+            sla20096: self.form.sla20096,
+            sla20097: self.form.sla20097,
+            sla20098: self.form.sla20098,
+            sla20099: self.form.sla20099,
+            sla20100: self.form.sla20100,
+            sla20101: self.form.sla20101,
+            sla20102: self.form.sla20102
             
           }).then(response => {
             console.log(response)

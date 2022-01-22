@@ -342,6 +342,33 @@
             </el-form-item>
           </el-col>
         </el-row>
+        <el-row>
+          <el-col :span="4">
+            <el-form-item label="業績歸屬人1" prop="sla10035">
+              <el-input v-model="form.sla10035" maxlength="10"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="4">
+            <el-form-item label="業績歸屬人2" prop="sla10036">
+              <el-input v-model="form.sla10036" maxlength="10" ></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="4">
+            <el-form-item label="業績歸屬人3" prop="sla10037">
+              <el-input v-model="form.sla10037" maxlength="10" ></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="4">
+            <el-form-item label="業績歸屬人4" prop="sla10038">
+              <el-input v-model="form.sla10038" maxlength="10"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="4">
+            <el-form-item label="業績歸屬人5" prop="sla10039">
+              <el-input v-model="form.sla10039" maxlength="10" ></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>  
 
         <el-form-item>
           <el-button type="primary" @click="save">{{ $t('button.submit') }}</el-button>

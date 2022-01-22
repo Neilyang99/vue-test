@@ -39,6 +39,11 @@ export default {
         sla10029: '',
         sla10030: '',
         sla10033: '',
+        sla10035: '',
+        sla10036: '',
+        sla10037: '',
+        sla10038: '',
+        sla10039: '',
         building: '',
         buildingName: ''
       },
@@ -205,6 +210,11 @@ export default {
         sla10029: '',
         sla10030: '',
         sla10033: '',
+        sla10035: '',
+        sla10036: '',
+        sla10037: '',
+        sla10038: '',
+        sla10039: '',
         building: '',
         buildingName: ''
       }
@@ -252,7 +262,12 @@ export default {
             sla10028: self.form.sla10028,
             sla10029: self.form.sla10029,
             sla10030: self.form.sla10030,
-            sla10033: self.form.sla10033
+            sla10033: self.form.sla10033,
+            sla10035: self.form.sla10035,
+            sla10036: self.form.sla10036,
+            sla10037: self.form.sla10037,
+            sla10038: self.form.sla10038,
+            sla10039: self.form.sla10039
           }).then(response => {
             console.log(response)
             this.$message({

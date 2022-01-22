@@ -162,6 +162,11 @@
               <el-input v-model="form.sla00035"></el-input>
             </el-form-item>
           </el-col>
+          <el-col :span="6">
+            <el-form-item label="車位價格" prop="sla00043">
+              <el-input v-model="form.sla00043"></el-input>
+            </el-form-item>
+          </el-col>
         </el-row>
         <el-row>    
           <el-col :span="6">

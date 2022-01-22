@@ -25,7 +25,8 @@ export default {
         sla00028: 0,
         sla00029: 0,
         sla00030: 0,
-        sla00035: 0
+        sla00035: 0,
+        sla00043: ''
       },
       rules: {
         sla00002: [
@@ -128,7 +129,8 @@ export default {
         sla00028: 0,
         sla00029: 0,
         sla00030: 0,
-        sla00035: 0
+        sla00035: 0,
+        sla00043: ''
       }
     },
     add() {
@@ -162,7 +164,8 @@ export default {
             sla00029: self.form.sla00029,
             sla00030: self.form.sla00030,
             sla00035: self.form.sla00035,
-            sla00041: self.form.sla00041
+            sla00041: self.form.sla00041,
+            sla00043: self.form.sla00043
             
           }).then(response => {
             console.log(response)
