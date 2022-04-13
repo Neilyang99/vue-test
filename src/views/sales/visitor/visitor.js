@@ -1,6 +1,6 @@
 import { remove, getList, save, 
   getSla10004,getSla10016,getSla10017,getSla10018,getSla10019,getSla10020,getSla10021,getSla10022,getSla10023,getSla10024,
-  getSla10025,getSla10026,getSla10027,getSla10029,getSla10030 } from '@/api/sales/visitor'
+  getSla10025,getSla10026,getSla10027,getSla10029,getSla10030,getSla10035 } from '@/api/sales/visitor'
 import { selectList } from '@/api/sales/sla00'
 
 export default {
@@ -40,10 +40,16 @@ export default {
         sla10030: '',
         sla10033: '',
         sla10035: '',
-        sla10036: '',
-        sla10037: '',
-        sla10038: '',
-        sla10039: '',
+        sla10041: '',
+        sla10042: '',
+        sla10043: '',
+        sla10044: '',
+        sla10045: '',
+        sla10046: '',
+        sla10047: '',
+        sla10048: '',
+        sla10049: '',
+        sla10050: '',
         building: '',
         buildingName: ''
       },
@@ -63,6 +69,7 @@ export default {
       sla10027List:[],
       sla10029List:[],
       sla10030List:[],
+      sla10035List:[],
       rules: {
         sla10004: [
           { required: true, message: '請輸入來人或來電', trigger: 'blur' }
@@ -140,6 +147,7 @@ export default {
       getSla10027().then(response => {this.sla10027List = response.data})
       getSla10029().then(response => {this.sla10029List = response.data})
       getSla10030().then(response => {this.sla10030List = response.data})
+      getSla10035().then(response => {this.sla10035List = response.data})
     },
     search() {
       this.listQuery.page = 1
@@ -211,10 +219,16 @@ export default {
         sla10030: '',
         sla10033: '',
         sla10035: '',
-        sla10036: '',
-        sla10037: '',
-        sla10038: '',
-        sla10039: '',
+        sla10041: '',
+        sla10042: '',
+        sla10043: '',
+        sla10044: '',
+        sla10045: '',
+        sla10046: '',
+        sla10047: '',
+        sla10048: '',
+        sla10049: '',
+        sla10050: '',
         building: '',
         buildingName: ''
       }
@@ -264,10 +278,17 @@ export default {
             sla10030: self.form.sla10030,
             sla10033: self.form.sla10033,
             sla10035: self.form.sla10035,
-            sla10036: self.form.sla10036,
-            sla10037: self.form.sla10037,
-            sla10038: self.form.sla10038,
-            sla10039: self.form.sla10039
+            sla10041: self.form.sla10041,
+            sla10042: self.form.sla10042,
+            sla10043: self.form.sla10043,
+            sla10044: self.form.sla10044,
+            sla10045: self.form.sla10045,
+            sla10046: self.form.sla10046,
+            sla10047: self.form.sla10047,
+            sla10048: self.form.sla10048,
+            sla10049: self.form.sla10049,
+            sla10050: self.form.sla10050,
+            
           }).then(response => {
             console.log(response)
             this.$message({

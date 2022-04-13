@@ -27,7 +27,8 @@ export default {
         sla11005:'',
         sla11006:'',
         sla11008:'',
-        sla11023:0
+        sla11023:0,
+        sla11024:0
       },
       sla11003List:[],
       houseList:[],
@@ -111,7 +112,8 @@ export default {
         sla11005:'',
         sla11006:'',
         sla11008:'',
-        sla11023:0
+        sla11023:0,
+        sla11024:0
       }
       
     },

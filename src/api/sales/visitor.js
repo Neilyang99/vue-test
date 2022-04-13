@@ -117,3 +117,10 @@ export function getSla10030(){
     method: 'get'
   })
 }
+export function getSla10035(){
+  return request({
+    url: '/visitor/getSla10035',
+    method: 'get'
+  })
+}
+

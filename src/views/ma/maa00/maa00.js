@@ -41,6 +41,8 @@ export default {
         maa00032: 0,
         maa00033: '',
         maa00034: '',
+        maa00035: '',
+        maa00036: '',
         maa00040: ''
       },
       rules: {
@@ -151,6 +153,8 @@ export default {
         maa00032: 0,
         maa00033: '',
         maa00034: '',
+        maa00035: '',
+        maa00036: '',
         maa00040: ''
       }
     },
@@ -198,6 +202,8 @@ export default {
             maa00032: 0,
             maa00033: '',
             maa00034: '',
+            maa00035: self.form.maa00035,
+            maa00036: self.form.maa00036,
             maa00040: ''
             
           }).then(response => {

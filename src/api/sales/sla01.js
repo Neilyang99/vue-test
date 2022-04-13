@@ -49,3 +49,14 @@ export function remove(id) {
     }
   })
 }
+
+export function exportXls(projectId,projectNo) {
+  return request({
+    url: '/sla01/export',
+    method: 'get',
+    params:{
+      projectId: projectId,
+      projectNo: projectNo
+    }
+  })
+}

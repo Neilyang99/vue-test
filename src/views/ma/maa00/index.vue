@@ -86,6 +86,18 @@
             </el-form-item>
           </el-col>
         </el-row>
+        <el-row>
+          <el-col :span="8">
+            <el-form-item label="業主名稱" prop="maa00035">
+              <el-input v-model="form.maa00035" maxlength="20"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="16">
+            <el-form-item label="地段" prop="maa00036">
+              <el-input v-model="form.maa00036" maxlength="100"></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
         <el-row> 
           <el-col :span="16">
             <el-form-item label="工程案名稱" prop="maa00004">
@@ -110,7 +122,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="8">
-            <el-form-item label="工期(月)" prop="maa00011">
+            <el-form-item label="工期(日)" prop="maa00011">
               <el-input v-model="form.maa00011"></el-input>
             </el-form-item>
           </el-col>

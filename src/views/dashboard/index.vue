@@ -1,6 +1,6 @@
 <template>
   <div class="dashboard-container" id="dashboard">
-    <div class="dashboard-text">歡迎光臨:{{name}} </div>
+    <div class="dashboard-text">歡迎光臨:{{name}}</div>
   
     <el-row :gutter="20">
       <el-col :span="6">
@@ -23,7 +23,7 @@
           </el-col>
           <el-col :span="12" >
             <div class="card-panel-text">{{ $t('dashboard.newUser') }}</div>
-            <div class="card-panel-num">102,400</div>
+            <div class="card-panel-num"></div>
           </el-col>
         </el-card>
       </el-col>
@@ -34,7 +34,7 @@
           </el-col>
           <el-col :span="12" >
             <div class="card-panel-text">{{ $t('dashboard.message') }}</div>
-            <div class="card-panel-num">5</div>
+            <div class="card-panel-num"></div>
           </el-col>
         </el-card>
       </el-col>
@@ -45,14 +45,50 @@
           </el-col>
           <el-col :span="12" >
             <div class="card-panel-text">{{ $t('dashboard.income') }}</div>
-            <div class="card-panel-num">10000</div>
+            <div class="card-panel-num"></div>
           </el-col>
         </el-card>
       </el-col>
     </el-row>
 
 
-    
+    <el-table :data="list" style="width: 100%;padding-top: 15px;">
+      <el-table-column label="銷售案" min-width="10">
+        <template slot-scope="scope">
+          {{ scope.row.sla10003 }}
+        </template>
+      </el-table-column>
+      <el-table-column label="客戶" min-width="10">
+        <template slot-scope="scope">
+          {{ scope.row.sla10006}}
+        </template>
+      </el-table-column>
+      <el-table-column label="客戶電話" min-width="10">
+        <template slot-scope="scope">
+          {{ scope.row.sla10010}}
+        </template>
+      </el-table-column>
+      <el-table-column label="最近洽詢日期" min-width="10">
+        <template slot-scope="scope">
+          {{ scope.row.sla11004}}
+        </template>
+      </el-table-column>
+      <el-table-column label="洽詢事項紀錄" min-width="20">
+        <template slot-scope="scope">
+          {{ scope.row.sla11006}}
+        </template>
+      </el-table-column>
+      <el-table-column label="上次更新資料日期" min-width="20">
+        <template slot-scope="scope">
+          {{ scope.row.modify_time}}
+        </template>
+      </el-table-column>
+      <el-table-column label="已超過天數未處理" min-width="15">
+        <template slot-scope="scope">
+          {{ scope.row.dt}}
+        </template>
+      </el-table-column>
+  </el-table>  
   
 
   </div>

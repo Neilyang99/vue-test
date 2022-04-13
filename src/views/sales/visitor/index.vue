@@ -336,7 +336,19 @@
               </el-select>
             </el-form-item>
           </el-col>
-          <el-col :span="16">
+          <el-col :span="8">
+            <el-form-item label="貸款需求" prop="sla10035">
+              <el-select  v-model="form.sla10035" placeholder="請選擇">
+                  <el-option
+                    v-for="item in sla10035List"
+                    :key="item.key"
+                    :label="item.value"
+                    :value="item.key">
+                  </el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
             <el-form-item label="備註" >
               <el-input v-model="form.sla10033" type="textarea"></el-input>
             </el-form-item>
@@ -344,31 +356,58 @@
         </el-row>
         <el-row>
           <el-col :span="4">
-            <el-form-item label="業績歸屬人1" prop="sla10035">
-              <el-input v-model="form.sla10035" maxlength="10"></el-input>
+            <el-form-item label="業績歸屬人1" prop="sla10041">
+              <el-input v-model="form.sla10041" maxlength="10"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="4">
-            <el-form-item label="業績歸屬人2" prop="sla10036">
-              <el-input v-model="form.sla10036" maxlength="10" ></el-input>
+            <el-form-item label="業績歸屬人2" prop="sla10042">
+              <el-input v-model="form.sla10042" maxlength="10" ></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="4">
-            <el-form-item label="業績歸屬人3" prop="sla10037">
-              <el-input v-model="form.sla10037" maxlength="10" ></el-input>
+            <el-form-item label="業績歸屬人3" prop="sla10043">
+              <el-input v-model="form.sla10043" maxlength="10" ></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="4">
-            <el-form-item label="業績歸屬人4" prop="sla10038">
-              <el-input v-model="form.sla10038" maxlength="10"></el-input>
+            <el-form-item label="業績歸屬人4" prop="sla10044">
+              <el-input v-model="form.sla10044" maxlength="10"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="4">
-            <el-form-item label="業績歸屬人5" prop="sla10039">
-              <el-input v-model="form.sla10039" maxlength="10" ></el-input>
+            <el-form-item label="業績歸屬人5" prop="sla10045">
+              <el-input v-model="form.sla10045" maxlength="10" ></el-input>
             </el-form-item>
           </el-col>
         </el-row>  
+        <el-row>
+          <el-col :span="4">
+            <el-form-item label="業績歸屬人6" prop="sla10046">
+              <el-input v-model="form.sla10046" maxlength="10"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="4">
+            <el-form-item label="業績歸屬人7" prop="sla10047">
+              <el-input v-model="form.sla10047" maxlength="10" ></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="4">
+            <el-form-item label="業績歸屬人8" prop="sla10048">
+              <el-input v-model="form.sla10048" maxlength="10" ></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="4">
+            <el-form-item label="業績歸屬人9" prop="sla10049">
+              <el-input v-model="form.sla10049" maxlength="10"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="4">
+            <el-form-item label="業績歸屬人10" prop="sla10050">
+              <el-input v-model="form.sla10050" maxlength="10" ></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row> 
 
         <el-form-item>
           <el-button type="primary" @click="save">{{ $t('button.submit') }}</el-button>

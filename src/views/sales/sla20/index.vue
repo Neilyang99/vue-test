@@ -223,6 +223,33 @@
           </el-col>
         </el-row>
         <el-row>
+          <el-col :span="4">
+            <el-form-item label="業績歸屬人6" prop="sla20103">
+              <el-input v-model="form.sla20103" maxlength="10"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="4">
+            <el-form-item label="業績歸屬人7" prop="sla20104">
+              <el-input v-model="form.sla20104" maxlength="10" ></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="4">
+            <el-form-item label="業績歸屬人8" prop="sla20105">
+              <el-input v-model="form.sla20105" maxlength="10" ></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="4">
+            <el-form-item label="業績歸屬人9" prop="sla20106">
+              <el-input v-model="form.sla20106" maxlength="10"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="4">
+            <el-form-item label="業績歸屬人10" prop="sla20107">
+              <el-input v-model="form.sla20107" maxlength="10" ></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
           <el-col :span="24">
             <el-form-item label="備註" >
               <el-input v-model="form.sla20087" type="textarea"></el-input>

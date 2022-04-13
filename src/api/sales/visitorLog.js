@@ -83,3 +83,10 @@ export function getAllSaleHouse(projectNo ){
     }
   })
 }
+
+export function findNoHandleList(){
+  return request({
+    url: '/visitorLog/findNoHandleList',
+    method: 'get'
+  })
+}

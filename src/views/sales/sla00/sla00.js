@@ -230,6 +230,11 @@ export default {
         this.$router.push({ path: '/sla02', query: { sla00ID: this.selRow.id, projectId: this.selRow.sla00002 }})
       }
     },
+    houseUpload() {
+      if (this.checkSel()) {
+        this.$router.push({ path: '/sla01Upload', query: { sla00ID: this.selRow.id, projectId: this.selRow.sla00002 }})
+      }
+    },
     startToSale(id,status) {
       //if (this.checkSel()) {
         startToSale(id,status).then(

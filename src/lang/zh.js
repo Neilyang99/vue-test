@@ -56,7 +56,8 @@ export default {
     maa01:'工程預算金額',
     maa90:'工程預算類別',
     maa91:'工程預算小類別',
-    maa92:'工程預算項目'
+    maa92:'工程預算項目',
+    sla01Upload:'房屋資料上傳',
   },
   navbar: {
     logOut: '退出登錄',
