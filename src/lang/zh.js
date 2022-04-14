@@ -57,6 +57,8 @@ export default {
     maa90:'工程預算類別',
     maa91:'工程預算小類別',
     maa92:'工程預算項目',
+    maa94:'類別項目定義',
+    maa941:'項目內容定義',
     sla01Upload:'房屋資料上傳',
   },
   navbar: {
