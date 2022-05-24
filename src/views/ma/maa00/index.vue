@@ -52,7 +52,7 @@
           {{scope.row.maa00010}}
         </template>
       </el-table-column>
-      <el-table-column label="工期(月)">
+      <el-table-column label="工期(日)">
         <template slot-scope="scope">
           {{scope.row.maa00011}}
         </template>
