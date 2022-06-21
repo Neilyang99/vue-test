@@ -68,7 +68,13 @@ export default {
     maa06:'混凝土氯離子品質紀錄',
     maa07:'結構體鋼筋試驗表',
     maa08:'出工人數統計表',
-    maa09:'個人工地重要紀事'
+    maa09:'個人工地重要紀事',
+    materialStock:'材料庫存統計',
+    materialUsed:'材料使用量回報',
+    maa10Stock:'材料入庫總表',
+    maa10:'材料入庫統計表',
+    maa11:'混凝土使用量統計',
+    maa12:'鋼筋使用量統計'
   },
   navbar: {
     logOut: '退出登錄',
