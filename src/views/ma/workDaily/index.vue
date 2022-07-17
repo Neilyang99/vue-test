@@ -14,8 +14,10 @@
       <el-row>
         <el-col :span="24">
           <el-button type="warning" size="mini"  @click.native="maa10">工作日報表</el-button>
-          <el-button type="info" size="mini"  @click.native="maa08">出工人數</el-button>
-          <el-button type="info" size="mini"  @click.native="maa09">記事備忘錄</el-button>
+          <el-button type="success" size="mini"  @click.native="maa08">出工人數</el-button>
+          <el-button type="success" size="mini"  @click.native="maa09">記事備忘錄</el-button>
+          <el-button type="primary" size="mini"  @click.native="maa14">臨時工登記</el-button>
+          <el-button type="primary" size="mini"  @click.native="maa15">廠商代墊款</el-button>
         </el-col>
       </el-row>
     </div>

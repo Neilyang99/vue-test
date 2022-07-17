@@ -116,6 +116,16 @@ export default {
         this.$router.push({ path: '/maa09', query: { maa00ID: this.selRow.id, projectName: this.selRow.maa00004 }})
       }
     },
+    maa14() {//臨時工
+      if (this.checkSel()) {
+        this.$router.push({ path: '/maa14', query: { maa00ID: this.selRow.id, projectName: this.selRow.maa00004 }})
+      }
+    },
+    maa15() {//廠商代墊款
+      if (this.checkSel()) {
+        this.$router.push({ path: '/maa15', query: { maa00ID: this.selRow.id, projectName: this.selRow.maa00004 }})
+      }
+    },
     edit() {
       
     },
