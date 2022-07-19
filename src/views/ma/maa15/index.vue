@@ -12,6 +12,7 @@
           <el-button type="success" size="mini" icon="el-icon-plus" @click.native="add">{{ $t('button.add') }}</el-button>
           <el-button type="primary" size="mini" icon="el-icon-edit" @click.native="edit">{{ $t('button.edit') }}</el-button>
           <el-button type="danger" size="mini" icon="el-icon-delete" @click.native="remove">{{ $t('button.delete') }}</el-button>
+          <el-button type="info" size="mini"  @click.native="accountConfirm">會計確認</el-button>
         </el-col>
       </el-row>
     </div>
@@ -59,9 +60,19 @@
           {{scope.row.maa15006*scope.row.maa15009}}
         </template>
       </el-table-column>
+      <el-table-column label="未扣代墊款">
+        <template slot-scope="scope" v-if="scope.row.maa15010==''">
+          {{scope.row.maa15006*scope.row.maa15009}}
+        </template>
+      </el-table-column>
       <el-table-column label="扣回日期">
         <template slot-scope="scope">
           {{scope.row.maa15010}}
+        </template>
+      </el-table-column>
+      <el-table-column label="會計確認否">
+        <template slot-scope="scope" v-if="scope.row.maa15015 != ''">
+          Y
         </template>
       </el-table-column>
     </el-table>
@@ -101,20 +112,8 @@
             </el-form-item>
           </el-col>
           <el-col :span="8">
-            <el-form-item label="單位" prop="maa15007" >
-              <el-input v-model="form.maa15007" maxlength="10"></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="8">
             <el-form-item label="單價" prop="maa15009" >
               <el-input v-model="form.maa15009" maxlength="8"></el-input>
-            </el-form-item>
-          </el-col>
-        </el-row>
-        <el-row>
-          <el-col :span="8">
-            <el-form-item label="內容" prop="maa15008" >
-              <el-input v-model="form.maa15008" maxlength="200"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="8">
@@ -122,9 +121,35 @@
               {{form.maa15009*form.maa15006}}
             </el-form-item>
           </el-col>
+          
+        </el-row>
+        <el-row>
+          <el-col :span="8">
+            <el-form-item label="單位" prop="maa15007" >
+              <el-input v-model="form.maa15007" maxlength="10"></el-input>
+            </el-form-item>
+          </el-col>
+          
           <el-col :span="8">
             <el-form-item label="扣回日期" prop="maa15010" >
               <el-date-picker type="date" value-format="yyyyMMdd" placeholder="選擇日期" v-model="form.maa15010" style="width: 100%;"></el-date-picker>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item label="未扣代墊款"  v-if="form.maa15010 != ''" >
+              {{ 0 }}
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item label="未扣代墊款"  v-if="form.maa15010 == ''" >
+              {{ form.maa15009*form.maa15006 }}
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="24">
+            <el-form-item label="內容" prop="maa15008" >
+              <el-input v-model="form.maa15008" maxlength="200"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
