@@ -1,4 +1,4 @@
-import { remove, getList, save, getWorkerName } from '@/api/ma/maa15'
+import { remove, getList, save, getMaxPeriod } from '@/api/ma/maa16'
 
 export default {
   data() {
@@ -15,36 +15,29 @@ export default {
       listLoading: true,
       selRow: {},
       formVisible: false,
-      titleTxt: '廠商代墊款紀錄',
+      titleTxt: '零用金紀錄',
       formTitle:'',
       isAdd: true,
       form: {
         id: '',
-        maa15002:this.projectID,
-        maa15003:'',
-        maa15004:'',
-        maa15005:'',
-        maa15006:'0',
-        maa15007:'',
-        maa15008:'',
-        maa15009:'0',
-        maa15010:'',
-        maa15011:'',
-        maa15012:'',
-        maa15013:'0'
+        maa16002:this.projectID,
+        maa16003:'',
+        maa16004:'',
+        maa16005:'0',
+        maa16006:'0',
+        maa16007:'',
+        maa16008:'',
+        maa16009:'0',
+        maa16010:'',
+        maa16011:'',
+        maa16012:'0',
+        maa16013:'',
+        maa16014:''
       },
       rules: {
-        maa15002: [
-          {required: true, message: '工程資料錯誤。',trigger: 'blur'}
-        ],
-        maa15003: [
-          {required: true, message: '請輸入日期。',trigger: 'blur'}
-        ],
-        maa15006: [
-          {required: true, message: '請輸入數量。',trigger: 'blur'}
-        ],
-        maa15009: [
-          {required: true, message: '請輸入單價。',trigger: 'blur'}
+        
+        maa16003: [
+          {required: true, message: '請輸入期別。',trigger: 'blur'}
         ]
       }
     }
@@ -68,6 +61,12 @@ export default {
         
       })
     },
+    fetchPeriod(){
+      getMaxPeriod(this.listQuery.maa00ID).then(response => {
+        //期別+1
+        this.form.maa16003 = 1+ response.data 
+      })
+    },
     back() {
       this.$router.go(-1)
     },
@@ -80,18 +79,19 @@ export default {
     resetForm() {
       this.form = {
         id: '',
-        maa15002:this.projectID,
-        maa15003:'',
-        maa15004:'',
-        maa15005:'',
-        maa15006:'0',
-        maa15007:'',
-        maa15008:'',
-        maa15009:'0',
-        maa15010:'',
-        maa15011:'',
-        maa15012:'',
-        maa15013:'0'
+        maa16002:this.projectID,
+        maa16003:'',
+        maa16004:'',
+        maa16005:'0',
+        maa16006:'0',
+        maa16007:'',
+        maa16008:'',
+        maa16009:'0',
+        maa16010:'',
+        maa16011:'',
+        maa16012:'0',
+        maa16013:'',
+        maa16014:''
       }
       
     },
@@ -100,6 +100,7 @@ export default {
       this.formTitle = '新增'+this.titleTxt
       this.formVisible = true
       this.isAdd = true
+      this.fetchPeriod()
     },
     save() {
       var self = this
@@ -107,17 +108,9 @@ export default {
         if (valid) {
           save({
             id: self.form.id,
-            maa15002:this.listQuery.maa00ID,
-            maa15003:self.form.maa15003,
-            maa15004:self.form.maa15004,
-            maa15005:self.form.maa15005,
-            maa15006:self.form.maa15006,
-            maa15007:self.form.maa15007,
-            maa15008:self.form.maa15008,
-            maa15009:self.form.maa15009,
-            maa15010:self.form.maa15010,
-            maa15012:self.form.maa15012,
-            maa15013:'0'
+            maa16002:this.listQuery.maa00ID,
+            maa16003:self.form.maa16003,
+            maa16012:'0'
           }).then(response => {
             //console.log(response)
             this.$message({
@@ -126,6 +119,7 @@ export default {
             })
             this.fetchData()
             this.formVisible = false
+            
           })
         } else {
           return false
@@ -168,6 +162,9 @@ export default {
         }).catch(() => {
         })
       }
+    },
+    viewDetail(dataPK,period) {
+      this.$router.push({ path: '/maa17', query: { dataPK: dataPK, period: period, projectName: this.projectName }})
     }
   }
 }

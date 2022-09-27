@@ -1,6 +1,7 @@
 <template>
   <div class="app-container">
     <div class="block">
+      <!-- 
       <el-row  :gutter="20">
         <el-col :span="6">
           <el-input v-model="listQuery.selMaa00004" size="mini" placeholder="請輸入工程案名稱"></el-input>
@@ -10,15 +11,17 @@
           <el-button type="primary" size="mini" icon="el-icon-refresh" @click.native="reset">{{ $t('button.reset') }}</el-button>
         </el-col>
       </el-row>
-      <br>
-      <el-row>
-        <el-col :span="24">
-          <el-button type="warning" size="mini"  @click.native="maa10">工作日報表</el-button>
-          <el-button type="success" size="mini"  @click.native="maa08">出工人數</el-button>
-          <el-button type="success" size="mini"  @click.native="maa09">記事備忘錄</el-button>
-          <el-button type="primary" size="mini"  @click.native="maa14">臨時工登記</el-button>
-          <el-button type="primary" size="mini"  @click.native="maa15">廠商代墊款</el-button>
-          <el-button type="primary" size="mini"  @click.native="maa16">工地零用金</el-button>
+      -->
+      <el-row  >
+        <el-col :span="6">外包商: {{this.vendorName}}
+        </el-col>
+      </el-row>
+    </div>
+
+    <div>
+      <el-row type="flex" justify="center">
+        <el-col :span="6">請選擇設定的工程案，並點此按鈕：
+          <el-button type="success" size="mini" icon="" @click.native="toNext">下一步</el-button>
         </el-col>
       </el-row>
     </div>
@@ -78,7 +81,7 @@
   </div>
 </template>
 
-<script src="./workDaily.js"></script>
+<script src="./outsourcing.js"></script>
 
 
 <style rel="stylesheet/scss" lang="scss" scoped>

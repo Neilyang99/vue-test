@@ -78,7 +78,10 @@ export default {
     maa14:'臨時工登記',
     maa15:'廠商代墊款紀錄',
     maa16:'零用金紀錄',                                                               
-    maa17:'零用金明細紀錄'
+    maa17:'零用金明細紀錄',
+    maa93:'外包商資料',
+    outsourcing:'外包合約',
+    outsourcingItem:'承包項目'
   },
   navbar: {
     logOut: '退出登錄',
@@ -93,7 +96,7 @@ export default {
   login: {
     title: '立桓建設',
     errorAccount:'請輸入5到32位的數字和字母',
-    errorPassword:'密碼至少位5位',
+    errorPassword:'密碼至少5位',
     logIn: '登錄',
     username: '帳號',
     password: '密碼'

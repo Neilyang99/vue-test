@@ -1,50 +1,44 @@
-import { remove, getList, save, getWorkerName } from '@/api/ma/maa15'
+import { remove, getList, save, getMaa17006 } from '@/api/ma/maa17'
 
 export default {
   data() {
     return {
-      projectID: '',
+      dataPK: '',
+      period: '',
       projectName: '',
       listQuery: {
         page: 1,
         limit: 20,
-        maa00ID: undefined
+        dataPK: undefined
       },
       total: 0,
       list: null,
+      list2: null,
       listLoading: true,
+      maa17006List: null,
       selRow: {},
       formVisible: false,
-      titleTxt: '廠商代墊款紀錄',
+      titleTxt: '零用金明細紀錄',
       formTitle:'',
       isAdd: true,
       form: {
         id: '',
-        maa15002:this.projectID,
-        maa15003:'',
-        maa15004:'',
-        maa15005:'',
-        maa15006:'0',
-        maa15007:'',
-        maa15008:'',
-        maa15009:'0',
-        maa15010:'',
-        maa15011:'',
-        maa15012:'',
-        maa15013:'0'
+        maa17002:0,
+        maa17003:'',
+        maa17004:'',
+        maa17005:'',
+        maa17006:'',
+        maa17007:''
       },
       rules: {
-        maa15002: [
-          {required: true, message: '工程資料錯誤。',trigger: 'blur'}
-        ],
-        maa15003: [
+        maa17004: [
           {required: true, message: '請輸入日期。',trigger: 'blur'}
         ],
-        maa15006: [
-          {required: true, message: '請輸入數量。',trigger: 'blur'}
+        maa17005: [
+          {required: true, message: '請輸入金額。',trigger: 'blur'}
         ],
-        maa15009: [
-          {required: true, message: '請輸入單價。',trigger: 'blur'}
+        maa17006: [
+          {required: true, message: '請輸入來源證明。',trigger: 'blur'}
         ]
       }
     }
@@ -54,19 +48,58 @@ export default {
   },
   methods: {
     init() {
-      this.listQuery.maa00ID = this.$route.query.maa00ID
+      this.listQuery.dataPK = this.$route.query.dataPK
+      this.period = this.$route.query.period
       this.projectName = this.$route.query.projectName
       this.fetchData()
+      this.fetchOptionList()
+    },
+    getTotal(param){
+      const { columns, data } = param;
+      const sums = [];
+      columns.forEach((column, index) => {
+        if (index === 0) {
+          sums[index] = '合計';
+          return;
+        }
+        //const values = data.map(item => Number(item[column.property]));
+        const values = data.map(item => Number(item["maa17005"]));
+        if (column.property === 'num') {
+          sums[index] = values.reduce((prev, curr) => {
+            const value = Number(curr);
+            if (!isNaN(value)) {
+              return prev + curr;
+            } else {
+              return prev;
+            }
+          }, 0);
+          
+          sums[index];
+        } else {
+          sums[index] = '--';
+        }
+      });
+
+      return sums;
     },
     fetchData() {
       this.listLoading = true
       
-      getList(this.listQuery.maa00ID).then(response => {
+      getList(this.listQuery.dataPK,"I").then(response => {
         this.list = response.data.records
         this.listLoading = false
         this.total = response.data.total
         
       })
+      getList(this.listQuery.dataPK,"O").then(response => {
+        this.list2 = response.data.records
+        this.listLoading = false
+        this.total = response.data.total
+        
+      })
+    },
+    fetchOptionList(){
+      getMaa17006().then(response => {this.maa17006List = response.data})
     },
     back() {
       this.$router.go(-1)
@@ -80,18 +113,12 @@ export default {
     resetForm() {
       this.form = {
         id: '',
-        maa15002:this.projectID,
-        maa15003:'',
-        maa15004:'',
-        maa15005:'',
-        maa15006:'0',
-        maa15007:'',
-        maa15008:'',
-        maa15009:'0',
-        maa15010:'',
-        maa15011:'',
-        maa15012:'',
-        maa15013:'0'
+        maa17002:0,
+        maa17003:'',
+        maa17004:'',
+        maa17005:'',
+        maa17006:'',
+        maa17007:''
       }
       
     },
@@ -100,6 +127,7 @@ export default {
       this.formTitle = '新增'+this.titleTxt
       this.formVisible = true
       this.isAdd = true
+      
     },
     save() {
       var self = this
@@ -107,17 +135,13 @@ export default {
         if (valid) {
           save({
             id: self.form.id,
-            maa15002:this.listQuery.maa00ID,
-            maa15003:self.form.maa15003,
-            maa15004:self.form.maa15004,
-            maa15005:self.form.maa15005,
-            maa15006:self.form.maa15006,
-            maa15007:self.form.maa15007,
-            maa15008:self.form.maa15008,
-            maa15009:self.form.maa15009,
-            maa15010:self.form.maa15010,
-            maa15012:self.form.maa15012,
-            maa15013:'0'
+            maa17002:this.listQuery.dataPK,
+            maa17003:'O',
+            maa17004:self.form.maa17004,
+            maa17005:self.form.maa17005,
+            maa17006:self.form.maa17006,
+            maa17007:self.form.maa17007
+
           }).then(response => {
             //console.log(response)
             this.$message({
@@ -153,12 +177,14 @@ export default {
     remove() {
       if (this.checkSel() ) {
         var id = this.selRow.id
+        var maa17002 = this.selRow.maa17002// maa16PK
+        
         this.$confirm('確定刪除資料?', '提示', {
           confirmButtonText: '確定',
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          remove(id).then(response => {
+          remove(id, maa17002).then(response => {
             this.$message({
               message: '操作成功',
               type: 'success'
