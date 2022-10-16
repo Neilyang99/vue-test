@@ -34,8 +34,8 @@ export default {
   },
   methods: {
     init() {
-      this.vendorId = this.$route.params.vendorId
-      this.vendorName = this.$route.params.vendorName
+      this.vendorId = this.$route.query.vendorId
+      this.vendorName = this.$route.query.vendorName
       this.fetchData()
     },
     fetchData() {

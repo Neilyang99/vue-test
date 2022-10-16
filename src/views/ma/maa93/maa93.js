@@ -170,9 +170,9 @@ export default {
       })
     },
     setBudget(vendorId,vendorName) {
-      //this.$router.push({ path: '/outsourcing', query: { vendorId: vendorId, vendorName: vendorName }})
+      this.$router.push({ path: '/outsourcing', query: { vendorId: vendorId, vendorName: vendorName }})
       //outsourcing:外包合約
-      this.$router.push({ name: '外包合約', params: { vendorId: vendorId, vendorName: vendorName }})
+      //this.$router.push({ name: '外包合約', params: { vendorId: vendorId, vendorName: vendorName }})
     },
     checkSel() {
       if (this.selRow && this.selRow.id) {

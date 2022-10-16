@@ -36,10 +36,10 @@ export default {
   },
   methods: {
     init() {
-      this.vendorId = this.$route.params.vendorId
-      this.vendorName = this.$route.params.vendorName
-      this.prjId = this.$route.params.prjId
-      this.prjName = this.$route.params.prjName
+      this.vendorId = this.$route.query.vendorId
+      this.vendorName = this.$route.query.vendorName
+      this.prjId = this.$route.query.prjId
+      this.prjName = this.$route.query.prjName
       this.fetchData()
     },
     fetchData() {
