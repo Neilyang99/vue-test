@@ -2,20 +2,28 @@
   <div class="app-container">
     <div class="block">
       <el-row  :gutter="20">
-        <el-col :span="6">
-          <el-input v-model="listQuery.selMaa93004" size="mini" placeholder="請輸入外包商名稱"></el-input>
+        <el-col :span="6">請選擇 工程案 : 
+          <el-select v-model="listQuery.projectId" size="mini" placeholder="工程案名稱">
+            <el-option
+              v-for="item in projectList"
+              :key="item.maa00002"
+              :label="item.maa00004"
+              :value="item.id">
+            </el-option>
+          </el-select>
         </el-col>
         <el-col :span="6">
           <el-button type="success" size="mini" icon="el-icon-search" @click.native="search">{{ $t('button.search') }}</el-button>
-          <el-button type="primary" size="mini" icon="el-icon-refresh" @click.native="reset">{{ $t('button.reset') }}</el-button>
+          <!-- <el-button type="primary" size="mini" icon="el-icon-refresh" @click.native="reset">{{ $t('button.reset') }}</el-button>
+          -->  
         </el-col>
       </el-row>
       <br>
       <el-row>
         <el-col :span="24">
-          <el-button type="success" size="mini" icon="el-icon-plus" @click.native="add">{{ $t('button.add') }}</el-button>
-          <el-button type="primary" size="mini" icon="el-icon-edit" @click.native="edit">{{ $t('button.edit') }}</el-button>
-          <el-button type="danger" size="mini" icon="el-icon-delete" @click.native="remove">{{ $t('button.delete') }}</el-button>
+          <el-button type="primary" size="mini"  @click.native="invoiceList">廠商各期請款表</el-button>
+          <el-button type="primary" size="mini"  @click.native="invoiceList">放款期別明細表</el-button>
+          <el-button type="primary" size="mini"  @click.native="invoiceList">發票條件及代墊扣款</el-button>
         </el-col>
       </el-row>
     </div>
@@ -24,64 +32,47 @@
       @current-change="handleCurrentChange" style="width: 100%">
       <el-table-column label="統一編號" :min-width="66">
         <template slot-scope="scope">
-          {{scope.row.maa93011}}
-        </template>
-      </el-table-column>
-      <el-table-column label="包商編號">
-        <template slot-scope="scope">
-          {{scope.row.maa93003}}
+          {{scope.row.maa02022}}
         </template>
       </el-table-column>
       <el-table-column label="包商名稱">
         <template slot-scope="scope">
-          {{scope.row.maa93004}}
+          {{scope.row.maa02015}}
         </template>
       </el-table-column>
       <el-table-column label="連絡人">
         <template slot-scope="scope">
-          {{scope.row.maa93008}}
+          {{scope.row.maa02019}}
         </template>
       </el-table-column>
       <el-table-column label="連絡電話">
         <template slot-scope="scope">
-          {{scope.row.maa93009}}
+          {{scope.row.maa02020}}
         </template>
       </el-table-column>
-      <el-table-column label="通訊地址">
-        <template slot-scope="scope">
-          {{scope.row.maa93017}}
-        </template>
-      </el-table-column>
-      <!-- 
-      <el-table-column label="建檔日期" :min-width="65">
-        <template slot-scope="scope">
-          {{scope.row.createTime}}
-        </template>
-      </el-table-column>
-      -->
       <el-table-column label="開始放款日">
         <template slot-scope="scope">
-          {{scope.row.maa93081}}
+          {{scope.row.maa02084}}
         </template>
       </el-table-column>
       <el-table-column label="最後放款日">
         <template slot-scope="scope">
-          {{scope.row.maa93082}}
+          {{scope.row.maa02085}}
         </template>
       </el-table-column>
       <el-table-column label="尾款結清日">
         <template slot-scope="scope">
-          {{scope.row.maa93083}}
+          {{scope.row.maa02086}}
         </template>
       </el-table-column>
       <el-table-column label="保固金">
         <template slot-scope="scope">
-          {{scope.row.maa93086}}
+          {{scope.row.maa02089}}
         </template>
       </el-table-column>
       <el-table-column label="操作" >
         <template slot-scope="scope">
-        <el-button size="mini" @click.native="setBudget(scope.row.id,scope.row.maa93004)">設定承包項目</el-button>
+        <el-button size="mini" @click.native="setInvoice(scope.row.id,scope.row.maa02015)">工程請款單</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -93,95 +84,95 @@
       <el-form ref="form" :model="form" :rules="rules" label-width="130px">
         <el-row>
           <el-col :span="8">
-            <el-form-item label="統一編號" prop="maa93011">
-              <el-input v-model="form.maa93011" maxlength="20"></el-input>
+            <el-form-item label="統一編號" prop="maa02011">
+              <el-input v-model="form.maa02011" maxlength="20"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="8">
-            <el-form-item label="包商編號" prop="maa93003">
-              <el-input v-model="form.maa93003" maxlength="50"></el-input>
+            <el-form-item label="包商編號" prop="maa02003">
+              <el-input v-model="form.maa02003" maxlength="50"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="8">
-            <el-form-item label="包商名稱" prop="maa93004">
-              <el-input v-model="form.maa93004" maxlength="50"></el-input>
+            <el-form-item label="包商名稱" prop="maa02004">
+              <el-input v-model="form.maa02004" maxlength="50"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
           <el-col :span="8">
-            <el-form-item label="連絡人" prop="maa93008">
-              <el-input v-model="form.maa93008" maxlength="50"></el-input>
+            <el-form-item label="連絡人" prop="maa02008">
+              <el-input v-model="form.maa02008" maxlength="50"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="8">
-            <el-form-item label="連絡電話" prop="maa93009">
-              <el-input v-model="form.maa93009" maxlength="20"></el-input>
+            <el-form-item label="連絡電話" prop="maa02009">
+              <el-input v-model="form.maa02009" maxlength="20"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="8">
-            <el-form-item label="行動電話" prop="maa93010">
-              <el-input v-model="form.maa93010" maxlength="20"></el-input>
+            <el-form-item label="行動電話" prop="maa02010">
+              <el-input v-model="form.maa02010" maxlength="20"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
           <el-col :span="8">
-            <el-form-item label="負責人" prop="maa93005">
-              <el-input v-model="form.maa93005" maxlength="50"></el-input>
+            <el-form-item label="負責人" prop="maa02005">
+              <el-input v-model="form.maa02005" maxlength="50"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="8">
-            <el-form-item label="負責人電話" prop="maa93006">
-              <el-input v-model="form.maa93006" maxlength="20"></el-input>
+            <el-form-item label="負責人電話" prop="maa02006">
+              <el-input v-model="form.maa02006" maxlength="20"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="8">
-            <el-form-item label="負責人行動電話" prop="maa93007">
-              <el-input v-model="form.maa93007" maxlength="20"></el-input>
+            <el-form-item label="負責人行動電話" prop="maa02007">
+              <el-input v-model="form.maa02007" maxlength="20"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row> 
           <el-col :span="16">
-            <el-form-item label="公司地址" prop="maa93012">
-              <el-input v-model="form.maa93012" maxlength="200"></el-input>
+            <el-form-item label="公司地址" prop="maa02012">
+              <el-input v-model="form.maa02012" maxlength="200"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="8">
-            <el-form-item label="公司電話1" prop="maa93013">
-              <el-input v-model="form.maa93013" maxlength="20"></el-input>
+            <el-form-item label="公司電話1" prop="maa02013">
+              <el-input v-model="form.maa02013" maxlength="20"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row> 
           <el-col :span="16">
-            <el-form-item label="通訊地址" prop="maa93017">
-              <el-input v-model="form.maa93017" maxlength="200"></el-input>
+            <el-form-item label="通訊地址" prop="maa02017">
+              <el-input v-model="form.maa02017" maxlength="200"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="8">
-            <el-form-item label="公司電話2" prop="maa93014">
-              <el-input v-model="form.maa93014" maxlength="20"></el-input>
+            <el-form-item label="公司電話2" prop="maa02014">
+              <el-input v-model="form.maa02014" maxlength="20"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row> 
           <el-col :span="16">
-            <el-form-item label="發票地址" prop="maa93018">
-              <el-input v-model="form.maa93018" maxlength="200"></el-input>
+            <el-form-item label="發票地址" prop="maa02018">
+              <el-input v-model="form.maa02018" maxlength="200"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="8">
-            <el-form-item label="公司傳真" prop="maa93015">
-              <el-input v-model="form.maa93015" maxlength="20"></el-input>
+            <el-form-item label="公司傳真" prop="maa02015">
+              <el-input v-model="form.maa02015" maxlength="20"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row> 
           <el-col :span="24">
-            <el-form-item label="備註" prop="maa93089">
-              <el-input v-model="form.maa93089" maxlength="200"></el-input>
+            <el-form-item label="備註" prop="maa02089">
+              <el-input v-model="form.maa02089" maxlength="200"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
@@ -209,7 +200,7 @@
   </div>
 </template>
 
-<script src="./maa93.js"></script>
+<script src="./vendorInvoice.js"></script>
 
 
 <style rel="stylesheet/scss" lang="scss" scoped>

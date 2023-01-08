@@ -79,9 +79,11 @@ export default {
     maa15:'廠商代墊款紀錄',
     maa16:'零用金紀錄',                                                               
     maa17:'零用金明細紀錄',
+    maa31:'新增請款單',
     maa93:'外包商資料',
     outsourcing:'外包合約',
-    outsourcingItem:'承包項目'
+    outsourcingItem:'承包項目',
+    vendorInvoice:'工程請款單'
   },
   navbar: {
     logOut: '退出登錄',
