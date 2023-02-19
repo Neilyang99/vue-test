@@ -21,9 +21,9 @@
       <br>
       <el-row>
         <el-col :span="24">
-          <el-button type="primary" size="mini"  @click.native="invoiceList">廠商各期請款表</el-button>
-          <el-button type="primary" size="mini"  @click.native="invoiceList">放款期別明細表</el-button>
-          <el-button type="primary" size="mini"  @click.native="invoiceList">發票條件及代墊扣款</el-button>
+          <el-button type="primary" size="mini"  @click.native="paymentReport">各期請款表</el-button>
+          <el-button type="info" size="mini"  @click.native="costReport">成本分析表</el-button>
+          
         </el-col>
       </el-row>
     </div>

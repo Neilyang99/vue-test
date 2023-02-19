@@ -83,7 +83,8 @@ export default {
     maa93:'外包商資料',
     outsourcing:'外包合約',
     outsourcingItem:'承包項目',
-    vendorInvoice:'工程請款單'
+    vendorInvoice:'工程請款單',
+    paymentReport:'各期請款表'
   },
   navbar: {
     logOut: '退出登錄',

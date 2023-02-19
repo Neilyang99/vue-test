@@ -1,85 +1,53 @@
-import { remove, getList, save, projectList } from '@/api/ma/vendorInvoice'
+import { getPaymentReport } from '@/api/ma/paymentReport'
 
 export default {
   data() {
     return {
-      formVisible: false,
-      titleTxt:'外包商資料',
-      formTitle: '',
-      isAdd: true,
-      form: {
-        id: ''
-      
-        
-      },
-      rules: {
-   
-      },
+      projectID: '',
+      projectName: '',
       listQuery: {
         page: 1,
-        limit:20,
-        projectId: undefined
+        limit: 20,
+        maa00ID: undefined
       },
       total: 0,
       list: null,
       listLoading: true,
-      selRow: {}
+      selRow: {},
+      formVisible: false,
+      formTitle: '各期請款表',
+      isAdd: true,
+      form: {
+        id: '',
+        
+        
+      },
+      rules: {
+        
+      }
     }
-  },
-  filters: {
-
   },
   created() {
     this.init()
   },
   methods: {
     init() {
-      this.fetchProject()
-
+      this.listQuery.maa00ID = this.$route.query.maa00ID
+      this.projectName = this.$route.query.projectName
       this.fetchData()
-      
     },
     fetchData() {
       this.listLoading = true
-      getList(this.listQuery).then(response => {
-        this.list = response.data.records
+      
+      getPaymentReport(this.listQuery.maa00ID).then(response => {
+        this.list = response.data
         this.listLoading = false
         this.total = response.data.total
+        
       })
     },
-    fetchProject() {
-      projectList().then(response => {
-        this.projectList = response.data
-      })
-    },
-    search() {
-      this.listQuery.page = 1
-      this.fetchData()
-    },
-    reset() {
-      this.listQuery.projectId = ''
-      this.listQuery.page = 1
-      this.fetchData()
-    },
-    handleFilter() {
-      this.listQuery.page = 1
-      this.getList()
-    },
-    fetchNext() {
-      this.listQuery.page = this.listQuery.page + 1
-      this.fetchData()
-    },
-    fetchPrev() {
-      this.listQuery.page = this.listQuery.page - 1
-      this.fetchData()
-    },
-    fetchPage(page) {
-      this.listQuery.page = page
-      this.fetchData()
-    },
-    changeSize(limit) {
-      this.listQuery.limit = limit
-      this.fetchData()
+    back() {
+      this.$router.go(-1)
     },
     handleClose() {
 
@@ -89,13 +57,13 @@ export default {
     },
     resetForm() {
       this.form = {
-        id: ''
         
       }
+      
     },
     add() {
       this.resetForm()
-      this.formTitle = '新增'+this.titleTxt
+      this.formTitle = ''
       this.formVisible = true
       this.isAdd = true
     },
@@ -105,9 +73,8 @@ export default {
         if (valid) {
           save({
             
-            
           }).then(response => {
-            console.log(response)
+            //console.log(response)
             this.$message({
               message: '提交成功',
               type: 'success'
@@ -120,15 +87,6 @@ export default {
         }
       })
     },
-    paymentReport() {
-      if (this.checkSel()) {
-        this.$router.push({ path: '/paymentReport', query: { maa00ID: this.selRow.id, projectName: this.selRow.maa00004 }})
-      }
-
-    },
-    setInvoice(vendorId,vendorName) {
-      this.$router.push({ path: '/maa31', query: { vendorId: vendorId, vendorName: vendorName, prjId:'', prjName:'獨立大透天' }})
-    },
     checkSel() {
       if (this.selRow && this.selRow.id) {
         return true
@@ -140,15 +98,15 @@ export default {
       return false
     },
     edit() {
-      if (this.checkSel()) {
+      if (this.checkSel() ) {
         this.isAdd = false
         this.form = this.selRow
-        this.formTitle = '修改'+this.titleTxt
+        this.formTitle = ''
         this.formVisible = true
       }
     },
     remove() {
-      if (this.checkSel()) {
+      if (this.checkSel() ) {
         var id = this.selRow.id
         this.$confirm('確定刪除資料?', '提示', {
           confirmButtonText: '確定',
