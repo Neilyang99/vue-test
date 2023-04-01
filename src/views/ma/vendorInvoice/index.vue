@@ -22,6 +22,8 @@
       <el-row>
         <el-col :span="24">
           <el-button type="primary" size="mini"  @click.native="paymentReport">各期請款表</el-button>
+          <el-button type="primary" size="mini"  @click.native="paymentReport2">當期對帳表</el-button>
+          <el-button type="primary" size="mini"  @click.native="paymentReport3">單一廠商請款表</el-button>
           <el-button type="info" size="mini"  @click.native="costReport">成本分析表</el-button>
           
         </el-col>

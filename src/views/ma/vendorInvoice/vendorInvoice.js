@@ -120,9 +120,21 @@ export default {
         }
       })
     },
-    paymentReport() {
+    paymentReport() {//各期請款表
       if (this.checkSel()) {
-        this.$router.push({ path: '/paymentReport', query: { maa00ID: this.selRow.id, projectName: this.selRow.maa00004 }})
+        this.$router.push({ path: '/paymentReport', query: { maa00ID: this.selRow.id, projectName: '獨立大透天' }})
+      }
+
+    },
+    paymentReport2() {//當期所有廠商對帳表
+      if (this.checkSel()) {
+        this.$router.push({ path: '/paymentMonthly', query: { maa00ID: this.selRow.id, projectName: '獨立大透天' }})
+      }
+
+    },
+    paymentReport3() {//單一廠商請款表
+      if (this.checkSel()) {
+        this.$router.push({ path: '/paymentVendor', query: { maa00ID: this.selRow.id, projectName: '獨立大透天' }})
       }
 
     },

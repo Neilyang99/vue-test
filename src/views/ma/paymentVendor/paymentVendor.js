@@ -1,4 +1,4 @@
-import { getPaymentReport } from '@/api/ma/paymentReport'
+import { getPaymentVendor, getVendorList} from '@/api/ma/paymentReport'
 
 export default {
   data() {
@@ -10,6 +10,7 @@ export default {
         limit: 20,
         maa00ID: undefined
       },
+      vendorList:[],
       total: 0,
       list: null,
       listLoading: true,
@@ -22,8 +23,7 @@ export default {
         
         
       },
-      //gridTitle:['第1期','第2期','第3期','第4期','第5期','第6期'],
-      gridTitle:[1,2,3,4,5,6],
+      
       rules: {
         
       }
@@ -36,17 +36,28 @@ export default {
     init() {
       this.listQuery.maa00ID = this.$route.query.maa00ID
       this.projectName = this.$route.query.projectName
+
+      this.fetchVendor()
       this.fetchData()
     },
     fetchData() {
       this.listLoading = true
       
-      getPaymentReport(this.listQuery.maa00ID).then(response => {
+      getPaymentVendor(this.listQuery.maa00ID,0).then(response => {
         this.list = response.data
         this.listLoading = false
         this.total = response.data.total
         
       })
+    },
+    fetchVendor() {
+      getVendorList().then(response => {
+        this.vendorList = response.data
+      })
+    },
+    search() {
+      this.listQuery.page = 1
+      this.fetchData()
     },
     back() {
       this.$router.go(-1)
@@ -64,25 +75,11 @@ export default {
       
     },
     spanLogicMethod({row, column, rowIndex, columnIndex}) {
-      if(columnIndex === 0 || columnIndex === 1){
-        if(rowIndex % 5 === 0){
-          return {
-            rowspan: 5,
-            colspan: 1
-          };
-        }else{
-          return {
-            rowspan: 0,
-            colspan: 0
-          };
-        }
-      }
+      
     },
     tableRowClassName({row, rowIndex}) {
-      if(rowIndex %5 === 0){
+      if(rowIndex %2 === 0){
         return 'success-row';
-      }else if(rowIndex %5 === 3){
-        return 'warning-row';
       }
       return '';
     },

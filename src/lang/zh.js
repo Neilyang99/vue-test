@@ -84,7 +84,9 @@ export default {
     outsourcing:'外包合約',
     outsourcingItem:'承包項目',
     vendorInvoice:'工程請款單',
-    paymentReport:'各期請款表'
+    paymentReport:'各期請款表',
+    paymentVendor:'廠商請款表',
+    paymentMonthly:'當期對帳表'
   },
   navbar: {
     logOut: '退出登錄',
