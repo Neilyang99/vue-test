@@ -1,48 +1,58 @@
-import { remove, getList, save, selectBudget } from '@/api/ma/maa01'
+import { remove, getList, getListByPrjLv2, save, selectItemByLv2 } from '@/api/ma/maa01a'
 
 export default {
   data() {
     return {
       prjId: '',
       prjName: '',
-      pk1: 0,
-      name1: '',
-      name2: '',
+      level1Id:0,
+      level2Id:0,
+      lv1Name: '',
+      lv2Name: '',
       formVisible: false,
-      formTitle: '新增總工程預算',
+      formTitle: '工程預算項目編訂',
       isAdd: true,
       form: {
         id: '',
-        maa01002: 0,
-        maa01003: 0,
-        maa01004: '',
-        maa01005: '',
-        maa01006: '',
-        maa01007: '',
-        maa01008: '',
-        maa01009: '',
-        maa01010: '',
-        maa01011: '',
-        maa01012: 0,
-        maa01013: 0,
-        maa01014: 0,
-        maa01015: 0,
-        maa01016: 0,
-        maa01017: 10,
-        maa01018: '',
-        maa01019: ''
+        maa01a002: 0,
+        maa01a003: 0,
+        maa01a004: 0,
+        maa01a005: 0,
+        maa01a006: 0,
+        maa01a007: '',
+        maa01a008: '',
+        maa01a009: '',
+        maa01a010: '',
+        maa01a011: '',
+        maa01a012: '',
+        maa01a013: '',
+        maa01a014: '',
+        maa01a015: 0,
+        maa01a016: 0,
+        maa01a017: 0,
+        maa01a018: '',
+        maa01a019: '',
+        name1:'',
+        name2:'',
+        name3:'',
+        pk1:0,
+        pk2:0,
+        pk3:0
       },
       budgetList:[],
       rules: {
-        
-        maa01012: [
-          { required: true, message: '請輸入工程預算金額', trigger: 'blur' }
+        maa01a015: [
+          { required: true, message: '請輸入數量', trigger: 'blur' }
+        ],
+        maa01a016: [
+          { required: true, message: '請輸入單價', trigger: 'blur' }
         ]
       },
       listQuery: {
         page: 1,
         limit:20,
-        prjId: undefined
+        projectId: undefined,
+        lv2:0
       },
       total: 0,
       list: null,
@@ -60,20 +70,25 @@ export default {
     init() {
       this.prjId = this.$route.query.prjId
       this.prjName = this.$route.query.prjName
-      this.listQuery.prjId = this.prjId
+      this.level1Id = this.$route.query.level1Id
+      this.level2Id = this.$route.query.level2Id
+      this.lv1Name = this.$route.query.lv1Name
+      this.lv2Name = this.$route.query.lv2Name
+      this.listQuery.projectId = this.prjId
+      this.listQuery.lv2 = this.level2Id
       this.fetchData()
       this.fetchBudgetItem()
     },
     fetchData() {
       this.listLoading = true
-      getList(this.listQuery).then(response => {
-        this.list = response.data.records
+      getListByPrjLv2(this.listQuery).then(response => {
+        this.list = response.data
         this.listLoading = false
         this.total = response.data.total
       })
     },
     fetchBudgetItem() {
-      selectBudget().then(response => {
+      selectItemByLv2(this.level2Id).then(response => {
         this.budgetList = response.data
       })
     },
@@ -118,32 +133,35 @@ export default {
     resetForm() {
       this.form = {
         id: '',
-        maa01002: 0,
-        maa01003: 0,
-        maa01004: '',
-        maa01005: '',
-        maa01006: '',
-        maa01007: '',
-        maa01008: '',
-        maa01009: '',
-        maa01010: '',
-        maa01011: '',
-        maa01012: 0,
-        maa01013: 0,
-        maa01014: 0,
-        maa01015: 0,
-        maa01016: 0,
-        maa01017: 10,
-        maa01018: '',
-        maa01019: '',
-        pk1: 0,
-        name1: '',
-        name2: '',
+        maa01a002: 0,
+        maa01a003: 0,
+        maa01a004: 0,
+        maa01a005: 0,
+        maa01a006: 0,
+        maa01a007: '',
+        maa01a008: '',
+        maa01a009: '',
+        maa01a010: '',
+        maa01a011: '',
+        maa01a012: '',
+        maa01a013: '',
+        maa01a014: '',
+        maa01a015: 0,
+        maa01a016: 0,
+        maa01a017: 0,
+        maa01a018: '',
+        maa01a019: '',
+        name1:'',
+        name2:'',
+        name3:'',
+        pk1:0,
+        pk2:0,
+        pk3:0
       }
     },
     add() {
       this.resetForm()
-      this.formTitle = '新增工程預算金額'
+      this.formTitle = '新增工程預算項目'
       this.formVisible = true
       this.isAdd = true
     },
@@ -155,24 +173,24 @@ export default {
           this.getSelectLable()
           save({
             id: self.form.id,
-            maa01002: this.prjId,
-            maa01003: this.pk1,
-            maa01004: self.form.maa01004,
-            maa01005: '',
-            maa01006: '',
-            maa01007: '',
-            maa01008: '',
-            maa01009: '',
-            maa01010: this.name1,
-            maa01011: this.name2,
-            maa01012: self.form.maa01012,
-            maa01013: 0,
-            maa01014: 0,
-            maa01015: 0,
-            maa01016: 0,
-            maa01017: self.form.maa01017,
-            maa01018: 'Y',
-            maa01019: ''
+            maa01a002: this.prjId,
+            maa01a003: this.level1Id,
+            maa01a004: this.level2Id,
+            maa01a005: self.form.maa01a005,
+            maa01a006: self.form.maa01a006,
+            maa01a007: '',
+            maa01a008: '',
+            maa01a009: '',
+            maa01a010: this.lv1Name,
+            maa01a011: this.lv2Name,
+            maa01a012: '',
+            maa01a013: this.name3,
+            maa01a014: self.form.maa01a014,
+            maa01a015: self.form.maa01a015,
+            maa01a016: self.form.maa01a016,
+            maa01a017: self.form.maa01a015*self.form.maa01a016,
+            maa01a018: '',
+            maa01a019: ''
             
           }).then(response => {
             console.log(response)
@@ -190,23 +208,15 @@ export default {
     },
     getSelectLable(){
       this.budgetList.forEach(item =>{
-        if(item.secId === this.form.maa01004){
+        if(item.itemId === this.form.maa01a005){
           this.name1 = item.firstName
           this.name2 = item.secName
+          this.name3 = item.itemName
           this.pk1 = item.firstId
+          this.pk2 = item.secId
+          this.pk3 = item.itemId
         }
       })
-    },
-    setBudget(level1Id,level2Id,lv1Name,lv2Name) {
-      this.$router.push({ path: '/maa01a', 
-        query: { 
-          prjId: this.prjId, 
-          prjName: this.prjName, 
-          level1Id: level1Id, 
-          level2Id: level2Id,
-          lv1Name: lv1Name,
-          lv2Name: lv2Name
-        }})
     },
     checkSel() {
       if (this.selRow && this.selRow.id) {
@@ -222,7 +232,7 @@ export default {
       if (this.checkSel()) {
         this.isAdd = false
         this.form = this.selRow
-        this.formTitle = '修改工程預算金額'
+        this.formTitle = '修改工程預算項目'
         this.formVisible = true
       }
     },
