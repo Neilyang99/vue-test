@@ -85,7 +85,7 @@
         <el-row>   
           <el-col :span="16">
             <el-form-item label="預算金額" prop="maa01012">
-              <el-input v-model="form.maa01012" ></el-input>
+              {{ form.maa01012 }}
             </el-form-item>
           </el-col>
         </el-row>

@@ -45,12 +45,13 @@ export function save(params) {
   })
 }
 
-export function remove(id) {
+export function remove(id,lv2Id) {
   return request({
     url: '/maa01a',
     method: 'delete',
     params: {
-      id: id
+      id: id,
+      lv2Id: lv2Id
     }
   })
 }

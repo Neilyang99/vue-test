@@ -244,7 +244,7 @@ export default {
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          remove(id).then(response => {
+          remove(id,this.selRow.maa01a004).then(response => {
             this.$message({
               message: '操作成功',
               type: 'success'
