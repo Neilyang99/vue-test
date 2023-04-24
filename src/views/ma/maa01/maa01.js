@@ -1,5 +1,5 @@
-import { remove, getList, save, selectBudget } from '@/api/ma/maa01'
-
+import { remove, getList, save, selectBudget, exportXls } from '@/api/ma/maa01'
+import { getApiUrl } from '@/utils/utils'
 export default {
   data() {
     return {
@@ -207,6 +207,12 @@ export default {
           lv1Name: lv1Name,
           lv2Name: lv2Name
         }})
+    },
+    exportXls() {
+      exportXls(this.listQuery).then(response => {
+        window.location.href= getApiUrl() + '/file/download?idFile='+response.data.id
+      })
+
     },
     checkSel() {
       if (this.selRow && this.selRow.id) {

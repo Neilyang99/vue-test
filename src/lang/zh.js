@@ -80,6 +80,7 @@ export default {
     maa15:'廠商代墊款紀錄',
     maa16:'零用金紀錄',                                                               
     maa17:'零用金明細紀錄',
+    maa21:'承包合約維護',
     maa31:'新增請款單',
     maa93:'外包商資料',
     outsourcing:'外包合約',

@@ -1,60 +1,68 @@
 <template>
   <div class="app-container">
-    <el-row>
-      <el-col :span="24">
-        <el-button icon="el-icon-back" size="mini" @click.native="back">{{ $t('button.back') }}</el-button>
-      </el-col>
-    </el-row>
-    <br>
     <div class="block">
+      <el-row  :gutter="20">
+        <el-col :span="6">
+          <el-input v-model="listQuery.selmaa21003" size="mini" placeholder="請挑選工程案"></el-input>
+        </el-col>
+        <el-col :span="6">
+          <el-input v-model="listQuery.selmaa21004" size="mini" placeholder="請挑選承包商"></el-input>
+        </el-col>
+        <el-col :span="6">
+          <el-input v-model="listQuery.selmaa21002" size="mini" placeholder="請輸入合約編號"></el-input>
+        </el-col>
+        <el-col :span="6">
+          <el-button type="success" size="mini" icon="el-icon-search" @click.native="search">{{ $t('button.search') }}</el-button>
+          <el-button type="primary" size="mini" icon="el-icon-refresh" @click.native="reset">{{ $t('button.reset') }}</el-button>
+        </el-col>
+      </el-row>
+      <br>
       <el-row>
         <el-col :span="24">
           <el-button type="success" size="mini" icon="el-icon-plus" @click.native="add">{{ $t('button.add') }}</el-button>
           <el-button type="primary" size="mini" icon="el-icon-edit" @click.native="edit">{{ $t('button.edit') }}</el-button>
           <el-button type="danger" size="mini" icon="el-icon-delete" @click.native="remove">{{ $t('button.delete') }}</el-button>
-          <el-button type="info" size="mini" icon="el-icon-document" @click.native="exportXls">{{ $t('button.export') }}</el-button>
         </el-col>
       </el-row>
     </div>
 
     <el-table :data="list" v-loading="listLoading" element-loading-text="Loading" border fit highlight-current-row
       @current-change="handleCurrentChange">
-      <el-table-column label="工程案">
-        <template >
-          {{prjName}}
+      <el-table-column label="合約編號">
+        <template slot-scope="scope">
+          {{scope.row.maa21002}}
         </template>
       </el-table-column>
-      <el-table-column label="大類別名稱">
+      <el-table-column label="承包商">
         <template slot-scope="scope">
-          {{scope.row.maa01010}}
+          {{scope.row.maa21004Name}}
         </template>
       </el-table-column>
-      <el-table-column label="小類別名稱">
+      <el-table-column label="版本">
         <template slot-scope="scope">
-          {{scope.row.maa01011}}
+          {{scope.row.maa21004}}
         </template>
       </el-table-column>
-      <el-table-column label="預算金額">
+      <el-table-column label="合約日期">
         <template slot-scope="scope">
-          {{scope.row.maa01012}}
+          {{scope.row.maa21006}}
         </template>
       </el-table-column>
-      <el-table-column label="排序">
+      <el-table-column label="合約金額">
         <template slot-scope="scope">
-          {{scope.row.maa01017}}
+          {{scope.row.maa21015}}
         </template>
       </el-table-column>
-      <el-table-column label="啟用">
+      <el-table-column label="合約狀態">
         <template slot-scope="scope">
-          {{scope.row.maa01018}}
+          {{scope.row.maa21020}}
         </template>
       </el-table-column>
       <el-table-column label="操作" width="200">
         <template slot-scope="scope">
-        <el-button icon="el-icon-log" size="mini" @click.native="setBudget(scope.row.maa01003,scope.row.maa01004,scope.row.maa01010,scope.row.maa01011)">預算細項</el-button>
+        <el-button icon="el-icon-log" size="mini" @click.native="view2nd(scope.row.id,scope.row.maa21003)">設定預算小類別</el-button>
         </template>
       </el-table-column>
-      
     </el-table>
 
     <el-dialog
@@ -64,36 +72,22 @@
       <el-form ref="form" :model="form" :rules="rules" label-width="120px">
         <el-row>
           <el-col :span="16">
-            <el-form-item label="工程案: ">
-              <label>{{prjName}}</label>
-            </el-form-item>
-          </el-col>
-        </el-row>
-        <el-row>
-          <el-col :span="16">
-            <el-form-item label="預算類別"  >
-              <el-select  v-model="form.maa01004" filterable placeholder="請選擇">
-                <el-option
-                  v-for="item in budgetList"
-                  :key="item.secId"
-                  :label="item.secName"
-                  :value="item.secId">
-                </el-option>
-              </el-select>
+            <el-form-item label="類別代號" prop="maa21002">
+              <el-input v-model="form.maa21002" maxlength="20"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>   
           <el-col :span="16">
-            <el-form-item label="預算金額" prop="maa01012">
-              {{ form.maa01012 }}
+            <el-form-item label="類別名稱" prop="maa21003">
+              <el-input v-model="form.maa21003" maxlength="50"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row> 
           <el-col :span="16">
-            <el-form-item label="排序" prop="maa01017">
-              <el-input v-model="form.maa01017"></el-input>
+            <el-form-item label="排序" prop="maa21004">
+              <el-input v-model="form.maa21004"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
@@ -121,7 +115,7 @@
   </div>
 </template>
 
-<script src="./maa01.js"></script>
+<script src="./maa21.js"></script>
 
 
 <style rel="stylesheet/scss" lang="scss" scoped>
