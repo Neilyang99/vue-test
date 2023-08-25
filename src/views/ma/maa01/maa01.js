@@ -213,6 +213,7 @@ export default {
         window.location.href= getApiUrl() + '/file/download?idFile='+response.data.id
       })
 
+
     },
     checkSel() {
       if (this.selRow && this.selRow.id) {
