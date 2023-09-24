@@ -1,4 +1,4 @@
-import { remove, getList, save } from '@/api/ma/maa00'
+import { remove, getList, save, inertByNewProject } from '@/api/ma/maa00'
 
 export default {
   data() {
@@ -219,6 +219,17 @@ export default {
           return false
         }
       })
+    },
+    addByNewProject(){
+      if (this.checkSel()) {
+        inertByNewProject(this.selRow.id).then(response => {
+          console.log(response)
+          this.$message({
+            message: response.data,
+            type: 'success'
+          })
+        })
+      }
     },
     setBudget(prjId,prjName) {
       this.$router.push({ path: '/maa01', query: { prjId: prjId, prjName: prjName }})

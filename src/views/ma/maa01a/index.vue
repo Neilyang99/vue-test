@@ -107,7 +107,7 @@
         </el-row>
         <el-row>   
           <el-col :span="8">
-            <el-form-item label="數量" prop="maa01a015">
+            <el-form-item label="數量" prop="maa01a015" >
               <el-input v-model="form.maa01a015" ></el-input>
             </el-form-item>
           </el-col>
@@ -117,8 +117,8 @@
             </el-form-item>
           </el-col>
           <el-col :span="8">
-            <el-form-item label="複價" >
-              {{form.maa01a015*form.maa01a016}}
+            <el-form-item label="複價" prop="maa01a017">
+              {{Math.round(form.maa01a015*form.maa01a016)}}
             </el-form-item>
           </el-col>
         </el-row>

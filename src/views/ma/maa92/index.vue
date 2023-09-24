@@ -1,11 +1,13 @@
 <template>
   <div class="app-container">
+    <!-- 
     <el-row>
       <el-col :span="24">
         <el-button icon="el-icon-back" size="mini" @click.native="back">{{ $t('button.back') }}</el-button>
       </el-col>
     </el-row>
     <br>
+    -->
     <div class="block">
       <el-row  :gutter="20">
         <el-col :span="6">
@@ -27,7 +29,7 @@
     </div>
 
     <el-table :data="list" v-loading="listLoading" element-loading-text="Loading" border fit highlight-current-row
-      @current-change="handleCurrentChange">
+      @current-change="handleCurrentChange" style="width: 100%" :header-cell-style="{textAlign: 'center'}">
       <el-table-column label="大類別">
         <template >
           {{firstTypeName}}
@@ -43,22 +45,32 @@
           {{scope.row.maa92006}}
         </template>
       </el-table-column>
-      <el-table-column label="項目名稱">
+      <el-table-column :min-width="200" label="項目名稱">
         <template slot-scope="scope">
           {{scope.row.maa92007}}
         </template>
       </el-table-column>
-      <el-table-column label="單位">
+      <el-table-column :min-width="40"  label="單位">
         <template slot-scope="scope">
           {{scope.row.maa92008}}
         </template>
       </el-table-column>
-      <el-table-column label="排序">
+      <el-table-column label="數量">
+        <template slot-scope="scope">
+          {{scope.row.maa92009}}
+        </template>
+      </el-table-column>
+      <el-table-column label="單價">
+        <template slot-scope="scope">
+          {{scope.row.maa92010}}
+        </template>
+      </el-table-column>
+      <el-table-column :min-width="40" label="排序">
         <template slot-scope="scope">
           {{scope.row.maa92012}}
         </template>
       </el-table-column>
-      <el-table-column label="啟用">
+      <el-table-column :min-width="30" label="啟用">
         <template slot-scope="scope">
           {{scope.row.maa92013}}
         </template>

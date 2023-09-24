@@ -42,10 +42,12 @@ export default {
       budgetList:[],
       rules: {
         maa01a015: [
-          { required: true, message: '請輸入數量', trigger: 'blur' }
+          { required: true, message: '請輸入數量，限2位小數', trigger: 'blur' },
+          {pattern:/^\d{1,8}(\.\d{1,2})?$/, message: '數量，限整數8位與小數2位'}
         ],
         maa01a016: [
-          { required: true, message: '請輸入單價', trigger: 'blur' }
+          { required: true, message: '請輸入單價，限2位小數', trigger: 'blur' },
+          {pattern:/^\d{1,8}(\.\d{1,2})?$/, message: '單價，限整數8位與小數2位'}
         ]
       },
       listQuery: {
@@ -75,6 +77,7 @@ export default {
       this.lv1Name = this.$route.query.lv1Name
       this.lv2Name = this.$route.query.lv2Name
       this.listQuery.projectId = this.prjId
+      this.listQuery.lv1 = this.level1Id
       this.listQuery.lv2 = this.level2Id
       this.fetchData()
       this.fetchBudgetItem()
@@ -188,7 +191,7 @@ export default {
             maa01a014: self.form.maa01a014,
             maa01a015: self.form.maa01a015,
             maa01a016: self.form.maa01a016,
-            maa01a017: self.form.maa01a015*self.form.maa01a016,
+            maa01a017: Math.round(self.form.maa01a015*self.form.maa01a016),
             maa01a018: '',
             maa01a019: ''
             
@@ -244,7 +247,7 @@ export default {
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          remove(id,this.selRow.maa01a004).then(response => {
+          remove(id,this.selRow.maa01a002,this.selRow.maa01a004).then(response => {
             this.$message({
               message: '操作成功',
               type: 'success'

@@ -26,3 +26,13 @@ export function remove(id) {
     }
   })
 }
+
+export function inertByNewProject(projectId) {
+  return request({
+    url: '/maa01a/inertByNewProject',
+    method: 'get',
+    params:{
+      projectId: projectId
+    }
+  })
+}

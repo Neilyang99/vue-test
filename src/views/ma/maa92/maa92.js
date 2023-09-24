@@ -32,6 +32,12 @@ export default {
         ],
         maa92007: [
           { required: true, message: '請輸入工程預算項目名稱', trigger: 'blur' }
+        ],
+        maa92009: [
+          {pattern:/^\d{1,8}(\.\d{1,2})?$/, message: '數量，限整數8位與小數2位'}
+        ],
+        maa92010: [
+          {pattern:/^\d{1,8}(\.\d{1,2})?$/, message: '單價，限整數8位與小數2位'}
         ]
       },
       listQuery: {
