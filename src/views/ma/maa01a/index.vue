@@ -136,6 +136,13 @@
             </el-form-item>
           </el-col>
         </el-row>
+        <el-row> 
+          <el-col :span="24">
+            <el-form-item label="備註" prop="maa01a018">
+              <el-input v-model="form.maa01a018" oninput="if(value.length>200)value=value.slice(0,200)"></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
         <el-form-item>
           <el-button type="primary" @click="save">{{ $t('button.submit') }}</el-button>
           <el-button @click.native="formVisible = false">{{ $t('button.cancel') }}</el-button>

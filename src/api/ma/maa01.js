@@ -35,10 +35,3 @@ export function selectBudget(params) {
   })
 }
 
-export function exportXls(params) {
-  return request({
-    url: '/maa01a/export',
-    method: 'get',
-    params
-  })
-}

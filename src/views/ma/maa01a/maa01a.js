@@ -192,7 +192,7 @@ export default {
             maa01a015: self.form.maa01a015,
             maa01a016: self.form.maa01a016,
             maa01a017: Math.round(self.form.maa01a015*self.form.maa01a016),
-            maa01a018: '',
+            maa01a018: self.form.maa01a018,
             maa01a019: ''
             
           }).then(response => {

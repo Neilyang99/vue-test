@@ -1,4 +1,5 @@
 import { remove, getList, save, inertByNewProject } from '@/api/ma/maa00'
+import { exportXls } from '@/api/ma/maa01a'
 
 export default {
   data() {
@@ -61,7 +62,8 @@ export default {
       total: 0,
       list: null,
       listLoading: true,
-      selRow: {}
+      selRow: {},
+      xlsData: null
     }
   },
   filters: {
@@ -230,6 +232,37 @@ export default {
           })
         })
       }
+    },
+    export2Xls(){
+      if (this.checkSel()) {
+        
+        import('@/vendor/Export2Excel').then(excel=>{
+          const title = ["工程案","大類別","小類別","項目","單位","數量","單價","複價","備註"]
+          const filterVal = ['maa01a009','maa01a010', 'maa01a011','maa01a013','maa01a014','maa01a015','maa01a016','maa01a017','maa01a018']
+          //const listData=[{"AA":"a01","Age":"18","Sex":"F"},{"AA":"a02","Age":"55","Sex":"M"}]
+          exportXls(this.selRow.id).then(response => {
+            this.xlsData = response.data
+            let data1 = this.formatJson(filterVal, this.xlsData)
+            excel.export_json_to_excel({
+              header: title,
+              data: data1, 
+              filename: '預算項目',
+              autoWidth: true,
+              bookType: 'xlsx'
+            })
+          
+          })
+        })
+      }
+    },
+    formatJson(filterVal, jsonData) {
+      return jsonData.map(v => filterVal.map(j => {
+        //if (j === 'timestamp') {
+        //  return parseTime(v[j])
+        //} else {
+          return v[j]
+        //}
+      }))
     },
     setBudget(prjId,prjName) {
       this.$router.push({ path: '/maa01', query: { prjId: prjId, prjName: prjName }})

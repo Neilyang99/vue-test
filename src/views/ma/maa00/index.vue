@@ -17,6 +17,7 @@
           <el-button type="primary" size="mini" icon="el-icon-edit" @click.native="edit">{{ $t('button.edit') }}</el-button>
           <el-button type="danger" size="mini" icon="el-icon-delete" @click.native="remove">{{ $t('button.delete') }}</el-button>
           <el-button type="primary" size="mini" icon="el-icon-crop" @click.native="addByNewProject">整批產生預算項目</el-button>
+          <el-button type="primary" size="mini" icon="el-icon-document" @click.native="export2Xls">預算項目匯出</el-button>
         </el-col>
       </el-row>
     </div>

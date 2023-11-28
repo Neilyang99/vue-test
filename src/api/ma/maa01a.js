@@ -57,3 +57,13 @@ export function remove(id,projectId,lv2Id) {
   })
 }
 
+export function exportXls(projectId) {
+  return request({
+    url: '/maa01a/export',
+    method: 'get',
+    params:{
+      prjId: projectId
+    }
+  })
+}
+
