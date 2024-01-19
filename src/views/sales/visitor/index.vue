@@ -67,6 +67,13 @@
           {{scope.row.sla10004Name}}
         </template>
       </el-table-column>
+<!-- 
+      <el-table-column label="資料維護者">
+        <template slot-scope="scope">
+          {{scope.row.modifyName}}
+        </template>
+      </el-table-column>
+-->      
       <el-table-column label="操作" width="200">
         <template slot-scope="scope">
         <el-button icon="el-icon-log" size="mini" @click.native="viewLog(scope.row.id,scope.row.sla10002)">查看訪談紀錄</el-button>
