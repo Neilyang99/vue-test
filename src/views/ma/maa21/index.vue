@@ -6,7 +6,7 @@
           <el-input v-model="listQuery.selmaa21003" size="mini" placeholder="請挑選工程案"></el-input>
         </el-col>
         <el-col :span="6">
-          <el-input v-model="listQuery.selmaa21004" size="mini" placeholder="請挑選承包商"></el-input>
+          <el-input v-model="listQuery.selmaa21004" size="mini" placeholder="請挑選請款公司"></el-input>
         </el-col>
         <el-col :span="6">
           <el-input v-model="listQuery.selmaa21002" size="mini" placeholder="請輸入合約編號"></el-input>
@@ -33,7 +33,7 @@
           {{scope.row.maa21002}}
         </template>
       </el-table-column>
-      <el-table-column label="承包商">
+      <el-table-column label="請款公司">
         <template slot-scope="scope">
           {{scope.row.maa21004Name}}
         </template>
@@ -74,6 +74,7 @@
           <el-col :span="16">
             <el-form-item label="類別代號" prop="maa21002">
               <el-input v-model="form.maa21002" maxlength="20"></el-input>
+              <el-button type="success" size="mini" icon="el-icon-plus" @click.native="selVendor">請款公司</el-button>
             </el-form-item>
           </el-col>
         </el-row>
@@ -98,6 +99,14 @@
         </el-form-item>
 
       </el-form>
+    </el-dialog>
+
+    <el-dialog
+      :title="Test"
+      :visible.sync="formTest"
+      width="26%">
+      <div>This is Test</div>
+      <el-button type="success" size="mini" icon="el-icon-plus" @click.native="formTest = false">XXX公司</el-button>
     </el-dialog>
 
     <el-pagination 

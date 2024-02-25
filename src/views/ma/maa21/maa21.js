@@ -1,31 +1,35 @@
-import { remove, getList, save } from '@/api/ma/maa90'
+import { remove, getList, save } from '@/api/ma/maa21'
 
 export default {
   data() {
     return {
       formVisible: false,
-      formTitle: '新增工程預算大類別',
+      formTest: false,
+      titleTxt: '工程合約',
       isAdd: true,
       form: {
         id: '',
-        maa90002: '',
-        maa90003: '',
-        maa90004: 10,
-        maa90005: 'Y',
-        maa90006: ''
+        maa21002: '',
+        maa21003: '',
+        maa21004: 10,
+        maa21005: 'Y',
+        maa21006: ''
       },
       rules: {
-        maa90002: [
-          { required: true, message: '請輸入工程預算大類別代號', trigger: 'blur' }
+        maa21003: [
+          { required: true, message: '請輸入工程案', trigger: 'blur' }
         ],
-        maa90003: [
-          { required: true, message: '請輸入工程預算大類別名稱', trigger: 'blur' }
+        maa21004: [
+          { required: true, message: '請輸入請款公司', trigger: 'blur' }
+        ],
+        maa21005: [
+          { required: true, message: '請輸入付款公司', trigger: 'blur' }
         ]
       },
       listQuery: {
         page: 1,
         limit:20,
-        selMaa90003: undefined
+        selMaa21003: undefined
       },
       total: 0,
       list: null,
@@ -56,7 +60,7 @@ export default {
       this.fetchData()
     },
     reset() {
-      this.listQuery.selMaa90003 = ''
+      this.listQuery.selMaa21003 = ''
       this.listQuery.page = 1
       this.fetchData()
     },
@@ -86,19 +90,23 @@ export default {
     handleCurrentChange(currentRow, oldCurrentRow) {
       this.selRow = currentRow
     },
+    selVendor(){
+      this.formTest = true;
+    },
+
     resetForm() {
       this.form = {
         id: '',
-        maa90002: '',
-        maa90003: '',
-        maa90004: 10,
-        maa90005: 'Y',
-        maa90006: ''
+        maa21002: '',
+        maa21003: '',
+        maa21004: 10,
+        maa21005: 'Y',
+        maa21006: ''
       }
     },
     add() {
       this.resetForm()
-      this.formTitle = '新增工程預算大類別'
+      this.formTitle = '新增'+this.titleTxt
       this.formVisible = true
       this.isAdd = true
     },
@@ -108,11 +116,11 @@ export default {
         if (valid) {
           save({
             id: self.form.id,
-            maa90002: self.form.maa90002,
-            maa90003: self.form.maa90003,
-            maa90004: self.form.maa90004,
-            maa90005: 'Y',
-            maa90006: ''
+            maa21002: self.form.maa21002,
+            maa21003: self.form.maa21003,
+            maa21004: self.form.maa21004,
+            maa21005: 'Y',
+            maa21006: ''
             
             
           }).then(response => {
@@ -130,7 +138,7 @@ export default {
       })
     },
     view2nd(typeId,name) {
-      this.$router.push({ path: '/maa91', query: { typeId: typeId, name: name }})
+      
     },
     checkSel() {
       if (this.selRow && this.selRow.id) {
@@ -146,7 +154,7 @@ export default {
       if (this.checkSel()) {
         this.isAdd = false
         this.form = this.selRow
-        this.formTitle = '修改工程預算大類別'
+        this.formTitle = '修改'+this.titleTxt
         this.formVisible = true
       }
     },
