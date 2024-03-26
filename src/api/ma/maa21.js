@@ -26,3 +26,10 @@ export function remove(id) {
     }
   })
 }
+
+export function projectList() {
+  return request({
+    url: '/maa00/selectList',
+    method: 'get'
+  })
+}
