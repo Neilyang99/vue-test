@@ -60,7 +60,7 @@
       </el-table-column>
       <el-table-column label="保固金額" align="right">
         <template slot-scope="scope">
-          {{scope.row.maa21015}}
+          {{scope.row.maa21017}}
         </template>
       </el-table-column>
       <el-table-column label="合約金額" align="right">
